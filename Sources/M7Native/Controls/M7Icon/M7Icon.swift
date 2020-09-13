@@ -129,18 +129,23 @@ public struct M7Icon: View {
     }
     
     let name: M7IconNames
-    var frameSize: CGFloat = Constants.m
+    var size: CGFloat = Constants.m
     
-    public init(name: M7IconNames = .menu, size: M7IconSizes = .m) {
+    
+    public init(_ name: M7IconNames = .menu) {
         self.name = name
-       
+        self.setTextStyle(M7IconSizes.m)
+    }
+    
+    public init(_ name: M7IconNames = .menu, size: M7IconSizes = .m) {
+        self.name = name
         self.setTextStyle(size)
     }
     
     public var body: some View {
         Image(name.rawValue)
             .resizable()
-            .frame(width: frameSize, height: frameSize)
+            .frame(width: size, height: size)
     }
     
     private mutating func setTextStyle(_ size: M7IconSizes) {
@@ -148,9 +153,9 @@ public struct M7Icon: View {
         case .m:
             break
         case .s:
-            self.frameSize = Constants.s
+            self.size = Constants.s
         case .l:
-            self.frameSize = Constants.l
+            self.size = Constants.l
         }
     }
 }
