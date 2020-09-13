@@ -15,7 +15,7 @@ public class M7Fonts {
     
     public static var title2:     Font { return Font.system(size: 22, weight: .bold) }
     
-    public static var title3:     Font { return Font.system(size: 30, weight: .bold) }
+    public static var title3:     Font { return Font.system(size: 20, weight: .bold) }
     
     public static var subtitle1:  Font { return Font.system(size: 16, weight: .semibold) }
     
