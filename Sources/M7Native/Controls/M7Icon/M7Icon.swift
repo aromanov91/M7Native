@@ -129,14 +129,17 @@ public struct M7Icon: View {
     
     let name: M7IconNames
     var size: CGFloat = Constants.m
+    var color: M7Color
     
     public init(_ name: M7IconNames = .menu) {
         self.name = name
+        self.color = M7Color.onBackgroundHighEmphasis
         self.setTextStyle(M7IconSizes.m)
     }
     
-    public init(_ name: M7IconNames = .menu, size: M7IconSizes = .m) {
+    public init(_ name: M7IconNames = .menu, size: M7IconSizes = .m, color: M7Color = .onBackgroundHighEmphasis) {
         self.name = name
+        self.color = color
         self.setTextStyle(size)
     }
     
@@ -144,6 +147,7 @@ public struct M7Icon: View {
         Image(name.rawValue)
             .resizable()
             .frame(width: size, height: size)
+            .foregroundColor(color.color)
     }
     
     private mutating func setTextStyle(_ size: M7IconSizes) {
