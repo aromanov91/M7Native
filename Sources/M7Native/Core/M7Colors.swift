@@ -35,7 +35,7 @@ public class M7Colors {
             return Color("OnPrimaryDisabled")
         }
     }
-//    
+    //
     /// Background
     public enum background {
         
@@ -48,7 +48,7 @@ public class M7Colors {
         public static var secondary: Color {
             return Color("BackgroundSecondary")
         }
-
+        
         /// Disabled
         public static var tertiary: Color {
             return Color("BackgroundTertiary")
@@ -73,7 +73,7 @@ public class M7Colors {
             return Color("OnBackgroundDisabled")
         }
     }
-
+    
     /// Surface
     public enum surface {
         
@@ -131,5 +131,52 @@ public class M7Colors {
     /// Link
     public static var link: Color {
         return Color("Primary")
+    }
+}
+
+public enum M7Color {
+    case primary
+    case onPrimaryHighEmphasis
+    case onPrimaryMediumEmphasis
+    case onPrimaryDisabled
+    case backgroundPrimary
+    case backgroundSecondary
+    case backgroundTertiary
+    case onBackgroundHighEmphasis
+    case onBackgroundMediumEmphasis
+    case onBackgroundDisabled
+    case surfacePrimary
+    case surfaceSecondary
+    case surfaceTertiary
+    case onSurfaceHighEmphasis
+    case onSurfaceMediumEmphasis
+    case onSurfaceDisabled
+    case error
+    case success
+    case warning
+    
+    public var color: Color {
+        switch self {
+        case .primary: return M7Colors.primary
+        case .onPrimaryHighEmphasis: return M7Colors.onPrimary.highEmphasis
+        case .onPrimaryMediumEmphasis: return M7Colors.onPrimary.mediumEmphasis
+        case .onPrimaryDisabled: return M7Colors.onPrimary.disabled
+        case .backgroundPrimary: return M7Colors.background.primary
+        case .backgroundSecondary: return M7Colors.background.secondary
+        case .backgroundTertiary: return M7Colors.background.tertiary
+        case .onBackgroundHighEmphasis: return M7Colors.onBackground.highEmphasis
+        case .onBackgroundMediumEmphasis: return M7Colors.onBackground.mediumEmphasis
+        case .onBackgroundDisabled: return M7Colors.onBackground.disabled
+        case .surfacePrimary: return M7Colors.surface.primary
+        case .surfaceSecondary: return M7Colors.surface.secondary
+        case .surfaceTertiary: return M7Colors.surface.tertiary
+        case .onSurfaceHighEmphasis: return M7Colors.onSurface.highEmphasis
+        case .onSurfaceMediumEmphasis: return M7Colors.onSurface.mediumEmphasis
+        case .onSurfaceDisabled: return M7Colors.onSurface.disabled
+        case .error: return M7Colors.error
+        case .success: return M7Colors.success
+        case .warning: return M7Colors.warning
+
+        }
     }
 }

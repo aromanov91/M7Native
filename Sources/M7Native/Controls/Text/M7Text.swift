@@ -46,11 +46,11 @@ public struct M7Text: View {
     
     var textStyle: Font = Font.body
     
-    let color: Color
+    let color: M7Color
     
     var lineSpacing: CGFloat = 0
 
-    public init(_ text: String, style: M7TextStyles = .paragraph1, color: Color = M7Colors.onSurface.highEmphasis) {
+    public init(_ text: String, style: M7TextStyles = .paragraph1, color: M7Color = .onSurfaceHighEmphasis) {
         self.text = text
         self.style = style
         self.color = color
@@ -58,7 +58,10 @@ public struct M7Text: View {
     }
     
     public var body: some View {
-        Text(text).font(textStyle).lineSpacing(lineSpacing).accentColor(color)
+        Text(text)
+            .font(textStyle)
+            .lineSpacing(lineSpacing)
+            .foregroundColor(color.color)
     }
     
     private mutating func setTextStyle(_ style: M7TextStyles) {

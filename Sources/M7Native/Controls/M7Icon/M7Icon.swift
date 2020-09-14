@@ -1,8 +1,7 @@
-//
-//  SwiftUIView.swift
 //  
 //
-//  Created by 18391981 on 13.09.2020.
+//  Created by Alexander Romanov on 13.09.2020.
+//  Copyright © 2020 romanov. All rights reserved.
 //
 
 import SwiftUI
@@ -130,7 +129,6 @@ public struct M7Icon: View {
     
     let name: M7IconNames
     var size: CGFloat = Constants.m
-    
     
     public init(_ name: M7IconNames = .menu) {
         self.name = name

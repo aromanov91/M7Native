@@ -1,6 +1,6 @@
 //
 //  M7Background.swift
-//  DSOneDemo
+//  DSOne
 //
 //  Created by Alexander Romanov on 07.06.2020.
 //  Copyright © 2020 romanov. All rights reserved.

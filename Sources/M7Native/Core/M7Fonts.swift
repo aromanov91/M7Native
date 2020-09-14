@@ -3,6 +3,7 @@
 //  
 //
 //  Created by Alexander Romanov on 13.09.2020.
+//  Copyright © 2020 romanov. All rights reserved.
 //
 
 import SwiftUI

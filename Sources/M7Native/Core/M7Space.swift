@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  M7Space.swift
 //  M7UIKit
 //
 //  Created by Aleksandr Romanov on 04.11.2019.
