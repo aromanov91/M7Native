@@ -14,7 +14,7 @@ public class M7Colors {
     
     /// Primary
     public static var primary: Color {
-        return Color("Primary")
+        return Color("Primary", bundle: .module)
     }
     
     /// On Primary
@@ -22,17 +22,17 @@ public class M7Colors {
         
         /// High Emphasis
         public static var highEmphasis: Color {
-            return Color("OnPrimaryHighEmphasis")
+            return Color("OnPrimaryHighEmphasis", bundle: .module)
         }
         
         /// Medium Emphasis
         public static var mediumEmphasis: Color {
-            return Color("OnPrimaryMediumEmphasis")
+            return Color("OnPrimaryMediumEmphasis", bundle: .module)
         }
         
         /// Disabled
         public static var disabled: Color {
-            return Color("OnPrimaryDisabled")
+            return Color("OnPrimaryDisabled", bundle: .module)
         }
     }
     //
@@ -41,17 +41,17 @@ public class M7Colors {
         
         /// High Emphasis
         public static var primary: Color {
-            return Color("BackgroundPrimary")
+            return Color("BackgroundPrimary", bundle: .module)
         }
         
         /// Medium Emphasis
         public static var secondary: Color {
-            return Color("BackgroundSecondary")
+            return Color("BackgroundSecondary", bundle: .module)
         }
         
         /// Disabled
         public static var tertiary: Color {
-            return Color("BackgroundTertiary")
+            return Color("BackgroundTertiary", bundle: .module)
         }
     }
     
@@ -60,17 +60,17 @@ public class M7Colors {
         
         /// High Emphasis
         public static var highEmphasis: Color {
-            return Color("OnBackgroundHighEmphasis")
+            return Color("OnBackgroundHighEmphasis", bundle: .module)
         }
         
         /// Medium Emphasis
         public static var mediumEmphasis: Color {
-            return Color("OnBackgroundMediumEmphasis")
+            return Color("OnBackgroundMediumEmphasis", bundle: .module)
         }
         
         /// Disabled
         public static var disabled: Color {
-            return Color("OnBackgroundDisabled")
+            return Color("OnBackgroundDisabled", bundle: .module)
         }
     }
     
@@ -79,17 +79,17 @@ public class M7Colors {
         
         /// High Emphasis
         public static var primary: Color {
-            return Color("SurfacePrimary")
+            return Color("SurfacePrimary", bundle: .module)
         }
         
         /// Medium Emphasis
         public static var secondary: Color {
-            return Color("SurfaceSecondary")
+            return Color("SurfaceSecondary", bundle: .module)
         }
         
         /// Disabled
         public static var tertiary: Color {
-            return Color("SurfaceTertiary")
+            return Color("SurfaceTertiary", bundle: .module)
         }
     }
     
@@ -98,39 +98,39 @@ public class M7Colors {
         
         /// High Emphasis
         public static var highEmphasis: Color {
-            return Color("OnSurfaceHighEmphasis")
+            return Color("OnSurfaceHighEmphasis", bundle: .module)
         }
         
         /// Medium Emphasis
         public static var mediumEmphasis: Color {
-            return Color("OnSurfaceMediumEmphasis")
+            return Color("OnSurfaceMediumEmphasis", bundle: .module)
         }
         
         /// Disabled
         public static var disabled: Color {
-            return Color("OnSurfaceDisabled")
+            return Color("OnSurfaceDisabled", bundle: .module)
         }
     }
     
     /// Error
     public static var error: Color {
-        return Color("Error")
+        return Color("Error", bundle: .module)
     }
     
     /// Success
     public static var success: Color {
-        return Color("Success")
+        return Color("Success", bundle: .module)
     }
     
     /// Warning
     public static var warning: Color {
-        return Color("Warning")
+        return Color("Warning", bundle: .module)
     }
     
     
     /// Link
     public static var link: Color {
-        return Color("Primary")
+        return Color("Primary", bundle: .module)
     }
 }
 

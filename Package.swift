@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "M7Native",
+    defaultLocalization: "en",
     platforms: [
         .macOS(.v10_15),
         .iOS(.v13),

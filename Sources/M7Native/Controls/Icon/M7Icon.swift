@@ -146,7 +146,7 @@ public struct M7Icon: View {
     }
     
     public var body: some View {
-        Image(name.rawValue)
+        Image(name.rawValue, bundle: .module)
             .resizable()
             .frame(width: size, height: size)
             .foregroundColor(color.color)

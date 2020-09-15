@@ -58,7 +58,7 @@ public struct M7Text: View {
     }
     
     public var body: some View {
-        Text(LocalizedStringKey(text))
+        Text(LocalizedStringKey(text), bundle: .module)
             .font(textStyle)
             .lineSpacing(lineSpacing)
             .foregroundColor(color.color)
