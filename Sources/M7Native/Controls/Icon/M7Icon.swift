@@ -7,6 +7,8 @@
 import SwiftUI
 
 public enum M7IconNames: String, CaseIterable {
+    
+    case none = ""
     case menu = "menu"
     case send = "send"
     case menuLine2 = "menu2line"

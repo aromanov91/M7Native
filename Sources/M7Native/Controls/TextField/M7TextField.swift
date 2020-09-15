@@ -22,18 +22,35 @@ public struct M7TextField: View {
     @Binding public var helperText: String
     @Binding public var helperStyle: M7TextFieldHelperStyle
     
-    public var leadingImage: String
-    public var trallingImage: String
+    //    public var leadingImage: String
+    //    public var trallingImage: String
+    
+    public var leadingImage: M7IconNames
+    public var trallingImage: M7IconNames
     
     public var secure: Bool = false
     @State private var focused: Bool = false
+    
+    //    public init(_ placeholder: String,
+    //                text: Binding<String>,
+    //                helperText: Binding<String> = .constant(""),
+    //                helperStyle: Binding<M7TextFieldHelperStyle> = .constant(.none),
+    //                leadingImage: String = "",
+    //                trallingImage: String = "") {
+    //        self.placeholder = placeholder
+    //        self._text = text
+    //        self._helperText = helperText
+    //        self._helperStyle = helperStyle
+    //        self.leadingImage = leadingImage
+    //        self.trallingImage = trallingImage
+    //    }
     
     public init(_ placeholder: String,
                 text: Binding<String>,
                 helperText: Binding<String> = .constant(""),
                 helperStyle: Binding<M7TextFieldHelperStyle> = .constant(.none),
-                leadingImage: String = "",
-                trallingImage: String = "") {
+                leadingImage: M7IconNames = .none,
+                trallingImage: M7IconNames = .none) {
         self.placeholder = placeholder
         self._text = text
         self._helperText = helperText
@@ -54,8 +71,8 @@ public struct M7TextField: View {
                 
                 HStack {
                     
-                    if leadingImage != "" {
-                        Image(leadingImage).frame(width: 20, height: 20)
+                    if leadingImage != .none {
+                        M7Icon(leadingImage)
                     }
                     
                     if secure {
@@ -67,8 +84,8 @@ public struct M7TextField: View {
                         })
                     }
                     
-                    if trallingImage != "" {
-                        Image(trallingImage).frame(width: 20, height: 20)
+                    if trallingImage != .none {
+                        M7Icon(trallingImage)
                     }
                     
                     if helperStyle == .errorText {
@@ -83,16 +100,14 @@ public struct M7TextField: View {
                 }
                 
             }.padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(focused ? M7Colors.primary : M7Colors.surface.primary, lineWidth: 4)
-                    
-                    
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(focused ? M7Colors.primary : M7Colors.surface.primary, lineWidth: 4)
+                
+                
             ).background(RoundedRectangle(cornerRadius: 12).fill(focused ? M7Colors.surface.primary : M7Colors.surface.secondary))
-                
-                
-                .cornerRadius(M7Radius.m)
-                .font(M7Fonts.subtitle1)
+            .cornerRadius(M7Radius.m)
+            .font(M7Fonts.subtitle1)
             
             if helperText != "" {
                 
