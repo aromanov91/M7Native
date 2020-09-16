@@ -176,7 +176,7 @@ public enum M7Color {
         case .error: return M7Colors.error
         case .success: return M7Colors.success
         case .warning: return M7Colors.warning
-
+            
         }
     }
 }

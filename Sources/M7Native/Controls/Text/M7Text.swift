@@ -49,11 +49,14 @@ public struct M7Text: View {
     let color: M7Color
     
     var lineSpacing: CGFloat = 0
+    
+    let alignment: TextAlignment
 
-    public init(_ text: String, style: M7TextStyles = .paragraph1, color: M7Color = .onSurfaceHighEmphasis) {
+    public init(_ text: String, style: M7TextStyles = .paragraph1, color: M7Color = .onSurfaceHighEmphasis, alignment: TextAlignment = .leading) {
         self.text = text
         self.style = style
         self.color = color
+        self.alignment = alignment
         setTextStyle(style)
     }
     
@@ -62,6 +65,7 @@ public struct M7Text: View {
             .font(textStyle)
             .lineSpacing(lineSpacing)
             .foregroundColor(color.color)
+            .multilineTextAlignment(alignment)
     }
     
     private mutating func setTextStyle(_ style: M7TextStyles) {

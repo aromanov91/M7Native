@@ -11,6 +11,7 @@
 "Settings.ReviewAppStoreTitle" = "Leave a review";
 "Settings.FeedbakToAuthorTitle" = "Write to the author";
 "Settings.TelegramChatTitle" = "Chat to Telegram";
+"Settings.About" = "About";
 
 //Subscription
 "Subscriptions.Navbar.Title" = "Subscription";

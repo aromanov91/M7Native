@@ -109,6 +109,7 @@ public enum M7IconNames: String, CaseIterable {
     case arrowLeftCircle = "arrow-left-circle"
     case arrowDownCircle = "arrow-down-circle"
     case refresh = "arefresh-cw"
+    case info = "info"
     
 }
 

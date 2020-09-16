@@ -11,6 +11,7 @@
 "Settings.ReviewAppStoreTitle" = "Оставить отзыв";
 "Settings.FeedbakToAuthorTitle" = "Написать автору";
 "Settings.TelegramChatTitle" = "Чат в Телеграмм";
+"Settings.About" = "О приложении";
 
 //Subscription
 "Subscriptions.Navbar.Title" = "Подписка";
