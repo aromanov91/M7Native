@@ -1,5 +1,5 @@
 //
-//  TitleAndButtonView.swift
+//  M7TitleAndButtonView.swift
 //  
 //
 //  Created by Alexander Romanov on 15.09.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct TitleAndButtonView: View {
+public struct M7TitleAndButtonView: View {
     
     let primaryAction: () -> Void
     let secondaryAction: () -> Void
