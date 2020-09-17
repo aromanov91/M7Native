@@ -5,8 +5,8 @@
 "StoryList.DeleteButton" = "Удалить";
 
 // Settings
+"Settings.NavigationBar.Title" = "Настройки";
 "Settings.SubscriptionTitle" = "Премиум";
-
 "Settings.SupportSectionTitle" = "Поддержка";
 "Settings.ReviewAppStoreTitle" = "Оставить отзыв";
 "Settings.FeedbakToAuthorTitle" = "Написать автору";

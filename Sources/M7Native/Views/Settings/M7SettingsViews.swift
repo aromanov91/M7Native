@@ -13,12 +13,22 @@ public struct M7SettingsViews: View {
     
     public var body: some View {
         
-        M7List {
+        NavigationView {
+        
+        M7List(style: .groupedListStyle) {
             
-            M7SettingsMessageLinkRowView("aromanov07@gmail.com")
-            
-            M7SettingsTelegramLinkRowView("https://www.google.com")
+            Section(header: M7Text("Settings.SupportSectionTitle", style: .overline, color: .onBackgroundMediumEmphasis) ) {
+                
+                M7SettingsAppStoreReviewRowView()
+                
+                M7SettingsMessageLinkRowView("aromanov07@gmail.com", subject: "FeedBack")
+                
+                M7SettingsTelegramLinkRowView("https://www.google.com")
+                
+            }
         }
+            
+        }.navigationBarTitle(LocalizedStringKey("Settings.NavigationBar.Title"))
         
     }
 }

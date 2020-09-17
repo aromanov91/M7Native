@@ -18,7 +18,7 @@ public struct M7SettingsTelegramLinkRowView: View {
     public var body: some View {
         
         Button(action: {
-            // OPEN A LINK
+
             guard let url = URL(string: self.link), UIApplication.shared.canOpenURL(url) else {
                 return
             }

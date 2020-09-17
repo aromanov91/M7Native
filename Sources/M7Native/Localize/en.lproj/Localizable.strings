@@ -5,6 +5,7 @@
 "StoryList.DeleteButton" = "Delete";
 
 // Settings
+"Settings.NavigationBar.Title" = "Settings";
 "Settings.SubscriptionTitle" = "Premium";
 
 "Settings.SupportSectionTitle" = "Support";
