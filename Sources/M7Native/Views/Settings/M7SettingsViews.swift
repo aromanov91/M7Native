@@ -17,6 +17,13 @@ public struct M7SettingsViews: View {
         
         M7List(style: .groupedListStyle) {
             
+            
+            Section {
+                
+                M7SettingsAppernceRowView()
+                
+            }
+            
             Section(header: M7Text("Settings.SupportSectionTitle", style: .overline, color: .onBackgroundMediumEmphasis) ) {
                 
                 M7SettingsAppStoreReviewRowView()

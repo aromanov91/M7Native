@@ -12,9 +12,19 @@ import SwiftUI
 
 public class M7Colors {
     
+    
+    
+    @ObservedObject var theme = AccentColorSetting()
+    var themes: [AccentColor] = accentColorsData
+
+    
+//    @ObservedObject var theme = ThemeSettings()
+//    var themes: [Theme] = themeData
+
+    
     /// Primary
     public static var primary: Color {
-        return Color("Primary", bundle: .module)
+        return Color(themes[self.theme.accentColorSetting].themeColor)
     }
     
     /// On Primary
