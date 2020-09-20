@@ -35,7 +35,8 @@ public struct M7Row: View {
     
     public var text: String
     public var type: M7RowAccessoryType
-    public var leadingImage: M7IconNames
+    public var leadingIcon: M7IconNames
+    public var leadingImage: Image
     public var size: M7RowSize
     @Binding var toggle: Bool
     private var varticalPadding = Constants.heightS
@@ -43,7 +44,8 @@ public struct M7Row: View {
     
     public init(_ text: String,
                 type: M7RowAccessoryType = .none,
-                leadingImage: M7IconNames = .none,
+                leadingIcon: M7IconNames = .none,
+                leadingImage: Image = Image(""),
                 size: M7RowSize = .m,
                 toggle: Binding<Bool> = .constant(false)
         
@@ -51,6 +53,7 @@ public struct M7Row: View {
         self.text = text
         self.type = type
         self.size = size
+        self.leadingIcon = leadingIcon
         self.leadingImage = leadingImage
         self._toggle = toggle
         self.setSize(size)
@@ -62,15 +65,19 @@ public struct M7Row: View {
             
             HStack() {
                 
-                if leadingImage != .none {
+                if leadingIcon != .none {
                     
                     M7Surface(background: .secondary, padding: .xxs) {
                         
-                        M7Icon(leadingImage)
+                        M7Icon(leadingIcon)
                         
                     }.padding(.trailing, Constants.spacingIconAndText)
                 }
                 
+                if leadingImage != Image("") {
+                    leadingImage.frame(width: 32, height: 32)
+                }
+
                 if type == .toggle {
                     
                     Toggle(isOn: $toggle) {
@@ -79,7 +86,7 @@ public struct M7Row: View {
                     
                 } else if type == .radio {
                     
-                    M7Text(text, style: .paragraph1)
+                    M7Text(text, style: .subtitle1)
                     
                     Spacer()
                     

@@ -16,18 +16,18 @@ public enum M7ListStyle: Int, CaseIterable {
 
 public struct M7List<Content: View>: View {
     
+    private let title: String
     private let content: Content
     private let style: M7ListStyle
     
-    public init(style: M7ListStyle = .defaultListStyle, @ViewBuilder content: () -> Content) {
-        
+    public init(_ title: String = "", style: M7ListStyle = .defaultListStyle, @ViewBuilder content: () -> Content) {
+        self.title = title
         self.content = content()
         self.style = style
     }
     
     
     public var body: some View {
-        
         containedView()
     }
     
@@ -36,43 +36,109 @@ public struct M7List<Content: View>: View {
         switch self.style {
         
         case .defaultListStyle:
-            return AnyView(
-                List {
-                    self.content
-                })
             
-        case .plainListStyle:
-            return AnyView(
-                List {
-                    self.content
-                }.listStyle(PlainListStyle()))
-        case .groupedListStyle:
-            return AnyView(
-                List {
-                    self.content
-                }.listStyle(GroupedListStyle()))
-        case .insetGroupedListStyle:
-            
-            if #available(iOS 14, *) {
+            if title == "" {
                 
                 return AnyView(
-                    List {
-                        self.content
-                        
-                    }.listStyle(InsetGroupedListStyle())
-                    
-                )
+                    List { self.content })
                 
             } else {
                 
                 return AnyView(
-                    List {
-                        self.content
+                    List { self.content }
+                        .navigationBarTitle(Text(LocalizedStringKey(title), bundle: .module)))
+            }
+            
+        case .plainListStyle:
+            
+            if title == "" {
+                
+                return AnyView(
+                    List { self.content  }.listStyle(PlainListStyle()))
+                
+            } else {
+                
+                return AnyView(
+                    List { self.content  }.listStyle(PlainListStyle())
+                        .navigationBarTitle(Text(LocalizedStringKey(title), bundle: .module)))
+            }
+            
+           
+            
+        case .groupedListStyle:
+            
+            
+            if title == "" {
+                
+
+                    return AnyView(
+                        List { self.content }.listStyle(GroupedListStyle()))
+                
+            } else {
+                
+             
+                    return AnyView(
+                        List { self.content }.listStyle(GroupedListStyle())
+                        .navigationBarTitle(Text(LocalizedStringKey(title), bundle: .module)))
+            }
+            
+        case .insetGroupedListStyle:
+            
+            if #available(iOS 14, *) {
+                
+                if title == "" {
+
+                    return AnyView(
+                        List {
+                            self.content
+                            
+                        }.listStyle(InsetGroupedListStyle())
                         
-                    }.listStyle(GroupedListStyle())
-                    .environment(\.horizontalSizeClass, .regular)
+                    )
                     
-                )
+                } else {
+                    
+                    return AnyView(
+                        List {
+                            self.content
+                            
+                        }.listStyle(InsetGroupedListStyle())
+                        .navigationTitle(Text(LocalizedStringKey(title), bundle: .module))
+                        
+                    )
+                    
+                    
+                }
+                
+            } else {
+                
+                if title == "" {
+                    
+                    return AnyView(
+                        List {
+                            self.content
+                            
+                        }.listStyle(GroupedListStyle())
+                        .environment(\.horizontalSizeClass, .regular)
+                        
+                    )
+                    
+                } else {
+                    
+                    return AnyView(
+                        List {
+                            self.content
+                            
+                        }.listStyle(GroupedListStyle())
+                        .environment(\.horizontalSizeClass, .regular)
+                        .navigationBarTitle(Text(LocalizedStringKey(title), bundle: .module))
+                        
+                    )
+                }
+                
+                
+                
+
             }
         }
     }

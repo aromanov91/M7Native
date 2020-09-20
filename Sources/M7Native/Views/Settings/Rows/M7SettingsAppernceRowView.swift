@@ -11,13 +11,9 @@ public struct M7SettingsAppernceRowView: View {
     
     public var body: some View {
         
-        NavigationLink(destination: ApperanceView()) {
-            M7Row("Settings.AppernceTitle", leadingImage: .heart, size: .s)
+        NavigationLink(destination: M7ApperanceView()) {
+            M7Row("Settings.AppernceTitle", leadingIcon: .heart, size: .s)
         }
-        
-       
-        
-           
-        
+
     }
 }

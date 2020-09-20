@@ -47,7 +47,7 @@ public struct M7RowButton: View {
                         }
                     }
 
-                    M7Text(text, style: .paragraph1).foregroundColor( style == .link ? M7Colors.link : style == .delete ? M7Colors.error : M7Colors.onSurface.highEmphasis)
+                    M7Text(text, style: .subtitle1).foregroundColor( style == .link ? M7Colors.link : style == .delete ? M7Colors.error : M7Colors.onSurface.highEmphasis)
 
                     Spacer()
 

@@ -80,9 +80,7 @@ public struct M7TitleAndButtonView: View {
                 if subtitle != "" {
                     
                     M7Text(subtitle, style: .paragraph1, color: .onSurfaceHighEmphasis, alignment: .center)
-                    
                 }
-                
             }
             
             if primaryButtonTitle != "" {
@@ -90,7 +88,6 @@ public struct M7TitleAndButtonView: View {
                 M7Button(style: .primary, action: primaryAction) {
                     Text(primaryButtonTitle)
                 }
-                
             }
             
             if secondaryButtonTitle != "" {

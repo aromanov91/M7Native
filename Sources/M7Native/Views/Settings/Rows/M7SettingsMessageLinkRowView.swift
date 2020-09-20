@@ -44,7 +44,7 @@ public struct M7SettingsMessageLinkRowView: View {
                 MFMailComposeViewController.canSendMail() ? self.isShowingMailView.toggle() : self.alertNoMail.toggle()
                 
             }) {
-                M7Row("Settings.FeedbakToAuthorTitle", leadingImage: .mail, size: .s)
+                M7Row("Settings.FeedbakToAuthorTitle", leadingIcon: .mail, size: .s)
             }
             
             

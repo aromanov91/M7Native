@@ -13,6 +13,9 @@
 "Settings.TelegramChatTitle" = "Чат в Телеграмм";
 "Settings.About" = "О приложении";
 
+"Apperance.NavigationBar.Title" = "Отображение";
+"Apperance.SectionTheme.Title" = "Theme";
+
 //Subscription
 "Subscriptions.Navbar.Title" = "Подписка";
 "Subscriptions.InfoBlock.Title" = "Получите премиум";
