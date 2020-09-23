@@ -17,7 +17,7 @@ public struct M7SettingsAppStoreReviewRowView: View {
             SKStoreReviewController.requestReview()
             
         }) {
-            M7Row("Settings.ReviewAppStoreTitle", leadingIcon: .heart, size: .s)
+            M7Row(M7Localize.settings.feedbakAppStore, leadingIcon: .heart, size: .s)
         }
     }
 }

@@ -19,7 +19,7 @@ public struct M7SettingsViews: View {
             
             NavigationView {
                 
-                M7List("Settings.NavigationBar.Title" ,style: .groupedListStyle) {
+                M7List(M7Localize.settings.title ,style: .groupedListStyle) {
                     
                     
                     Section {
