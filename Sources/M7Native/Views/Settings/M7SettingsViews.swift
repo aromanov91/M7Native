@@ -22,13 +22,13 @@ public struct M7SettingsViews: View {
                 M7List(M7Localize.settings.title ,style: .groupedListStyle) {
                     
                     
-                    Section {
+                    Section(header: M7Text(M7Localize.settings.appSection, style: .overline, color: .onBackgroundMediumEmphasis)) {
                         
                         M7SettingsAppernceRowView()
                         
                     }
                     
-                    Section(header: M7Text(M7Localize.settings.supportSection, style: .overline, color: .onBackgroundMediumEmphasis) ) {
+                    Section(header: M7Text(M7Localize.settings.supportSection, style: .overline, color: .onBackgroundMediumEmphasis)) {
                         
                         M7SettingsAppStoreReviewRowView()
                         

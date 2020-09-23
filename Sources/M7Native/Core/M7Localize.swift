@@ -25,7 +25,7 @@ public class M7Localize {
         public static var about: String = "Settings.About"
         public static var subscription: String = "Settings.Subscription"
         public static var supportSection: String = "Settings.SupportSection"
-        public static var appSection: String = "AppSection"
+        public static var appSection: String = "Settings.AppSection"
     }
     
     public enum apperance {
