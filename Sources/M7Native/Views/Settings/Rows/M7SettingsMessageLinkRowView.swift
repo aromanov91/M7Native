@@ -19,12 +19,9 @@ import UIKit
 
 public struct M7SettingsMessageLinkRowView: View {
     
-    
     let adress: String
     let subject: String
-    
-    
-    
+
     @State var result: Result<MFMailComposeResult, Error>? = nil
     @State var isShowingMailView = false
     @State var alertNoMail = false
@@ -44,7 +41,7 @@ public struct M7SettingsMessageLinkRowView: View {
                 MFMailComposeViewController.canSendMail() ? self.isShowingMailView.toggle() : self.alertNoMail.toggle()
                 
             }) {
-                M7Row("Settings.FeedbakToAuthorTitle", leadingIcon: .mail, size: .s)
+                M7Row(M7Localize.settings.feedbakAuthor, leadingIcon: .mail, size: .s)
             }
             
             

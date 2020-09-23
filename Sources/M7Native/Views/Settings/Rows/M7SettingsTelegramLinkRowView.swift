@@ -25,7 +25,7 @@ public struct M7SettingsTelegramLinkRowView: View {
             UIApplication.shared.open(url as URL)
             
         }) {
-            M7Row("Settings.TelegramChatTitle", leadingIcon: .send, size: .s)
+            M7Row(M7Localize.settings.telegramChat, leadingIcon: .send, size: .s)
         }
     }
 }

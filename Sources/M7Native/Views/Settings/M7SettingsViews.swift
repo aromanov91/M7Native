@@ -28,7 +28,7 @@ public struct M7SettingsViews: View {
                         
                     }
                     
-                    Section(header: M7Text("Settings.SupportSectionTitle", style: .overline, color: .onBackgroundMediumEmphasis) ) {
+                    Section(header: M7Text(M7Localize.settings.supportSection, style: .overline, color: .onBackgroundMediumEmphasis) ) {
                         
                         M7SettingsAppStoreReviewRowView()
                         

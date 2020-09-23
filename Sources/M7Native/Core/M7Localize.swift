@@ -17,9 +17,9 @@ public class M7Localize {
     }
     
     public enum settings {
-        public static var title: String = "Settings.NavigationBar.Title"
-        public static var apperance: String = "Apperance.NavigationBar.Title"
-        public static var feedbakAppStore: String = "Settings.ReviewAppStoreTitle" 
+        public static var title: String = "Settings.Title"
+        public static var apperance: String = "Settings.Apperance"
+        public static var feedbakAppStore: String = "Settings.FeedbakAppStore"
         public static var feedbakAuthor: String = "Settings.FeedbakAuthor"
         public static var telegramChat: String = "Settings.TelegramChat"
         public static var about: String = "Settings.About"
