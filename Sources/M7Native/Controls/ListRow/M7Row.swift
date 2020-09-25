@@ -15,10 +15,10 @@ public enum M7RowSize {
 }
 
 public struct M7Row: View {
-
+    
     private struct Constants {
         
-         /// Size
+        /// Size
         static var heightNone: CGFloat { return .zero }
         static var heightS: CGFloat { return M7Space.xxxs }
         static var heightL: CGFloat { return M7Space.xxs }
@@ -31,7 +31,7 @@ public struct M7Row: View {
         
         /// Spacing
         static var spacingIconAndText: CGFloat { return M7Space.xxs }
-        }
+    }
     
     public var text: String
     public var type: M7RowAccessoryType
@@ -48,7 +48,7 @@ public struct M7Row: View {
                 leadingImage: Image = Image(""),
                 size: M7RowSize = .m,
                 toggle: Binding<Bool> = .constant(false)
-        
+                
     ) {
         self.text = text
         self.type = type
@@ -77,7 +77,7 @@ public struct M7Row: View {
                 if leadingImage != Image("") {
                     leadingImage.frame(width: 32, height: 32)
                 }
-
+                
                 if type == .toggle {
                     
                     Toggle(isOn: $toggle) {
@@ -98,7 +98,6 @@ public struct M7Row: View {
                             
                             Circle().fill(Color.white).frame(width: 8, height: 8)
                                 .cornerRadius(4)
-                            
                         }
                         
                     } else {
@@ -106,7 +105,7 @@ public struct M7Row: View {
                         Circle().stroke(M7Colors.onSurface.disabled, lineWidth: 4).frame(width: 24, height: 24).cornerRadius(12)
                         
                     }
-
+                    
                 } else {
                     
                     M7Text(text, style: .subtitle1)
@@ -115,7 +114,7 @@ public struct M7Row: View {
                 }
             }
         }.padding(.vertical, varticalPadding)
-           
+        
     }
     
     func createToggle() {
@@ -124,7 +123,7 @@ public struct M7Row: View {
     
     mutating func setSize(_ rowSize: M7RowSize) {
         switch size {
-
+        
         case .s:
             self.varticalPadding = Constants.heightS
         case .m:

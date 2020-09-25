@@ -164,3 +164,9 @@ public struct M7Icon: View {
         }
     }
 }
+
+struct M7Icon_Previews: PreviewProvider {
+    static var previews: some View {
+        M7Icon(.airplay)
+    }
+}
