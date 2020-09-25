@@ -17,6 +17,9 @@ let package = Package(
         .library(
             name: "M7Native",
             targets: ["M7Native"]),
+        .library(
+            name: "M7NativeViews",
+            targets: ["M7NativeViews"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -27,6 +30,9 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "M7Native",
+            dependencies: []),
+        .target(
+            name: "M7NativeViews",
             dependencies: []),
         .testTarget(
             name: "M7NativeTests",

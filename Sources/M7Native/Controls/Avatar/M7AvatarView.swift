@@ -2,7 +2,7 @@
 //  SwiftUIView.swift
 //  
 //
-//  Created by 18391981 on 24.09.2020.
+//  Created by Alexander Romanov on 24.09.2020.
 //
 
 import SwiftUI
@@ -73,9 +73,13 @@ public struct M7AvatarView: View {
                 
                 HStack(spacing: size == .s ? Constants.avatarTextSpaceS : size == .m ? Constants.avatarTextSpaceM : Constants.avatarTextSpaceL) {
                     
-                    M7Text(String(firstName.dropLast(firstName.count - 1)),
-                           style: size == .s ? .overline: size == .m ? .title3 : .largeTitle,
-                           color: M7Color.onPrimaryHighEmphasis)
+                    if firstName != "" {
+                        
+                        M7Text(String(firstName.dropLast(firstName.count - 1)),
+                               style: size == .s ? .overline: size == .m ? .title3 : .largeTitle,
+                               color: M7Color.onPrimaryHighEmphasis)
+                        
+                    }
                     
                     if lastName != "" {
                         M7Text(String(lastName.dropLast(lastName.count - 1)),

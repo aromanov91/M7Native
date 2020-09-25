@@ -1,11 +1,4 @@
 //
-//  File.swift
-//  
-//
-//  Created by 18391981 on 17.09.2020.
-//
-
-//
 //  M7SettingsTelegramLinkRowView.swift
 //
 //
