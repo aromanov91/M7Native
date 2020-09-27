@@ -3,6 +3,7 @@
 "Button.Edit" = "Edit";
 "Button.Cancel" = "Cancel";
 "Button.Delete" = "Delete";
+"Button.Next" = "Next";
 
 // Settings
 "Settings.Title" = "Settings";
@@ -21,3 +22,13 @@
 "Apperance.SystemTheme" = "System";
 "Apperance.DarkTheme" = "Dark";
 "Apperance.LightTheme" = "Light";
+
+// Auth
+"Auth.SignUpWithEmailTitle" = "Sign up";
+"Auth.CreateAccounTitle" = "Create Account";
+"Auth.SignUpWithEmailButton" = "Sign up";
+"Auth.SignUpWithGoogleButton" = "Sign up with Google";
+"Auth.LogInButton" = "Log In";
+"Auth.EmailTextField" = "Email";
+"Auth.PasswordTextField" = "Password";
+"Auth.CreateAccountButton" = "Create Account";

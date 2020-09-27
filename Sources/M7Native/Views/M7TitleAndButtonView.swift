@@ -75,7 +75,7 @@ public struct M7TitleAndButtonView: View {
             
             VStack(spacing: M7Space.xxs) {
             
-                M7Text(title, style: .title3, color: .onSurfaceHighEmphasis, alignment: .center)
+                M7Text(title, style: .title2, color: .onSurfaceHighEmphasis, alignment: .center)
             
                 if subtitle != "" {
                     

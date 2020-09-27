@@ -3,6 +3,7 @@
 "Button.Edit" = "Редактировать";
 "Button.Cancel" = "Отмена";
 "Button.Delete" = "Удалить";
+"Button.Next" = "Далее";
 
 // Settings
 "Settings.Title" = "Настройки";
@@ -21,3 +22,13 @@
 "Apperance.SystemTheme" = "Системная";
 "Apperance.DarkTheme" = "Темная";
 "Apperance.LightTheme" = "Светлая";
+
+// Auth
+"Auth.SignUpWithEmailTitle" = "Вход";
+"Auth.CreateAccounTitle" = "Создание учетной записи";
+"Auth.SignUpWithEmailButton" = "Зарегистрироваться";
+"Auth.SignUpWithGoogleButton" = "Зарегистрируйтесь в Google";
+"Auth.LogInButton" = "Войти";
+"Auth.EmailTextField" = "Электронная почта";
+"Auth.PasswordTextField" = "Пароль";
+"Auth.CreateAccountButton" = "Создать учетную запись";

@@ -14,6 +14,7 @@ public class M7Localize {
         public static var edit: String = "Button.Edit"
         public static var cancel: String = "Button.Cancel"
         public static var delete: String = "Button.Delete"
+        public static var next: String = "Button.Next"
     }
     
     public enum settings {
@@ -36,6 +37,17 @@ public class M7Localize {
         public static var lightTheme: String = "Apperance.LightTheme"
     }
     
+    public enum auth {
+        public static var signUpWithEmailTitle: String = "Auth.SignUpWithEmailTitle"
+        public static var createAccounTitle: String = "Auth.CreateAccounTitle"
+        public static var signUpWithEmailButton: String = "Auth.SignUpWithEmailButton"
+        public static var signUpWithGoogleButton: String = "Auth.SignUpWithGoogleButton"
+        public static var logInButton: String = "Auth.LogInButton"
+        public static var emailTextField: String = "Auth.EmailTextField"
+        public static var passwordTextField: String = "Auth.PasswordTextField"
+        public static var createAccountButton: String = "Auth.CreateAccountButton"
+    }
+
     public enum subscription {
         public static var title: String = "Subscriptions.Title"
        

@@ -8,7 +8,7 @@
 import SwiftUI
 
 public let accentColorsData: [AccentColor] = [
-    AccentColor(id: 0, colorName: "Red", themeColor: Color.pink),
-    AccentColor(id: 1, colorName: "Blue", themeColor: Color.blue),
+    AccentColor(id: 0, colorName: "Blue", themeColor: Color.blue),
+    AccentColor(id: 1, colorName: "Red", themeColor: Color.pink),
     AccentColor(id: 2, colorName: "Green", themeColor: Color.green)
 ]
