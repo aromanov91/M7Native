@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct M7AuthView: View {
+public struct M7AuthView: View {
     
     let registrationGoogleAction: () -> Void
     let secondaryAction: () -> Void
@@ -30,11 +30,15 @@ struct M7AuthView: View {
         self.secondaryAction = secondaryAction
     }
     
-    var body: some View {
+    public var body: some View {
         
         NavigationView {
             
             VStack {
+                
+                Spacer().frame(height: M7Space.m)
+                
+                M7Text("LISTER", style: .overline, color: .onBackgroundMediumEmphasis, alignment: .center)
                 
                 Spacer ()
                 
@@ -48,7 +52,7 @@ struct M7AuthView: View {
                 
                 Spacer ()
                 
-                VStack(spacing: M7Space.s) {
+                VStack(spacing: M7Space.m) {
                     
                     M7Text(title, style: .title2, color: .onSurfaceHighEmphasis, alignment: .center)
                     
@@ -69,11 +73,11 @@ struct M7AuthView: View {
                         Text(LocalizedStringKey(M7Localize.auth.logInButton), bundle: .module)
                     }
                     
-                    NavigationLink(destination: M7EmailRegistration(), tag: 1, selection: $navigationLink) {
+                    NavigationLink(destination: M7EmailRegistrationEmailEnterStepView(), tag: 1, selection: $navigationLink) {
                         EmptyView()
                     }
                     
-                    NavigationLink(destination: M7EmailLogin(), tag: 2, selection: $navigationLink) {
+                    NavigationLink(destination: M7EmailLoginView(), tag: 2, selection: $navigationLink) {
                         EmptyView()
                     }
                     

@@ -23,10 +23,16 @@ public enum M7ButtonRounded {
     case none
 }
 
-public enum M7ButtonSize{
+public enum M7ButtonSize {
     case l
     case m
 }
+
+public enum M7ButtonWidth {
+    case full
+    case round
+}
+
 
 public struct M7Button<Content: View>: View {
     
@@ -74,15 +80,18 @@ public struct M7Button<Content: View>: View {
     
     public var radius: CGFloat = 0
     
+    private var widthType: M7ButtonWidth
+    
     @State private var isPressed: Bool = false
     
-    public init(style: M7ButtonStyle = .secondary, size: M7ButtonSize = .l, round: M7ButtonRounded = .m, shadow: Bool = true, action: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+    public init(style: M7ButtonStyle = .secondary, size: M7ButtonSize = .l, round: M7ButtonRounded = .m, shadow: Bool = true, width: M7ButtonWidth = .full, action: @escaping () -> Void, @ViewBuilder content: () -> Content) {
         self.action = action
         self.content = content()
         self.style = style
         self.size = size
         self.round = round
         self.isShadow = shadow
+        self.widthType = width
 
         setButtonStyle(style)
         setShadow(shadow)
@@ -95,7 +104,7 @@ public struct M7Button<Content: View>: View {
         Button(action: action) {
 
             content
-                .frame(minWidth: 0, maxWidth: .infinity)
+                .frame(minWidth: 0, maxWidth: widthType == .full ? .infinity : size == .l ? Constants.heightL : Constants.heightM)
                 .frame(height: height)
                 .background(backgroundColor)
                 .cornerRadius(radius)
