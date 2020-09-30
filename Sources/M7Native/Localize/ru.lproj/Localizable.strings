@@ -25,10 +25,13 @@
 
 // Auth
 "Auth.SignUpWithEmailTitle" = "Вход";
-"Auth.CreateAccounTitle" = "Создание учетной записи";
+"Auth.CreateAccounTitle" = "Создание аккаунта";
 "Auth.SignUpWithEmailButton" = "Зарегистрироваться";
-"Auth.SignUpWithGoogleButton" = "Зарегистрируйтесь в Google";
+"Auth.SignUpWithGoogleButton" = "Войти через Google";
 "Auth.LogInButton" = "Войти";
-"Auth.EmailTextField" = "Электронная почта";
+"Auth.EmailTextField" = "Email";
 "Auth.PasswordTextField" = "Пароль";
+"Auth.FirstNameTextField" = "Имя";
+"Auth.LastNameTextField" = "Фамилия";
 "Auth.CreateAccountButton" = "Создать учетную запись";
+

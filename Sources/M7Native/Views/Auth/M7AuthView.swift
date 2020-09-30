@@ -36,11 +36,11 @@ public struct M7AuthView: View {
             
             VStack {
                 
-                Spacer().frame(height: M7Space.m)
+//                Spacer().frame(height: M7Space.m)
+//
+//                M7Text("LISTER", style: .overline, color: .onBackgroundMediumEmphasis, alignment: .center)
                 
-                M7Text("LISTER", style: .overline, color: .onBackgroundMediumEmphasis, alignment: .center)
-                
-                Spacer ()
+                Spacer()
                 
                 if image != Image("") {
                     
@@ -50,7 +50,7 @@ public struct M7AuthView: View {
                         .clipped()
                 }
                 
-                Spacer ()
+                Spacer()
                 
                 VStack(spacing: M7Space.m) {
                     

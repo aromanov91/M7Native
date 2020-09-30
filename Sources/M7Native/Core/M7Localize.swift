@@ -45,6 +45,8 @@ public class M7Localize {
         public static var logInButton: String = "Auth.LogInButton"
         public static var emailTextField: String = "Auth.EmailTextField"
         public static var passwordTextField: String = "Auth.PasswordTextField"
+        public static var firstNameTextField: String = "Auth.FirstNameTextField"
+        public static var lasttNameTextField: String = "Auth.LastNameTextField"
         public static var createAccountButton: String = "Auth.CreateAccountButton"
     }
 

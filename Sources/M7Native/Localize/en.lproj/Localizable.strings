@@ -31,4 +31,6 @@
 "Auth.LogInButton" = "Log In";
 "Auth.EmailTextField" = "Email";
 "Auth.PasswordTextField" = "Password";
+"Auth.FirstNameTextField" = "First Name";
+"Auth.LastNameTextField" = "Last Name";
 "Auth.CreateAccountButton" = "Create Account";

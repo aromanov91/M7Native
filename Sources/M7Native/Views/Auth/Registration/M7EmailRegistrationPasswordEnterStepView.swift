@@ -14,7 +14,13 @@ public struct M7EmailRegistrationPasswordEnterStepView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @State private var navigationLink: Int? = 0
+    
     public var body: some View {
+        
+        NavigationLink(destination: M7EmailRegistrationNameEnterStepView(email: email, password: password), tag: 1, selection: $navigationLink) {
+            EmptyView()
+        }
         
         VStack(alignment: .leading) {
             
@@ -33,7 +39,7 @@ public struct M7EmailRegistrationPasswordEnterStepView: View {
             
             Spacer()
             
-            M7Button(style: .primary, action: { print("") }) {
+            M7Button(style: .primary, action: { navigationLink = 1 }) {
                 Text(LocalizedStringKey(M7Localize.button.next), bundle: .module)
             }
             

@@ -54,7 +54,7 @@ public struct M7Button<Content: View>: View {
         static var shadowDefault: M7Shadow.shadowCreate { return M7Shadow.z2 }
         static var shadowTap: M7Shadow.shadowCreate { return M7Shadow.z1 }
         static var primaryShadow: M7Shadow.shadowCreate {
-            return M7Shadow.shadowCreate(color: M7Colors.primary, opacity: 0.5, radius: 12, x: 12, y: 12)
+            return M7Shadow.shadowCreate(color: M7Colors.primary, opacity: 0.5, radius: 12, x: 0, y: 12)
         }
         
         /// Font
