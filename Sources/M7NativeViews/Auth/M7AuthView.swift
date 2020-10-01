@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import M7Native
 
 public struct M7AuthView: View {
     
@@ -62,15 +63,17 @@ public struct M7AuthView: View {
                     }
                     
                     M7Button(style: .primary, action: { navigationLink = 1 }) {
-                        Text(LocalizedStringKey(M7Localize.auth.signUpWithEmailButton), bundle: .module)
+                        M7Text(M7Localize.auth.signUpWithEmailButton, style: .button, color: .onPrimaryHighEmphasis)
+                        
                     }
                     
                     M7Button(style: .secondary, action: registrationGoogleAction ) {
-                        Text(LocalizedStringKey(M7Localize.auth.signUpWithGoogleButton), bundle: .module)
+                        M7Text(M7Localize.auth.signUpWithGoogleButton, style: .button, color: .onSurfaceHighEmphasis)
+                        
                     }
                     
                     M7Button(style: .link, action: { navigationLink = 2 }) {
-                        Text(LocalizedStringKey(M7Localize.auth.logInButton), bundle: .module)
+                        M7Text(M7Localize.auth.logInButton, style: .button, color: .primary)
                     }
                     
                     NavigationLink(destination: M7EmailRegistrationEmailEnterStepView(), tag: 1, selection: $navigationLink) {
@@ -90,8 +93,8 @@ public struct M7AuthView: View {
     }
 }
 
-struct AuthView_Previews: PreviewProvider {
-    static var previews: some View {
-        M7AuthView(title: "Title", subtitle: "Subtitile", image: Image("empty", bundle: .module), registrationGoogleAction: { print(#function) })
-    }
-}
+//struct AuthView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        M7AuthView(title: "Title", subtitle: "Subtitile", image: Image("empty", bundle: .module), registrationGoogleAction: { print(#function) })
+//    }
+//}

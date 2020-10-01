@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import M7Native
 
 public struct M7EmailRegistrationNameEnterStepView: View {
     
@@ -40,11 +41,11 @@ public struct M7EmailRegistrationNameEnterStepView: View {
             Spacer()
             
             M7Button(style: .primary, action: { print("") }) {
-                Text(LocalizedStringKey(M7Localize.auth.createAccountButton), bundle: .module)
+                M7Text(M7Localize.auth.createAccountButton, style: .button, color: .onPrimaryHighEmphasis)
             }
             
             
-        }.padding(.all, M7Space.m)
+        }.padding(.all)
         .navigationBarHidden(true)
     }
     

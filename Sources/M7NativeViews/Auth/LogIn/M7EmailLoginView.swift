@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import M7Native
 
 public struct M7EmailLoginView: View {
     
@@ -36,9 +37,8 @@ public struct M7EmailLoginView: View {
             Spacer()
             
             M7Button(style: .primary, action: { print("") }) {
-                Text(LocalizedStringKey(M7Localize.auth.logInButton), bundle: .module)
+                M7Text(M7Localize.auth.logInButton, style: .button, color: .onPrimaryHighEmphasis)
             }
-            
             
         }.padding(.all, M7Space.m)
         .navigationBarHidden(true)
