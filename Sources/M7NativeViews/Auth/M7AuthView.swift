@@ -93,8 +93,8 @@ public struct M7AuthView: View {
     }
 }
 
-//struct AuthView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        M7AuthView(title: "Title", subtitle: "Subtitile", image: Image("empty", bundle: .module), registrationGoogleAction: { print(#function) })
-//    }
-//}
+struct AuthView_Previews: PreviewProvider {
+    static var previews: some View {
+        M7AuthView(title: "Title", subtitle: "Subtitile", image: Image("empty"), registrationGoogleAction: { print(#function) })
+    }
+}
