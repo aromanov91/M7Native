@@ -19,8 +19,6 @@ public struct M7SettingsMessageLinkRowView: View {
     @State var isShowingMailView = false
     @State var alertNoMail = false
     
-    
-    
     public init(_ adress: String, subject: String) {
         self.adress = adress
         self.subject = subject
@@ -41,7 +39,7 @@ public struct M7SettingsMessageLinkRowView: View {
         }
         //            .disabled(!MFMailComposeViewController.canSendMail())
         .sheet(isPresented: $isShowingMailView) {
-            MailView(isShowing: self.$isShowingMailView, result: self.$result, adress: self.adress, subject: self.subject)
+            M7MailView(isShowing: self.$isShowingMailView, result: self.$result, adress: self.adress, subject: self.subject)
         }
         .alert(isPresented: self.$alertNoMail) {
             Alert(title: Text("NO MAIL SETUP"))
@@ -50,7 +48,7 @@ public struct M7SettingsMessageLinkRowView: View {
     }
 }
 
-struct MailView: UIViewControllerRepresentable {
+struct M7MailView: UIViewControllerRepresentable {
     
     @Binding var isShowing: Bool
     @Binding var result: Result<MFMailComposeResult, Error>?
@@ -93,7 +91,7 @@ struct MailView: UIViewControllerRepresentable {
                            result: $result)
     }
     
-    func makeUIViewController(context: UIViewControllerRepresentableContext<MailView>) -> MFMailComposeViewController {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<M7MailView>) -> MFMailComposeViewController {
             let vc = MFMailComposeViewController()
             vc.setToRecipients([adress])
             vc.setSubject(subject)
@@ -102,7 +100,7 @@ struct MailView: UIViewControllerRepresentable {
         }
     
     func updateUIViewController(_ uiViewController: MFMailComposeViewController,
-                                context: UIViewControllerRepresentableContext<MailView>) {
+                                context: UIViewControllerRepresentableContext<M7MailView>) {
         
     }
     

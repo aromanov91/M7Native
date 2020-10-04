@@ -35,3 +35,7 @@
 "Auth.LastNameTextField" = "Фамилия";
 "Auth.CreateAccountButton" = "Создать учетную запись";
 
+// Rate
+"Rate.title" = "Вам нравится приложение?";
+"Rate.subtitle" = "Будем рады, если оцените приложение или оставите отзыв";
+

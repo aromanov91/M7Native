@@ -64,8 +64,10 @@ public struct M7Text: View {
         Text(LocalizedStringKey(text), bundle: .module)
             .font(textStyle)
             .lineSpacing(lineSpacing)
+            .lineLimit(2)
             .foregroundColor(color.color)
             .multilineTextAlignment(alignment)
+        
     }
     
     private mutating func setTextStyle(_ style: M7TextStyles) {

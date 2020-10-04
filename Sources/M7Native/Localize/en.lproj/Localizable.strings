@@ -34,3 +34,7 @@
 "Auth.FirstNameTextField" = "First Name";
 "Auth.LastNameTextField" = "Last Name";
 "Auth.CreateAccountButton" = "Create Account";
+
+// Rate
+"Rate.title" = "Do you like the app?";
+"Rate.subtitle" = "We would be glad if you rate the app or give us a review";

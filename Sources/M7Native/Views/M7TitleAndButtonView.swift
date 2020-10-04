@@ -111,6 +111,6 @@ public struct M7TitleAndButtonView: View {
 
 struct TitleAndButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        Text("Hello, World!")
+        M7TitleAndButtonView(title: "Title", primaryAction: {} )
     }
 }

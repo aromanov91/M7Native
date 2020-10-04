@@ -62,4 +62,9 @@ public class M7Localize {
        
     }
     
+    public enum rate {
+        public static var title = "Rate.title"
+        public static var subtitle = "Rate.subtitle"
+    }
+    
 }
