@@ -8,6 +8,7 @@
 import SwiftUI
 import M7Native
 
+
 public struct M7AuthView: View {
     
     let registrationGoogleAction: () -> Void

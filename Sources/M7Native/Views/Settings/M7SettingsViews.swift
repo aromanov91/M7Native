@@ -43,3 +43,9 @@ public struct M7SettingsViews: View {
         }
     }
 }
+
+struct M7SettingsViews_Previews: PreviewProvider {
+    static var previews: some View {
+        M7SettingsViews()
+    }
+}
