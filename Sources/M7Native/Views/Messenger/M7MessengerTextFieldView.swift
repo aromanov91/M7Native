@@ -24,7 +24,7 @@ public struct M7MessengerTextFieldView: View {
             
             ZStack {
                 
-                M7BlurView(.light)
+                //M7BlurView(.light)
                 
                 VStack {
                     
@@ -54,6 +54,7 @@ public struct M7MessengerTextFieldView: View {
                     }.frame(height: 40)
                     .padding(.leading, 12)
                     .padding(.trailing, 8)
+                    //.background(M7BlurView())
                     .background(M7Color.onBackgroundHighEmphasis.color.opacity(0.07))
                     .cornerRadius(14)
                     
@@ -65,6 +66,8 @@ public struct M7MessengerTextFieldView: View {
 
             }
         }
+        //.background(M7Color.backgroundSecondary.color)
+        .background( M7BlurView())
         .padding(.all, 0)
         .frame(minWidth: 0, maxWidth: .infinity)
 
