@@ -8,12 +8,19 @@
 import SwiftUI
 import Combine
 
+public enum M7ApperanseMode: String, CaseIterable {
+    case system
+    case light
+    case dark
+}
+
 public class M7SettingsStore: ObservableObject {
     
     private enum Keys {
         static let pro = "Settings.Pro"
-        static let apperance = "Settings.Apperance"
+        static let apperance = "Settings.Apperance.Theme"
         static let vibration = "Settings.Vibration"
+        static let sound = "Settings.Sound"
     }
     
     public let cancellable: Cancellable
@@ -26,6 +33,8 @@ public class M7SettingsStore: ObservableObject {
         
         defaults.register(defaults: [
             Keys.vibration: true,
+            Keys.sound: true,
+            Keys.apperance: M7ApperanseMode.system.rawValue,
         ])
         
         cancellable = NotificationCenter.default
@@ -43,5 +52,35 @@ public class M7SettingsStore: ObservableObject {
         set { defaults.set(newValue, forKey: Keys.vibration) }
         get { defaults.bool(forKey: Keys.vibration) }
     }
+    
+    public var isSound: Bool {
+        set { defaults.set(newValue, forKey: Keys.sound) }
+        get { defaults.bool(forKey: Keys.sound) }
+    }
+
+    public var apperancMode: M7ApperanseMode {
+        get {
+            return defaults.string(forKey: Keys.apperance)
+                .flatMap { M7ApperanseMode(rawValue: $0) } ?? .system
+        }
+
+        set {
+            defaults.set(newValue.rawValue, forKey: Keys.apperance)
+        }
+    }
+    
+//    public var isSystemApperance: bool {
+//        
+//        let apperance = defaults.bool(forKey: Keys.apperance)
+//        
+//        if apperance != M7ApperanseMode.system.rawValue {
+//            return false
+//        } else {
+//            return true
+//        }
+//        
+//        
+//        
+//    }
     
 }

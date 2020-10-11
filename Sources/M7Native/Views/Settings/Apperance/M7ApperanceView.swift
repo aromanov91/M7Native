@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  M7ApperanceView.swift
 //  
 //
 //  Created by Alexander Romanov on 18.09.2020.
@@ -14,6 +14,8 @@ public struct M7ApperanceView: View {
     @State private var isThemeChanged: Bool = false
     
     @ObservedObject var theme = M7ThemeColorSetting()
+    
+    @EnvironmentObject var settings: M7SettingsStore
     
     public var body: some View {
         
@@ -60,24 +62,33 @@ public struct M7ApperanceView: View {
                 }
                 
                 
-                Section(header: M7Text("Apperance.SectionTheme.Title", style: .overline)) {
-                    
-                    M7RowButton("System") {
-                        self.theme.themeSetting = "system"
-                        UserDefaults.standard.set(self.theme.themeSetting, forKey: "Settings.Apperance.Theme")
-                    }
-                    
-                    M7RowButton("Dark") {
-                        self.theme.themeSetting = "dark"
-                        UserDefaults.standard.set(self.theme.themeSetting, forKey: "Settings.Apperance.Theme")
-                    }
-                    
-                    M7RowButton("Light") {
-                        self.theme.themeSetting = "light"
-                        UserDefaults.standard.set(self.theme.themeSetting, forKey: "Settings.Apperance.Theme")
-                    }
-                    
-                }
+                Picker(
+                    selection: $settings.apperancMode,
+                                       label: Text("Apperance")
+                                   ) {
+                                       ForEach(M7ApperanseMode.allCases, id: \.self) {
+                                           Text($0.rawValue).tag($0)
+                                       }
+                                   }
+                
+                
+//                Section(header: M7Text("Apperance.SectionTheme.Title", style: .overline)) {
+//
+//                    ForEach(M7ApperanseMode.allCases, id: \.self) { item in
+//
+//
+//                        Button(action: { settings.apperancMode = item } ) {
+//
+//                            M7Row( item.rawValue)
+//
+//                        }
+//
+//
+//                                                           }
+//
+//
+//
+//                }
                 
             }
         }

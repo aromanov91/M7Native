@@ -40,6 +40,8 @@ public class M7Info {
     
     public enum author {
         
+        public static var name: String = ""
+        
         public static var email: String = ""
         
         public static var url: String = ""
@@ -70,12 +72,14 @@ public class M7Info {
         app.appStoreUrl = appStoreUrl
     }
     
-    public init(email: String = "",
+    public init(name: String = "",
+        email: String = "",
                 url: String = "",
                 appStoreUrl: String = "",
                 telegramAccountUrl: String = "",
                 facebookAccountUrl: String = "") {
         
+        author.name = name
         author.email = email
         author.url = url
         author.appStoreUrl = appStoreUrl

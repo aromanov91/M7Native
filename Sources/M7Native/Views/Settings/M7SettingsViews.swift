@@ -39,18 +39,11 @@ public struct M7SettingsViews: View {
                         
                     }
                     
-                    VStack {
-                    
-                        M7Text(M7Info.app.name ?? "name")
-                            
-                        M7Text(M7Info.app.version ?? "version")
-                        
-                        M7Text(M7Info.app.facebookMessengerChatUrl)
-                        
-                    }
 
-                    
+                    M7SettingsAboutRowView()
                 }
+                
+                
                 
             }
         }
