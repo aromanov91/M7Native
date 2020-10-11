@@ -9,11 +9,11 @@ import SwiftUI
 
 public struct M7SettingsViews: View {
     
-    public init(){}
+    @EnvironmentObject var settings: M7SettingsStore
     
+    public init() {}
+
     public var body: some View {
-        
-        
         
         M7ThemingView {
             
@@ -21,10 +21,11 @@ public struct M7SettingsViews: View {
                 
                 M7List(M7Localize.settings.title ,style: .groupedListStyle) {
                     
-                    
                     Section(header: M7Text(M7Localize.settings.appSection, style: .overline, color: .onBackgroundMediumEmphasis)) {
                         
                         M7SettingsAppernceRowView()
+                        
+                        M7Row("Vibration", type: .toggle, leadingIcon: .volume, toggle: $settings.isVibration)
                         
                     }
                     
@@ -38,7 +39,19 @@ public struct M7SettingsViews: View {
                         
                     }
                     
+                    VStack {
+                    
+                        M7Text(M7Info.app.name ?? "name")
+                            
+                        M7Text(M7Info.app.version ?? "version")
+                        
+                        M7Text(M7Info.app.facebookMessengerChatUrl)
+                        
+                    }
+
+                    
                 }
+                
             }
         }
     }
