@@ -14,24 +14,52 @@ public struct M7EmailLoginView: View {
     
     @State var password = ""
     
+    @State var show = false
+    
     @Environment(\.presentationMode) var presentationMode
     
     public var body: some View {
         
-        VStack {
+        M7ModalNavigationView(M7Localize.auth.signUpWithEmailTitle, showTitle: $show) {
+        
+            VStack(spacing: .zero) {
             
             VStack(alignment: .leading, spacing: M7Space.m) {
                 
-                M7Button(style: .secondary, size: .m, round: .full, width: .round, action: { self.presentationMode.wrappedValue.dismiss() }) {
-                    M7Icon(.arrowLeft)
-                }
-                
-                M7Text(M7Localize.auth.signUpWithEmailTitle, style: .title1)
-                
+
+                List {
+                    
+                    
                 M7TextField(M7Localize.auth.emailTextField, text: $email)
+                    .onAppear {
+                    
+                    withAnimation {
+                        
+                        self.show = true
+                    }
+                    
+                }
+                .onDisappear {
+                    
+                    withAnimation {
+                        
+                        self.show = false
+                    }
+                }
+                    
+                    
                 
                 M7TextField(M7Localize.auth.passwordTextField, text: $password)
+                    M7TextField(M7Localize.auth.passwordTextField, text: $password)
+                    M7TextField(M7Localize.auth.passwordTextField, text: $password)
+                    M7TextField(M7Localize.auth.passwordTextField, text: $password)
+                    M7TextField(M7Localize.auth.passwordTextField, text: $password)
+                    M7TextField(M7Localize.auth.passwordTextField, text: $password)
+                    M7TextField(M7Localize.auth.passwordTextField, text: $password)
+                    M7TextField(M7Localize.auth.passwordTextField, text: $password)
+                    M7TextField(M7Localize.auth.passwordTextField, text: $password)
                 
+                }
             }
             
             Spacer()
@@ -39,9 +67,10 @@ public struct M7EmailLoginView: View {
             M7Button(style: .primary, action: { print("") }) {
                 M7Text(M7Localize.auth.logInButton, style: .button, color: .onPrimaryHighEmphasis)
             }
-            
-        }.padding(.all, M7Space.m)
-        .navigationBarHidden(true)
+            }.padding(.horizontal, M7Space.m)
+        
+    }
+        
     }
 }
 

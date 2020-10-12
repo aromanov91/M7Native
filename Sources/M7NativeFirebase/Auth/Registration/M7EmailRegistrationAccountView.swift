@@ -2,25 +2,26 @@
 //  SwiftUIView.swift
 //  
 //
-//  Created by 18391981 on 27.09.2020.
+//  Created by 18391981 on 29.09.2020.
 //
 
 import SwiftUI
 import M7Native
 
-public struct M7EmailRegistrationEmailEnterStepView: View {
+public struct M7EmailRegistrationAccountView: View {
     
-    @State var email = ""
+    var email = ""
+    var password = ""
     
-    @State private var navigationLink: Int? = 0
+    @State var firstName = ""
+    
+    @State var lasttName = ""
     
     @Environment(\.presentationMode) var presentationMode
     
     public var body: some View {
         
-        NavigationLink(destination: M7EmailRegistrationPasswordEnterStepView(email: email), tag: 1, selection: $navigationLink) {
-            EmptyView()
-        }
+        M7ModalNavigationView {
         
         VStack(alignment: .leading) {
             
@@ -33,27 +34,29 @@ public struct M7EmailRegistrationEmailEnterStepView: View {
                 
                 M7Text(M7Localize.auth.createAccounTitle, style: .title1)
                 
-                M7TextField(M7Localize.auth.emailTextField, text: $email)
+                M7TextField(M7Localize.auth.firstNameTextField, text: $firstName)
+                
+                M7TextField(M7Localize.auth.lasttNameTextField, text: $lasttName)
                 
             }
             
             Spacer()
             
-            M7Button(style: .primary, action: { navigationLink = 1 }) {
-                M7Text(M7Localize.button.next, style: .button, color: .onPrimaryHighEmphasis)
+            M7Button(style: .primary, action: { print("") }) {
+                M7Text(M7Localize.auth.createAccountButton, style: .button, color: .onPrimaryHighEmphasis)
             }
             
             
         }.padding(.all)
-            .navigationBarHidden(true)
-            
+    }
     }
     
-  
+    
 }
 
-struct M7EmailRegistration_Previews: PreviewProvider {
+struct M7EmailRegistrationNameEnterStepView_Previews: PreviewProvider {
     static var previews: some View {
-        M7EmailRegistrationEmailEnterStepView()
+        M7EmailRegistrationAccountView()
     }
 }
+

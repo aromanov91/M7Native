@@ -11,6 +11,8 @@ public struct M7AboutView: View {
     
     public var body: some View {
         
+        
+        
         M7List("", style: .insetGroupedListStyle) {
             
             

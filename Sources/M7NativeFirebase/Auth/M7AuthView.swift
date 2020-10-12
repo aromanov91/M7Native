@@ -77,7 +77,7 @@ public struct M7AuthView: View {
                         M7Text(M7Localize.auth.logInButton, style: .button, color: .primary)
                     }
                     
-                    NavigationLink(destination: M7EmailRegistrationEmailEnterStepView(), tag: 1, selection: $navigationLink) {
+                    NavigationLink(destination: M7EmailRegistrationEmailView(), tag: 1, selection: $navigationLink) {
                         EmptyView()
                     }
                     

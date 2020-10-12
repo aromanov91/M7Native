@@ -8,7 +8,7 @@
 import SwiftUI
 import M7Native
 
-public struct M7EmailRegistrationPasswordEnterStepView: View {
+public struct M7EmailRegistrationPasswordView: View {
     
     var email = ""
     @State var password = ""
@@ -19,18 +19,15 @@ public struct M7EmailRegistrationPasswordEnterStepView: View {
     
     public var body: some View {
         
-        NavigationLink(destination: M7EmailRegistrationNameEnterStepView(email: email, password: password), tag: 1, selection: $navigationLink) {
+        M7ModalNavigationView {
+        
+        NavigationLink(destination: M7EmailRegistrationAccountView(email: email, password: password), tag: 1, selection: $navigationLink) {
             EmptyView()
         }
         
         VStack(alignment: .leading) {
             
             VStack(alignment: .leading, spacing: M7Space.m) {
-                
-                M7Button(style: .secondary, size: .m, round: .full, width: .round,
-                         action: { self.presentationMode.wrappedValue.dismiss() }) {
-                    M7Icon(.arrowLeft)
-                }
                 
                 M7Text(M7Localize.auth.createAccounTitle, style: .title1)
                 
@@ -46,7 +43,7 @@ public struct M7EmailRegistrationPasswordEnterStepView: View {
             
             
         }.padding(.all, M7Space.m)
-        .navigationBarHidden(true)
+    }
     }
     
     
@@ -54,7 +51,7 @@ public struct M7EmailRegistrationPasswordEnterStepView: View {
 
 struct M7EmailRegistrationPasswordEnterStepView_Previews: PreviewProvider {
     static var previews: some View {
-        M7EmailRegistrationPasswordEnterStepView()
+        M7EmailRegistrationPasswordView()
     }
 }
 
