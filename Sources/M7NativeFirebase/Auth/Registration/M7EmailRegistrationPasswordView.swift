@@ -10,41 +10,41 @@ import M7Native
 
 public struct M7EmailRegistrationPasswordView: View {
     
-    var email = ""
-    @State var password = ""
-    
-    @Environment(\.presentationMode) var presentationMode
-    
-    @State private var navigationLink: Int? = 0
+    @EnvironmentObject public var model: M7AuthModel
     
     public var body: some View {
         
-        M7ModalNavigationView {
         
-        NavigationLink(destination: M7EmailRegistrationAccountView(email: email, password: password), tag: 1, selection: $navigationLink) {
-            EmptyView()
+        
+        M7ModalNavigationView(M7Localize.auth.createAccounTitle) {
+            
+            
+            
+            
+            VStack(alignment: .leading) {
+                
+                VStack(alignment: .leading, spacing: M7Space.m) {
+                    
+                    M7TextField(M7Localize.auth.passwordTextField, text: $model.passwordSignUp)
+                    
+                }
+                
+                Spacer()
+                
+                M7Button(style: .primary, action: { model.signUp() }) {
+                    M7Text(M7Localize.button.next, style: .button, color: .onPrimaryHighEmphasis)
+                }
+                
+                
+            }.padding(.all, M7Space.m)
         }
         
-        VStack(alignment: .leading) {
+        NavigationLink(destination: M7ApperanceView(), tag: 2, selection: $model.navigationLink) {
+        EmptyView()
             
-            VStack(alignment: .leading, spacing: M7Space.m) {
-                
-                M7Text(M7Localize.auth.createAccounTitle, style: .title1)
-                
-                M7TextField(M7Localize.auth.passwordTextField, text: $password)
-                
-            }
-            
-            Spacer()
-            
-            M7Button(style: .primary, action: { navigationLink = 1 }) {
-                M7Text(M7Localize.button.next, style: .button, color: .onPrimaryHighEmphasis)
-            }
-            
-            
-        }.padding(.all, M7Space.m)
+        }
     }
-    }
+    
     
     
 }

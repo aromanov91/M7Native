@@ -17,6 +17,8 @@ public struct M7AuthView: View {
     let subtitle: String
     let image: Image
     
+    @ObservedObject var model = M7AuthModel()
+    
     @State private var navigationLink: Int? = 0
     
     public init(title: String,
@@ -38,9 +40,9 @@ public struct M7AuthView: View {
             
             VStack {
                 
-//                Spacer().frame(height: M7Space.m)
-//
-//                M7Text("LISTER", style: .overline, color: .onBackgroundMediumEmphasis, alignment: .center)
+                Spacer().frame(height: M7Space.m)
+                
+                M7Text("LISTER", style: .overline, color: .onBackgroundMediumEmphasis, alignment: .center)
                 
                 Spacer()
                 
@@ -63,7 +65,7 @@ public struct M7AuthView: View {
                         M7Text(subtitle, style: .paragraph1, color: .onSurfaceHighEmphasis, alignment: .center)
                     }
                     
-                    M7Button(style: .primary, action: { navigationLink = 1 }) {
+                    M7Button(style: .primary, action: { navigationLink = 10 }) {
                         M7Text(M7Localize.auth.signUpWithEmailButton, style: .button, color: .onPrimaryHighEmphasis)
                         
                     }
@@ -73,15 +75,15 @@ public struct M7AuthView: View {
                         
                     }
                     
-                    M7Button(style: .link, action: { navigationLink = 2 }) {
+                    M7Button(style: .link, action: { navigationLink = 11 }) {
                         M7Text(M7Localize.auth.logInButton, style: .button, color: .primary)
                     }
                     
-                    NavigationLink(destination: M7EmailRegistrationEmailView(), tag: 1, selection: $navigationLink) {
+                    NavigationLink(destination: M7EmailRegistrationEmailView().environmentObject(model), tag: 10, selection: $navigationLink) {
                         EmptyView()
                     }
                     
-                    NavigationLink(destination: M7EmailLoginView(), tag: 2, selection: $navigationLink) {
+                    NavigationLink(destination: M7EmailLoginView(), tag: 11, selection: $navigationLink) {
                         EmptyView()
                     }
                     

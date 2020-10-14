@@ -17,6 +17,8 @@ public struct M7ApperanceView: View {
     
     @EnvironmentObject var settings: M7SettingsStore
     
+    public init() {}
+    
     public var body: some View {
         
         M7ThemingView {

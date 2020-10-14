@@ -10,29 +10,20 @@ import M7Native
 
 public struct M7EmailRegistrationAccountView: View {
     
-    var email = ""
-    var password = ""
-    
     @State var firstName = ""
     
     @State var lasttName = ""
     
-    @Environment(\.presentationMode) var presentationMode
+    ///@EnvironmentObject var model: M7AuthModel
     
     public var body: some View {
         
-        M7ModalNavigationView {
+        M7ModalNavigationView(M7Localize.auth.createAccounTitle) {
         
         VStack(alignment: .leading) {
             
             VStack(alignment: .leading, spacing: M7Space.m) {
-                
-                M7Button(style: .secondary, size: .m, round: .full, width: .round,
-                         action: { self.presentationMode.wrappedValue.dismiss() }) {
-                    M7Icon(.arrowLeft)
-                }
-                
-                M7Text(M7Localize.auth.createAccounTitle, style: .title1)
+
                 
                 M7TextField(M7Localize.auth.firstNameTextField, text: $firstName)
                 
@@ -45,6 +36,8 @@ public struct M7EmailRegistrationAccountView: View {
             M7Button(style: .primary, action: { print("") }) {
                 M7Text(M7Localize.auth.createAccountButton, style: .button, color: .onPrimaryHighEmphasis)
             }
+            
+            
             
             
         }.padding(.all)
