@@ -12,6 +12,7 @@ public enum M7ButtonStyle: Int, CaseIterable {
     case primary
     case secondary
     case gray
+    case text
     case link
     case deleteLink
 }
@@ -148,6 +149,8 @@ public struct M7Button<Content: View>: View {
         case .deleteLink:
             labelColor = M7Colors.error
             
+        case .text:
+            labelColor = M7Colors.onSurface.highEmphasis
         }
     }
     

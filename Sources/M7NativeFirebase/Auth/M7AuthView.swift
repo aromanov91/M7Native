@@ -21,6 +21,8 @@ public struct M7AuthView: View {
     
     @State private var navigationLink: Int? = 0
     
+    @State public var phone = ""
+    
     public init(title: String,
                 subtitle: String = "",
                 image: Image = Image(""),
@@ -58,6 +60,10 @@ public struct M7AuthView: View {
                 
                 VStack(spacing: M7Space.m) {
                     
+                    Text(phone)
+                    
+                    M7PhoneFiled($phone)
+                    
                     M7Text(title, style: .title2, color: .onSurfaceHighEmphasis, alignment: .center)
                     
                     if subtitle != "" {
@@ -65,7 +71,7 @@ public struct M7AuthView: View {
                         M7Text(subtitle, style: .paragraph1, color: .onSurfaceHighEmphasis, alignment: .center)
                     }
                     
-                    M7Button(style: .primary, action: { navigationLink = 10 }) {
+                    M7Button(style: .primary, action: { navigationLink = 21 }) {
                         M7Text(M7Localize.auth.signUpWithEmailButton, style: .button, color: .onPrimaryHighEmphasis)
                         
                     }
@@ -75,7 +81,7 @@ public struct M7AuthView: View {
                         
                     }
                     
-                    M7Button(style: .link, action: { navigationLink = 11 }) {
+                    M7Button(style: .link, action: { navigationLink = 22 }) {
                         M7Text(M7Localize.auth.logInButton, style: .button, color: .primary)
                     }
                     
@@ -83,7 +89,7 @@ public struct M7AuthView: View {
                         EmptyView()
                     }
                     
-                    NavigationLink(destination: M7EmailLoginView(), tag: 11, selection: $navigationLink) {
+                    NavigationLink(destination: M7EmailLoginView(), tag: 23, selection: $navigationLink) {
                         EmptyView()
                     }
                     

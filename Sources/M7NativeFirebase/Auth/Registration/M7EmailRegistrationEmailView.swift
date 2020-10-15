@@ -14,7 +14,7 @@ public struct M7EmailRegistrationEmailView: View {
 
     public var body: some View {
         
-        NavigationLink(destination: M7EmailRegistrationPasswordView().environmentObject(model), tag: 1, selection: $model.navigationLink ) {
+        NavigationLink(destination: M7EmailRegistrationPasswordView().environmentObject(model), tag: 11, selection: $model.navigationLink ) {
             EmptyView()
         }
         

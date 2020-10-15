@@ -39,7 +39,7 @@ public struct M7EmailRegistrationPasswordView: View {
             }.padding(.all, M7Space.m)
         }
         
-        NavigationLink(destination: M7ApperanceView(), tag: 2, selection: $model.navigationLink) {
+        NavigationLink(destination: M7ApperanceView(), tag: 12, selection: $model.navigationLink) {
         EmptyView()
             
         }

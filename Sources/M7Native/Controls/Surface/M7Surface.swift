@@ -27,6 +27,7 @@ public enum M7SurfacePadding: Int, CaseIterable {
     case xxs
     case m
     case s
+    case zero
 }
 
 @available(iOS 13.0, macOS 10.15, *)
@@ -44,6 +45,7 @@ public struct M7Surface<Content: View>: View {
         static var paddingS: CGFloat { return M7Paddings.all.s }
         static var paddingXXXS: CGFloat { return M7Paddings.all.xxxs }
          static var paddingXXS: CGFloat { return M7Paddings.all.xxs }
+        static var paddingZero: CGFloat { return .zero }
         
         /// Radius
         static var radiusM: CGFloat { return M7Radius.m }
@@ -129,6 +131,8 @@ public struct M7Surface<Content: View>: View {
             self.paddingSize = Constants.paddingM
         case .s:
             self.paddingSize = Constants.paddingS
+        case .zero:
+            self.paddingSize = Constants.paddingZero
         }
     }
     

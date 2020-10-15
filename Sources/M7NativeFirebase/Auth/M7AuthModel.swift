@@ -9,12 +9,12 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 
-public class M7AuthModel : ObservableObject {
+public class M7AuthModel: ObservableObject {
     
     public init() {}
     
     // Navigation
-    //@Published public var showModal = false
+    @Published public var showModal = false
     @Published public var navigationLink: Int? = 0
     
     // Email
@@ -34,6 +34,7 @@ public class M7AuthModel : ObservableObject {
     @Published public var phoneNumber = ""
     @Published public var smsErrorText = ""
     @Published public var isSmsError = false
+    @Published public var ID : String = ""
     
     // Form
     @Published public var firstName = ""
@@ -52,57 +53,52 @@ public class M7AuthModel : ObservableObject {
     public func signUp() {
         
         navigationLink = 2
-//
-//        self.isEmailError = false
-//
-//        if passwordSignUp == "" {
-//
-//            self.errorText = "Fill contents proprely!!!"
-//            self.isEmailError = true
-//            return
-//        }
-//
-//        withAnimation{
-//
-//            self.isLoading.toggle()
-//        }
-//
-//        Auth.auth().createUser(withEmail: emailSignUp, password: passwordSignUp) { (result, err) in
-//
-//            withAnimation{
-//
-//                self.isLoading.toggle()
-//            }
-//
-//            if err != nil{
-//                self.errorText = err!.localizedDescription
-//                self.isEmailError = true
-//                return
-//            }
-//
-//            // sending Verifcation Link....
-//
-//            result?.user.sendEmailVerification(completion: { (err) in
-//
-//                if err != nil{
-//                    self.errorText = err!.localizedDescription
-//                    self.isEmailError = true
-//                    return
-//                }
-//
-//                // Alerting User To Verify Email...
-//
-//                self.errorText = "Email Verification Has Been Sent !!! Verify Your Email ID !!!"
-//
-//            })
-//        }
+
     }
+    
+    public func sendAuthSMS() {
+        
+        PhoneAuthProvider.provider().verifyPhoneNumber("+79034764479", uiDelegate: nil) { (verificationID, error) in
+          if let error = error {
+            self.errorText = error.localizedDescription
+            print("+" + self.phoneNumber)
+            print(self.errorText)
+            return
+          }
+            
+            print("Все ок")
+            //print("+" + self.phoneNumber)
+            //self.ID = verificationID ?? ""
+            self.navigationLink = 1
+        }
+        
+    }
+    
+    public func chekSMS() {
+        let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.ID, verificationCode: smsCode)
+                        
+                        Auth.auth().signIn(with: credential) { (res, err) in
+                            
+                            if err != nil{
+                                self.errorText = err!.localizedDescription
+                              
+                                self.isLoading = false
+                                return
+                            }
+                            
+                            
+                            
+                            self.showModal = false
+                            
+                        }
+    }
+    
+    
     
     public func createAccount() {
         
         //self.showModal = false
         print(emailSignUp)
-        //print(showModal)
         
     }
     
