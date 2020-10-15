@@ -10,41 +10,32 @@ import M7Native
 
 public struct M7EmailRegistrationAccountView: View {
     
-    @State var firstName = ""
-    
-    @State var lasttName = ""
-    
-    ///@EnvironmentObject var model: M7AuthModel
+    @EnvironmentObject var model: M7AuthModel
     
     public var body: some View {
         
         M7ModalNavigationView(M7Localize.auth.createAccounTitle) {
-        
-        VStack(alignment: .leading) {
             
-            VStack(alignment: .leading, spacing: M7Space.m) {
+            VStack(alignment: .leading) {
+                
+                VStack(alignment: .leading, spacing: M7Space.m) {
+                    
+                    
+                    M7TextField(M7Localize.auth.firstNameTextField, text: $model.firstName)
+                    
+                    M7TextField(M7Localize.auth.lasttNameTextField, text: $model.lastName)
+                    
+                }
+                
+                Spacer()
+                
+                M7Button(style: .primary, action: { model.createAccount() }) {
+                    M7Text(M7Localize.auth.createAccountButton, style: .button, color: .onPrimaryHighEmphasis)
+                }
 
-                
-                M7TextField(M7Localize.auth.firstNameTextField, text: $firstName)
-                
-                M7TextField(M7Localize.auth.lasttNameTextField, text: $lasttName)
-                
-            }
-            
-            Spacer()
-            
-            M7Button(style: .primary, action: { print("") }) {
-                M7Text(M7Localize.auth.createAccountButton, style: .button, color: .onPrimaryHighEmphasis)
-            }
-            
-            
-            
-            
-        }.padding(.all)
+            }.padding(.all)
+        }
     }
-    }
-    
-    
 }
 
 struct M7EmailRegistrationNameEnterStepView_Previews: PreviewProvider {

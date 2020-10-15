@@ -38,10 +38,10 @@ public struct M7PhoneSMSView: View {
                     M7Text(M7Localize.button.next, style: .button, color: .onPrimaryHighEmphasis)
                 }
                 
-//                NavigationLink(destination: M7EmailRegistrationAccountView().environmentObject(model), tag: 45, selection: $model.navigationLink) {
-//                    EmptyView()
-//                }
-//
+                NavigationLink(destination: M7EmailRegistrationAccountView().environmentObject(model), tag: 45, selection: $model.navigationLink) {
+                    EmptyView()
+                }
+
             }.padding(.all, M7Space.m)
             
         }

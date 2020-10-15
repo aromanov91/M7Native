@@ -94,7 +94,7 @@ public class M7AuthModel: ObservableObject {
                             
                             
                             self.status = true
-                            self.showModal = false
+                            self.navigationLink = 45
                             
                         }
     }
@@ -103,8 +103,7 @@ public class M7AuthModel: ObservableObject {
     
     public func createAccount() {
         
-        //self.showModal = false
-        print(emailSignUp)
+        self.showModal = false
         
     }
     
@@ -125,6 +124,8 @@ public class M7AuthModel: ObservableObject {
         password = ""
         emailSignUp = ""
         passwordSignUp = ""
+        
+        navigationLink = 0
     }
     
 }
