@@ -14,7 +14,9 @@ public struct M7PhoneRegistrationView: View {
     
     public init() {}
     
-    @ObservedObject var model = M7AuthModel()
+   // @ObservedObject var model = M7AuthModel()
+    
+    @EnvironmentObject var model: M7AuthModel
     
     public var body: some View {
         
@@ -38,24 +40,24 @@ public struct M7PhoneRegistrationView: View {
                     Spacer()
                     
                     M7Button(style: .primary, action: {
-                        
-                       Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-                        
-                        print("Нажата кнопка")
-                        
-                        let phNo = "+79034764479"
-                               PhoneAuthProvider.provider().verifyPhoneNumber(phNo, uiDelegate: nil) { (verificationID, error) in
-                                   if let error = error {
-                                print("Еррор")
-                                       print(error.localizedDescription)
-                                       return
-                                   }
-                                   // Sign in using the verificationID and the code sent to the user
-                                   // ...
-                                
-                                print("Ок сассесс")
-                               //    UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-                               }
+//
+//                       Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+//
+//                        print("Нажата кнопка")
+//
+//                        let phNo = "+79034764479"
+//                               PhoneAuthProvider.provider().verifyPhoneNumber(phNo, uiDelegate: nil) { (verificationID, error) in
+//                                   if let error = error {
+//                                print("Еррор")
+//                                       print(error.localizedDescription)
+//                                       return
+//                                   }
+//                                   // Sign in using the verificationID and the code sent to the user
+//                                   // ...
+//
+//                                print("Ок сассесс")
+//                               //    UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+//                               }
                         
                         
 //                        PhoneAuthProvider.provider().verifyPhoneNumber("+79034764479", uiDelegate: nil) { (verificationID, error) in
@@ -68,11 +70,11 @@ public struct M7PhoneRegistrationView: View {
 //                          // ...
 //                        }
                         
-                       // UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                       UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         
                        // print("Phone " + model.phoneNumber)
                         
-                        //model.sendAuthSMS()
+                        model.sendAuthSMS()
                         
                         
                         

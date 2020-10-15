@@ -11,6 +11,8 @@ import FirebaseAuth
 
 public class M7AuthModel: ObservableObject {
     
+    
+    
     public init() {}
     
     // Navigation
@@ -40,7 +42,10 @@ public class M7AuthModel: ObservableObject {
     @Published public var firstName = ""
     @Published public var lastName = ""
     
-    
+    public var status: Bool {
+        set { UserDefaults.standard.set(newValue, forKey: "Auth.Status") }
+        get { UserDefaults.standard.bool(forKey: "Auth.Status") }
+    }
     
     // Loading
     
@@ -58,18 +63,19 @@ public class M7AuthModel: ObservableObject {
     
     public func sendAuthSMS() {
         
-        PhoneAuthProvider.provider().verifyPhoneNumber("+79034764479", uiDelegate: nil) { (verificationID, error) in
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
           if let error = error {
             self.errorText = error.localizedDescription
-            print("+" + self.phoneNumber)
+            print(self.phoneNumber)
             print(self.errorText)
             return
           }
             
             print("Все ок")
-            //print("+" + self.phoneNumber)
-            //self.ID = verificationID ?? ""
+            print(self.phoneNumber)
             self.navigationLink = 1
+            self.ID = verificationID ?? ""
+            
         }
         
     }
@@ -87,7 +93,7 @@ public class M7AuthModel: ObservableObject {
                             }
                             
                             
-                            
+                            self.status = true
                             self.showModal = false
                             
                         }
@@ -110,7 +116,7 @@ public class M7AuthModel: ObservableObject {
         
         withAnimation{
             
-            // self.status = false
+            self.status = false
         }
         
         // clearing all data...
