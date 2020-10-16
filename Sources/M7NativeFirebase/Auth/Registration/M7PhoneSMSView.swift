@@ -38,7 +38,7 @@ public struct M7PhoneSMSView: View {
                     M7Text(M7Localize.button.next, style: .button, color: .onPrimaryHighEmphasis)
                 }
                 
-                NavigationLink(destination: M7EmailRegistrationAccountView().environmentObject(model), tag: 45, selection: $model.navigationLink) {
+                NavigationLink(destination: M7EmailRegistrationAccountView().environmentObject(model), tag: 88, selection: $model.navigationLinkCreateAccount) {
                     EmptyView()
                 }
 

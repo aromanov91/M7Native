@@ -16,6 +16,8 @@ public struct M7PhoneRegistrationView: View {
     
    // @ObservedObject var model = M7AuthModel()
     
+  
+    
     @EnvironmentObject var model: M7AuthModel
     
     public var body: some View {

@@ -8,16 +8,17 @@
 import SwiftUI
 import Firebase
 import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 public class M7AuthModel: ObservableObject {
-    
-    
     
     public init() {}
     
     // Navigation
     @Published public var showModal = false
     @Published public var navigationLink: Int? = 0
+    @Published public var navigationLinkCreateAccount: Int? = 0
     
     // Email
     @Published public var email = ""
@@ -39,17 +40,27 @@ public class M7AuthModel: ObservableObject {
     @Published public var ID : String = ""
     
     // Form
+    @Published public var username = ""
     @Published public var firstName = ""
     @Published public var lastName = ""
+    @Published public var pic = ""
+    @Published public var bio = ""
+    
+    
+    @Published public var uid = ""
     
     public var status: Bool {
         set { UserDefaults.standard.set(newValue, forKey: "Auth.Status") }
         get { UserDefaults.standard.bool(forKey: "Auth.Status") }
     }
     
+    
+    
     // Loading
     
     @Published public var isLoading = false
+    
+    let db = Firestore.firestore()
     
     public func emailCheck() {
         navigationLink = 1
@@ -58,18 +69,20 @@ public class M7AuthModel: ObservableObject {
     public func signUp() {
         
         navigationLink = 2
-
+        
     }
     
     public func sendAuthSMS() {
         
+       // Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+        
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
-          if let error = error {
-            self.errorText = error.localizedDescription
-            print(self.phoneNumber)
-            print(self.errorText)
-            return
-          }
+            if let error = error {
+                self.errorText = error.localizedDescription
+                print(self.phoneNumber)
+                print(self.errorText)
+                return
+            }
             
             print("Все ок")
             print(self.phoneNumber)
@@ -82,32 +95,54 @@ public class M7AuthModel: ObservableObject {
     
     public func chekSMS() {
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.ID, verificationCode: smsCode)
-                        
-                        Auth.auth().signIn(with: credential) { (res, err) in
-                            
-                            if err != nil{
-                                self.errorText = err!.localizedDescription
-                              
-                                self.isLoading = false
-                                return
-                            }
-                            
-                            
-                            self.status = true
-                            self.navigationLink = 45
-                            
-                        }
+        
+        Auth.auth().signIn(with: credential) { (res, err) in
+            
+            if err != nil{
+                self.errorText = err!.localizedDescription
+                
+                self.isLoading = false
+                return
+            }
+            
+           
+            self.status = true
+            self.uid = res?.user.uid ?? ""
+            self.navigationLinkCreateAccount = 88
+            
+        }
     }
-    
-    
     
     public func createAccount() {
         
-        self.showModal = false
+        var ref: DocumentReference? = nil
+        ref = self.db.collection("users").addDocument(data: [
+            "userId": uid,
+            "username": username,
+            "firstName": firstName,
+            "lastName": lastName,
+            "pic": pic,
+            "bio": bio,
+            "dateCreated": Date()
+
+            
+            //"status": status,
+            //"company": company,
+            // "author": author
+            //"id": ref?.
+        ]) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+                
+                self.db.collection("users").document(ref!.documentID).setData( ["documentID": ref!.documentID], merge: true)
+                self.showModal = false
+                
+            }
+        }
         
     }
-    
-    // log Out...
     
     public func logOut(){
         
