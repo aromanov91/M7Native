@@ -85,7 +85,18 @@ public struct M7Button<Content: View>: View {
     
     @State private var isPressed: Bool = false
     
-    public init(style: M7ButtonStyle = .secondary, size: M7ButtonSize = .l, round: M7ButtonRounded = .m, shadow: Bool = true, width: M7ButtonWidth = .full, action: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+    @Binding public var loader: Bool
+    
+    @State private var shouldAnimate = false
+    
+    public init(style: M7ButtonStyle = .secondary,
+                size: M7ButtonSize = .l,
+                round: M7ButtonRounded = .m,
+                shadow: Bool = true,
+                width: M7ButtonWidth = .full,
+                loader: Binding<Bool> = .constant(false),
+                action: @escaping () -> Void,
+                @ViewBuilder content: () -> Content) {
         self.action = action
         self.content = content()
         self.style = style
@@ -93,6 +104,7 @@ public struct M7Button<Content: View>: View {
         self.round = round
         self.isShadow = shadow
         self.widthType = width
+        self._loader = loader
 
         setButtonStyle(style)
         setShadow(shadow)
@@ -104,19 +116,51 @@ public struct M7Button<Content: View>: View {
         
         Button(action: action) {
 
-            content
-                .frame(minWidth: 0, maxWidth: widthType == .full ? .infinity : size == .l ? Constants.heightL : Constants.heightM)
-                .frame(height: height)
-                .background(backgroundColor)
-                .cornerRadius(radius)
-                .foregroundColor(labelColor)
-                .shadow(color: shadowStyle.color.opacity(shadowStyle.opacity) ,
-                        radius: shadowStyle.radius,
-                        x: shadowStyle.x,
-                        y: shadowStyle.y)
+            HStack{
+            
+            if loader {
+                
+                HStack {
+                    Circle()
+                        .fill(labelColor)
+                        .frame(width: 12, height: 12)
+                        .scaleEffect(shouldAnimate ? 1.0 : 0.5)
+                        .animation(Animation.easeInOut(duration: 0.5).repeatForever())
+                    Circle()
+                        .fill(labelColor)
+                        .frame(width: 12, height: 12)
+                        .scaleEffect(shouldAnimate ? 1.0 : 0.5)
+                        .animation(Animation.easeInOut(duration: 0.5).repeatForever().delay(0.3))
+                    Circle()
+                        .fill(labelColor)
+                        .frame(width: 12, height: 12)
+                        .scaleEffect(shouldAnimate ? 1.0 : 0.5)
+                        .animation(Animation.easeInOut(duration: 0.5).repeatForever().delay(0.6))
+                }.onAppear {
+                    self.shouldAnimate = true
+                }
+            
+            } else {
+                
+                
+                content
+               
+                
+            }
+            
+        }
+        .frame(minWidth: 0, maxWidth: widthType == .full ? .infinity : size == .l ? Constants.heightL : Constants.heightM)
+        .frame(height: height)
+        .background(backgroundColor)
+        .cornerRadius(radius)
+        .foregroundColor(labelColor)
+        .shadow(color: shadowStyle.color.opacity(shadowStyle.opacity) ,
+                radius: shadowStyle.radius,
+                x: shadowStyle.x,
+                y: shadowStyle.y)
 
-                .font(Constants.font)
-                .scaleEffect(self.isPressed ? 0.90 : 1.0)
+        .font(Constants.font)
+        .scaleEffect(self.isPressed ? 0.90 : 1.0)
        
 //            .gesture(DragGesture(minimumDistance: 0.0)
 //            .onChanged { _ in self.isPressed = true }

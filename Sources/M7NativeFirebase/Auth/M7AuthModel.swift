@@ -74,16 +74,20 @@ public class M7AuthModel: ObservableObject {
     
     public func sendAuthSMS() {
         
+        isLoading = true
+        
        // Auth.auth().settings?.isAppVerificationDisabledForTesting = true
         
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
             if let error = error {
+                self.isLoading = false
+                
                 self.errorText = error.localizedDescription
                 print(self.phoneNumber)
                 print(self.errorText)
                 return
             }
-            
+            self.isLoading = false
             print("Все ок")
             print(self.phoneNumber)
             self.navigationLink = 1
@@ -94,51 +98,78 @@ public class M7AuthModel: ObservableObject {
     }
     
     public func chekSMS() {
+        
+        isLoading = true
+        
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.ID, verificationCode: smsCode)
         
         Auth.auth().signIn(with: credential) { (res, err) in
             
             if err != nil{
+                
+                self.isLoading = false
+                
                 self.errorText = err!.localizedDescription
                 
                 self.isLoading = false
                 return
             }
             
-           
+            self.isLoading = false
             self.status = true
             self.uid = res?.user.uid ?? ""
-            self.navigationLinkCreateAccount = 88
+            self.checkUser()
+           
             
         }
     }
     
     public func createAccount() {
+        self.isLoading = true
+      
+        db.collection("users").document(uid).setData([
         
-        var ref: DocumentReference? = nil
-        ref = self.db.collection("users").addDocument(data: [
-            "userId": uid,
-            "username": username,
-            "firstName": firstName,
-            "lastName": lastName,
-            "pic": pic,
-            "bio": bio,
-            "dateCreated": Date()
-
+                        "uid": uid,
+                        "username": username,
+                        "firstName": firstName,
+                        "lastName": lastName,
+                        "pic": pic,
+                        "bio": bio,
+                        "dateCreated": Date()
             
-            //"status": status,
-            //"company": company,
-            // "author": author
-            //"id": ref?.
-        ]) { error in
-            if let error = error {
-                print("Error adding document: \(error)")
+        ]) { (err) in
+         
+            if err != nil{
+                self.isLoading = false
+                return
+            }
+            self.isLoading = false
+            // success means settings status as true...
+            self.status = true
+            self.showModal = false
+        }
+        
+    }
+    
+    public func checkUser() {
+        
+        db.collection("users").document(uid).getDocument { (doc, err) in
+            
+            if let err = err {
+                print("Error getting documents: \(err)")
+                
             } else {
-                print("Document added with ID: \(ref!.documentID)")
+
+                guard let user = doc else { return }
+    
+                let uid = user.data()?["uid"] as? String
                 
-                self.db.collection("users").document(ref!.documentID).setData( ["documentID": ref!.documentID], merge: true)
-                self.showModal = false
-                
+                if uid == nil {
+                    self.navigationLinkCreateAccount = 88
+                   
+                } else {
+                    self.showModal = false
+                }
             }
         }
         

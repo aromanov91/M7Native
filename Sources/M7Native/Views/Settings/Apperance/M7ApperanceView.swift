@@ -66,31 +66,31 @@ public struct M7ApperanceView: View {
                 
                 Picker(
                     selection: $settings.apperancMode,
-                                       label: Text("Apperance")
-                                   ) {
-                                       ForEach(M7ApperanseMode.allCases, id: \.self) {
-                                           Text($0.rawValue).tag($0)
-                                       }
-                                   }
+                    label: Text("Apperance")
+                ) {
+                    ForEach(M7ApperanseMode.allCases, id: \.self) {
+                        Text($0.rawValue).tag($0)
+                    }
+                }
                 
                 
-//                Section(header: M7Text("Apperance.SectionTheme.Title", style: .overline)) {
-//
-//                    ForEach(M7ApperanseMode.allCases, id: \.self) { item in
-//
-//
-//                        Button(action: { settings.apperancMode = item } ) {
-//
-//                            M7Row( item.rawValue)
-//
-//                        }
-//
-//
-//                                                           }
-//
-//
-//
-//                }
+                //                Section(header: M7Text("Apperance.SectionTheme.Title", style: .overline)) {
+                //
+                //                    ForEach(M7ApperanseMode.allCases, id: \.self) { item in
+                //
+                //
+                //                        Button(action: { settings.apperancMode = item } ) {
+                //
+                //                            M7Row( item.rawValue)
+                //
+                //                        }
+                //
+                //
+                //                                                           }
+                //
+                //
+                //
+                //                }
                 
             }
         }
