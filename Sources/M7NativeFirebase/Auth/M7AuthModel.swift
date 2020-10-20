@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 
 public class M7AuthModel: ObservableObject {
     
-    public init() {}
+   
     
     // Navigation
     @Published public var showModal = false
@@ -61,6 +61,27 @@ public class M7AuthModel: ObservableObject {
     @Published public var isLoading = false
     
     let db = Firestore.firestore()
+    
+    public init() {}
+    
+//    public init() {
+//
+//        if status == false {
+//
+//            Auth.auth().signInAnonymously() { (authResult, error) in
+//
+//                guard let user = authResult?.user else { return }
+//                self.uid = user.uid
+//
+//            }
+//
+//
+//        }
+//
+//        print(uid)
+//
+//
+//    }
     
     public func emailCheck() {
         navigationLink = 1
