@@ -51,22 +51,38 @@ public struct M7Text: View {
     var lineSpacing: CGFloat = 0
     
     let alignment: TextAlignment
+    
+    @Binding var isPlaceholder: Bool
 
-    public init(_ text: String, style: M7TextStyles = .paragraph1, color: M7Color = .onSurfaceHighEmphasis, alignment: TextAlignment = .leading) {
+    public init(_ text: String, style: M7TextStyles = .paragraph1, color: M7Color = .onSurfaceHighEmphasis, alignment: TextAlignment = .leading, placeholder: Binding<Bool> = .constant(false)) {
         self.text = text
         self.style = style
         self.color = color
         self.alignment = alignment
+        self._isPlaceholder = placeholder
         setTextStyle(style)
     }
     
     public var body: some View {
+        
+        if #available(macOS 11, iOS 14, watchOS 7, tvOS 14, *) {
+        
         Text(LocalizedStringKey(text), bundle: .module)
             .font(textStyle)
             .lineSpacing(lineSpacing)
             .lineLimit(2)
             .foregroundColor(color.color)
             .multilineTextAlignment(alignment)
+            .redacted(reason:  isPlaceholder ? .placeholder : .init())
+            
+        } else {
+            Text( isPlaceholder ? "Load..." : LocalizedStringKey(text), bundle: .module)
+                .font(textStyle)
+                .lineSpacing(lineSpacing)
+                .lineLimit(2)
+                .foregroundColor(color.color)
+                .multilineTextAlignment(alignment)
+        }
         
     }
     
