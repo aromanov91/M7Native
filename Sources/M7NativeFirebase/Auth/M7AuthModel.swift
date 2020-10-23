@@ -62,26 +62,24 @@ public class M7AuthModel: ObservableObject {
     
     let db = Firestore.firestore()
     
-    public init() {}
+    //public init() {}
     
-//    public init() {
-//
-//        if status == false {
-//
-//            Auth.auth().signInAnonymously() { (authResult, error) in
-//
-//                guard let user = authResult?.user else { return }
-//                self.uid = user.uid
-//
-//            }
-//
-//
-//        }
-//
-//        print(uid)
-//
-//
-//    }
+    public init() {
+
+        if status == false {
+
+            Auth.auth().signInAnonymously() { (authResult, error) in
+
+                guard let user = authResult?.user else { return }
+                self.uid = user.uid
+
+            }
+        }
+
+        print(uid)
+
+
+    }
     
     public func emailCheck() {
         navigationLink = 1
@@ -195,6 +193,8 @@ public class M7AuthModel: ObservableObject {
         }
         
     }
+    
+    
     
     public func logOut(){
         

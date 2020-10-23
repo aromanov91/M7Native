@@ -31,13 +31,29 @@ public class AuthenticationService: ObservableObject{
     
     public init() {
         
-        if status {
+        if status == false {
+
+            Auth.auth().signInAnonymously() { (authResult, error) in
+
+                guard let user = authResult?.user else { return }
+                self.uid = user.uid
+
+            }
+        }
+        
+        
             
             fetchUser(uid: uid) { (user) in
                 self.user = user
             }
             
-        }
+        
+    }
+    
+    func signInAnonymously() {
+      if Auth.auth().currentUser == nil {
+        Auth.auth().signInAnonymously()
+      }
     }
     
     
