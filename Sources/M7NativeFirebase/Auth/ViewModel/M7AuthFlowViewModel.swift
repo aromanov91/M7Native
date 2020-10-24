@@ -10,11 +10,9 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Combine
 
 public class M7AuthFlowViewModel: ObservableObject {
-    
-    public init() {}
-    
     
     @Published var authenticationService = AuthenticationService()
     
@@ -50,6 +48,17 @@ public class M7AuthFlowViewModel: ObservableObject {
     
     
     @Published public var isLoading = false
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    public init() {
+        self.authenticationService.objectWillChange
+                    .sink { _ in
+                        self.objectWillChange.send()
+                    }
+                    .store(in: &cancellables)
+    }
+    
 
     
     public func emailCheck() {

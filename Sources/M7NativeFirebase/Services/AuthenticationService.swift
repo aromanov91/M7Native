@@ -16,7 +16,7 @@ public class AuthenticationService: ObservableObject{
     
     @Published public var currentUser = Auth.auth().currentUser
     
-    @Published public var uid = Auth.auth().currentUser?.uid ?? ""
+    @Published public var uid =  Auth.auth().currentUser?.uid ?? ""
     
     @Published public var ID: String = ""
     
@@ -29,18 +29,20 @@ public class AuthenticationService: ObservableObject{
     
     public init() {
         
+        self.currentUser = Auth.auth().currentUser
+        self.uid =  Auth.auth().currentUser?.uid ?? ""
+        
         if status {
             
             fetchUserData(uid: uid) { (user) in
                 self.userData = user
             }
-
+            
         } else {
             
-            if Auth.auth().currentUser == nil {
-
-                signInAnonymously()
-            }
+            
+            signInAnonymously()
+            
         }
         
         print("This" + uid + "<-")
@@ -50,7 +52,7 @@ public class AuthenticationService: ObservableObject{
     
     public func sendAuthSMS(phoneNumber: String, complition: @escaping (Result<Bool, Error>) -> Void) {
         
-       // Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+        // Auth.auth().settings?.isAppVerificationDisabledForTesting = true
         
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
             if let error = error {
@@ -67,7 +69,7 @@ public class AuthenticationService: ObservableObject{
     
     public func chekSMS(smsCode: String, complition: @escaping (Result<Bool, Error>) -> Void) {
         
-        let unauthUser = Auth.auth().currentUser
+        let unauthUser = currentUser
         
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.ID, verificationCode: smsCode)
         
@@ -77,17 +79,17 @@ public class AuthenticationService: ObservableObject{
                 print("⛔️ Check SMS error: " + error.localizedDescription)
                 complition(.failure(error))
             }
-
+            
             self.status = true
             self.currentUser = res?.user
             self.uid = res?.user.uid ?? ""
-//            self.checkUser()
-           
+            //            self.checkUser()
+            
             
         }
         
         unauthUser?.link(with: credential) { (authResult, error) in
-          
+            
             if let error = error {
                 print("⛔️ Accounts merged error: " + error.localizedDescription)
                 complition(.failure(error))
@@ -115,94 +117,96 @@ public class AuthenticationService: ObservableObject{
         }
     }
     
-//    public func checkUser() {
-//
-//        db.collection("users").document(uid).getDocument { (doc, err) in
-//
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//
-//            } else {
-//
-//                guard let user = doc else { return }
-//
-//                let uid = user.data()?["uid"] as? String
-//
-//                if uid == nil {
-//                    self.navigationLinkCreateAccount = 88
-//
-//                } else {
-//                    self.showModal = false
-//                }
-//            }
-//        }
-//
-//    }
+    //    public func checkUser() {
+    //
+    //        db.collection("users").document(uid).getDocument { (doc, err) in
+    //
+    //            if let err = err {
+    //                print("Error getting documents: \(err)")
+    //
+    //            } else {
+    //
+    //                guard let user = doc else { return }
+    //
+    //                let uid = user.data()?["uid"] as? String
+    //
+    //                if uid == nil {
+    //                    self.navigationLinkCreateAccount = 88
+    //
+    //                } else {
+    //                    self.showModal = false
+    //                }
+    //            }
+    //        }
+    //
+    //    }
     
     public func isUserDataCreated(completion: @escaping(Bool) -> ()) {
-
-            db.collection("users").document(uid).getDocument { (document, error) in
-                if let document = document, document.exists {
-                    print("document exists.")
-                    completion(true)
-                } else {
-                    print("document does not exists.")
-                    completion(false)
-                }
+        
+        db.collection("users").document(uid).getDocument { (document, error) in
+            if let document = document, document.exists {
+                print("document exists.")
+                completion(true)
+            } else {
+                print("document does not exists.")
+                completion(false)
             }
-
-
+        }
+        
+        
     }
     
     // MARK: - Sign In Anonymously
     
     public func signInAnonymously() {
         
-     
-
-        Auth.auth().signInAnonymously() { (authResult, error) in
-
-            guard let user = authResult?.user else { return }
-            print("✅ Sign In Anonymously")
-            self.currentUser = user
-            self.uid = user.uid
+        if currentUser == nil {
             
-            self.isUserDataCreated { (data) in
+            Auth.auth().signInAnonymously() { (authResult, error) in
                 
-                if data == false {
+                guard let user = authResult?.user else { return }
+                print("✅ Sign In Anonymously")
+                self.currentUser = user
+                self.uid = user.uid
+                
+                self.isUserDataCreated { (data) in
                     
-                    print("🙅‍♂️  Account chek: false")
-                    
-                    self.createAccount(UserModel(username: "", firstName: "Anonymously", lastName: "", pic: "", bio: "")) { result in
+                    if data == false {
                         
-                        switch result {
+                        print("🙅‍♂️  Account chek: false")
                         
-                        case .success(_): break
+                        self.createAccount(UserModel(username: "", firstName: "Anonymously", lastName: "", pic: "", bio: "")) { result in
                             
-                        case .failure(_): break
-                          
+                            switch result {
+                            
+                            case .success(_): break
+                                
+                            case .failure(_): break
+                                
+                            }
+                            
                         }
                         
                     }
                     
+                    print("🙋‍♂️ Account chek: true")
+                    
                 }
-                
-                print("🙋‍♂️ Account chek: true")
-                
             }
+            
         }
-      
+        
     }
     
     
     // MARK: - Fetch User Data
     
     public func fetchUserData(uid: String, completion: @escaping (UserModel)-> Void) {
-
+        
         let thisUser = db.collection("users").document(uid)
-
+        
         thisUser.getDocument(completion: { snapshot, error in
-
+            
             if let err = error {
                 print(err.localizedDescription)
                 return
@@ -210,7 +214,7 @@ public class AuthenticationService: ObservableObject{
             
             print("✅ Fetch user data Success")
             let user = try? snapshot?.data(as: UserModel.self)
-
+            
             completion(user ?? UserModel(username: "", firstName: "", lastName: "", pic: "", bio: ""))
         })
     }
