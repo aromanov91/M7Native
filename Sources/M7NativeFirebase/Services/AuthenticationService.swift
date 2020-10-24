@@ -12,19 +12,15 @@ import FirebaseFirestoreSwift
 
 public class AuthenticationService: ObservableObject{
     
-    @Published public var user = UserModel(username: "", firstName: "", lastName: "", pic: "", bio: "", uid: "")
+    @Published public var userData = UserModel(username: "", firstName: "", lastName: "", pic: "", bio: "")
     
-   
+    @Published public var currentUser = Auth.auth().currentUser
     
-    // Image Picker For Updating Image...
-    @Published public var picker = false
-    @Published public var img_data = Data(count: 0)
+    @Published public var uid = Auth.auth().currentUser?.uid ?? ""
     
-    // Loading View..
-    @Published public var isLoading = false
+    @Published public var ID: String = ""
     
-    public let ref = Firestore.firestore()
-    public var uid = Auth.auth().currentUser?.uid ?? ""
+    private let db = Firestore.firestore()
     
     public var status: Bool {
         set { UserDefaults.standard.set(newValue, forKey: "Auth.Status") }
@@ -33,38 +29,193 @@ public class AuthenticationService: ObservableObject{
     
     public init() {
         
-        if status == false {
+        if status {
+            
+            fetchUserData(uid: uid) { (user) in
+                self.userData = user
+            }
 
-//            Auth.auth().signInAnonymously() { (authResult, error) in
-//
-//                guard let user = authResult?.user else { return }
-//                self.uid = user.uid
-//
-//                self.fetchUser(uid: self.uid) { (user) in
-//                    self.user = user
-//                }
-//
-//            }
-            
         } else {
-        
-        
             
-            fetchUser(uid: uid) { (user) in
-                self.user = user
+            if Auth.auth().currentUser == nil {
+
+                signInAnonymously()
+            }
+        }
+        
+        print("This" + uid + "<-")
+    }
+    
+    // MARK: - SMS Auth
+    
+    public func sendAuthSMS(phoneNumber: String, complition: @escaping (Result<Bool, Error>) -> Void) {
+        
+       // Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+        
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
+            if let error = error {
+                print("⛔️ SMS error: " + error.localizedDescription)
+                complition(.failure(error))
+            }
+            self.ID = verificationID ?? ""
+            print("✅ SMS Sended")
+            print("📱 Auth number: " + phoneNumber)
+            complition(.success(true))
+            
+        }
+    }
+    
+    public func chekSMS(smsCode: String, complition: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let unauthUser = Auth.auth().currentUser
+        
+        let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.ID, verificationCode: smsCode)
+        
+        Auth.auth().signIn(with: credential) { (res, error) in
+            
+            if let error = error {
+                print("⛔️ Check SMS error: " + error.localizedDescription)
+                complition(.failure(error))
+            }
+
+            self.status = true
+            self.currentUser = res?.user
+            self.uid = res?.user.uid ?? ""
+//            self.checkUser()
+           
+            
+        }
+        
+        unauthUser?.link(with: credential) { (authResult, error) in
+          
+            if let error = error {
+                print("⛔️ Accounts merged error: " + error.localizedDescription)
+                complition(.failure(error))
             }
             
         }
         
-        print(uid)
+        complition(.success(true))
+        print("✅ Accounts merged")
     }
     
-    func signInAnonymously() {
-      if Auth.auth().currentUser == nil {
-        Auth.auth().signInAnonymously()
-      }
+    // MARK: - Create Account
+    
+    public func createAccount(_ user: UserModel, complition: @escaping (Result<Bool, Error>) -> Void) {
+        
+        do {
+            
+            let _ = try db.collection("users").addDocument(from: user)
+            print("✅ Account create")
+            complition(.success(true))
+        }
+        catch {
+            print("⛔️ Accounts merged error: " + error.localizedDescription)
+            complition(.failure(error))
+        }
     }
     
+//    public func checkUser() {
+//
+//        db.collection("users").document(uid).getDocument { (doc, err) in
+//
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//
+//            } else {
+//
+//                guard let user = doc else { return }
+//
+//                let uid = user.data()?["uid"] as? String
+//
+//                if uid == nil {
+//                    self.navigationLinkCreateAccount = 88
+//
+//                } else {
+//                    self.showModal = false
+//                }
+//            }
+//        }
+//
+//    }
+    
+    public func isUserDataCreated(completion: @escaping(Bool) -> ()) {
+
+            db.collection("users").document(uid).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    print("document exists.")
+                    completion(true)
+                } else {
+                    print("document does not exists.")
+                    completion(false)
+                }
+            }
+
+
+    }
+    
+    // MARK: - Sign In Anonymously
+    
+    public func signInAnonymously() {
+        
+     
+
+        Auth.auth().signInAnonymously() { (authResult, error) in
+
+            guard let user = authResult?.user else { return }
+            print("✅ Sign In Anonymously")
+            self.currentUser = user
+            self.uid = user.uid
+            
+            self.isUserDataCreated { (data) in
+                
+                if data == false {
+                    
+                    print("🙅‍♂️  Account chek: false")
+                    
+                    self.createAccount(UserModel(username: "", firstName: "Anonymously", lastName: "", pic: "", bio: "")) { result in
+                        
+                        switch result {
+                        
+                        case .success(_): break
+                            
+                        case .failure(_): break
+                          
+                        }
+                        
+                    }
+                    
+                }
+                
+                print("🙋‍♂️ Account chek: true")
+                
+            }
+        }
+      
+    }
+    
+    
+    // MARK: - Fetch User Data
+    
+    public func fetchUserData(uid: String, completion: @escaping (UserModel)-> Void) {
+
+        let thisUser = db.collection("users").document(uid)
+
+        thisUser.getDocument(completion: { snapshot, error in
+
+            if let err = error {
+                print(err.localizedDescription)
+                return
+            }
+            
+            print("✅ Fetch user data Success")
+            let user = try? snapshot?.data(as: UserModel.self)
+
+            completion(user ?? UserModel(username: "", firstName: "", lastName: "", pic: "", bio: ""))
+        })
+    }
+    
+    // MARK: - Log Out
     
     public func logOut(){
         
@@ -72,28 +223,6 @@ public class AuthenticationService: ObservableObject{
         
         try! Auth.auth().signOut()
         status = false
-    }
-    
-    
-    
-    public func fetchUser(uid: String,completion: @escaping (UserModel) -> Void) {
-        
-        ref.collection("users").document(uid).getDocument { (doc, err) in
-            
-            if let err = err {
-                print("Error getting documents: \(err)")
-                
-            } else {
-                
-                print("Fetch Success")
-                
-                guard let document = doc else { return }
-                
-                DispatchQueue.main.async {
-                    completion(UserModel(document: document) ??  UserModel(username: "", firstName: "", lastName: "", pic: "", bio: "", uid: ""))
-                }
-            }
-        }
     }
     
 }
