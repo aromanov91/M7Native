@@ -10,7 +10,7 @@ import M7Native
 
 public struct M7EmailRegistrationPasswordView: View {
     
-    @EnvironmentObject public var model: M7AuthModel
+    @EnvironmentObject public var model: M7AuthFlowViewModel
     
     public var body: some View {
         

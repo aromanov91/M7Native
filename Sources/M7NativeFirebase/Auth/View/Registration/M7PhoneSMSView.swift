@@ -12,7 +12,7 @@ public struct M7PhoneSMSView: View {
     
     public init() {}
     
-    @EnvironmentObject public var model: M7AuthModel
+    @EnvironmentObject public var model: M7AuthFlowViewModel
     
     public var body: some View {
         

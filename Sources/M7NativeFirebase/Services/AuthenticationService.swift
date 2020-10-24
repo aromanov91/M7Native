@@ -14,10 +14,7 @@ public class AuthenticationService: ObservableObject{
     
     @Published public var user = UserModel(username: "", firstName: "", lastName: "", pic: "", bio: "", uid: "")
     
-    public var status: Bool {
-        set { UserDefaults.standard.set(newValue, forKey: "Auth.Status") }
-        get { UserDefaults.standard.bool(forKey: "Auth.Status") }
-    }
+   
     
     // Image Picker For Updating Image...
     @Published public var picker = false
@@ -29,17 +26,27 @@ public class AuthenticationService: ObservableObject{
     public let ref = Firestore.firestore()
     public var uid = Auth.auth().currentUser?.uid ?? ""
     
+    public var status: Bool {
+        set { UserDefaults.standard.set(newValue, forKey: "Auth.Status") }
+        get { UserDefaults.standard.bool(forKey: "Auth.Status") }
+    }
+    
     public init() {
         
         if status == false {
 
-            Auth.auth().signInAnonymously() { (authResult, error) in
-
-                guard let user = authResult?.user else { return }
-                self.uid = user.uid
-
-            }
-        }
+//            Auth.auth().signInAnonymously() { (authResult, error) in
+//
+//                guard let user = authResult?.user else { return }
+//                self.uid = user.uid
+//
+//                self.fetchUser(uid: self.uid) { (user) in
+//                    self.user = user
+//                }
+//
+//            }
+            
+        } else {
         
         
             
@@ -47,7 +54,9 @@ public class AuthenticationService: ObservableObject{
                 self.user = user
             }
             
+        }
         
+        print(uid)
     }
     
     func signInAnonymously() {

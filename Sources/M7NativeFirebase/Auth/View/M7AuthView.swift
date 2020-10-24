@@ -17,7 +17,7 @@ public struct M7AuthView: View {
     let subtitle: String
     let image: Image
     
-    @ObservedObject var model = M7AuthModel()
+    @ObservedObject var model = M7AuthFlowViewModel()
     
     @State private var navigationLink: Int? = 0
     

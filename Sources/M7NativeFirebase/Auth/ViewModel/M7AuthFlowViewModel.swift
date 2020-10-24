@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-public class M7AuthModel: ObservableObject {
+public class M7AuthFlowViewModel: ObservableObject {
     
    
     
@@ -40,14 +40,14 @@ public class M7AuthModel: ObservableObject {
     @Published public var ID : String = ""
     
     // Form
-    @Published public var username = ""
+    @Published public var username = "Anonimus"
     @Published public var firstName = ""
     @Published public var lastName = ""
     @Published public var pic = ""
     @Published public var bio = ""
     
     
-    @Published public var uid = ""
+    @Published public var uid =  ""
     
     public var status: Bool {
         set { UserDefaults.standard.set(newValue, forKey: "Auth.Status") }
@@ -62,22 +62,55 @@ public class M7AuthModel: ObservableObject {
     
     let db = Firestore.firestore()
     
+    @EnvironmentObject var authenticationService: AuthenticationService
+    
     //public init() {}
     
     public init() {
+        
+//        if Auth.auth().currentUser == nil {
+//          Auth.auth().signInAnonymously()
+//            self.checkUser()
+//        }
+        
+        //self.uid = authenticationService.uid
+        
+        self.uid = Auth.auth().currentUser?.uid ?? ""
 
-        if status == false {
+        if status {
+            
+           //
+            self.checkUser()
+            
 
+            
+
+        } else {
+
+            
             Auth.auth().signInAnonymously() { (authResult, error) in
 
                 guard let user = authResult?.user else { return }
                 self.uid = user.uid
-
+                
+                self.isUserDataCreated { (data) in
+                    
+                    if data == false {
+                        print("Account chek: false")
+                        
+                        self.createAccount()
+                        
+                        
+                    }
+                    
+                    print("Account chek: true")
+                    
+                }
             }
         }
-
-        print(uid)
-
+        
+        print("This" + uid + "<-")
+        
 
     }
     
@@ -120,6 +153,9 @@ public class M7AuthModel: ObservableObject {
         
         isLoading = true
         
+      
+        let prevUser = Auth.auth().currentUser
+        
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.ID, verificationCode: smsCode)
         
         Auth.auth().signIn(with: credential) { (res, err) in
@@ -136,9 +172,19 @@ public class M7AuthModel: ObservableObject {
             
             self.isLoading = false
             self.status = true
+            
             self.uid = res?.user.uid ?? ""
             self.checkUser()
            
+            
+        }
+        
+        prevUser?.link(with: credential) { (authResult, error) in
+          
+            if let error = error {
+                print(error)
+                return
+            }
             
         }
     }
@@ -166,6 +212,8 @@ public class M7AuthModel: ObservableObject {
             // success means settings status as true...
             self.status = true
             self.showModal = false
+            
+            print("accountCreate")
         }
         
     }
@@ -194,6 +242,51 @@ public class M7AuthModel: ObservableObject {
         
     }
     
+    public func isUserDataCreated(completion: @escaping(Bool) -> ()) {
+
+            db.collection("users").document(uid).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    print("document exists.")
+                    completion(true)
+                } else {
+                    print("document does not exists.")
+                    completion(false)
+                }
+            }
+
+
+    }
+
+    
+    
+//    public func isUserDataCreated() -> Bool {
+//
+//        db.collection("users").document(uid).getDocument { (doc, err) in
+//
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//
+//                return false
+//
+//            } else {
+//
+//                guard let user = doc else {   return false }
+//
+//                let uid = user.data()?["uid"] as? String
+//
+//                if uid == nil {
+//                    return false
+//
+//                }
+//
+//                return true
+//            }
+//
+//
+//        }
+//
+//
+//    }
     
     
     public func logOut(){
