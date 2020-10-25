@@ -87,7 +87,7 @@ public class AuthenticationService: ObservableObject{
     
     public func sendAuthSMS(phoneNumber: String, complition: @escaping (Result<Bool, Error>) -> Void) {
         
-        // Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+        Auth.auth().settings?.isAppVerificationDisabledForTesting = true
         
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
             if let error = error {
@@ -129,6 +129,11 @@ public class AuthenticationService: ObservableObject{
             }
             
         }
+        
+        
+        currentUser = Auth.auth().currentUser
+       
+       uid =  Auth.auth().currentUser?.uid ?? ""
         
         complition(.success(true))
         print("✅ Accounts merged")
