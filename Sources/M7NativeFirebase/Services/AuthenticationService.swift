@@ -102,7 +102,7 @@ public class AuthenticationService: ObservableObject{
         }
     }
     
-    public func chekSMS(smsCode: String, complition: @escaping (Result<Bool, Error>) -> Void) {
+    public func chekSMS(smsCode: String, complition: @escaping (Result<User?, Error>) -> Void) {
         
         let unauthUser = currentUser
         
@@ -118,7 +118,6 @@ public class AuthenticationService: ObservableObject{
             self.status = true
             self.currentUser = res?.user
             self.uid = res?.user.uid ?? ""
-            
         }
         
         unauthUser?.link(with: credential) { (authResult, error) in
@@ -127,16 +126,12 @@ public class AuthenticationService: ObservableObject{
                 print("⛔️ Accounts merged error: " + error.localizedDescription)
                 complition(.failure(error))
             }
-            
         }
         
-        
         currentUser = Auth.auth().currentUser
-       
-       uid =  Auth.auth().currentUser?.uid ?? ""
-        
-        complition(.success(true))
+        uid =  Auth.auth().currentUser?.uid ?? ""
         print("✅ Accounts merged")
+        complition(.success(currentUser))
     }
     
     // MARK: - Create Account
@@ -195,8 +190,6 @@ public class AuthenticationService: ObservableObject{
                 completion(.success(false))
             }
         }
-        
-        
     }
     
     // MARK: - Sign In Anonymously
@@ -238,23 +231,15 @@ public class AuthenticationService: ObservableObject{
                         }
                         
                         print("🙋‍♂️ Account chek: true")
-                            
+                        
                         
                     case .failure(let error):
                         print("⛔️ Check UserData error: " + error.localizedDescription)
                     }
-                    
-                    
-
-                    
                 }
             }
-            
         }
-        
-        
-        
-    }
+  }
     
     
     // MARK: - Fetch User Data
@@ -294,23 +279,23 @@ public class AuthenticationService: ObservableObject{
     // MARK: - User propertis
     
     public func changeDisplayName(displayName: String, completion: @escaping (Result<User, Error>) -> Void) {
-    
+        
         if let user = Auth.auth().currentUser {
             
-          let changeRequest = user.createProfileChangeRequest()
-          changeRequest.displayName = displayName
-          changeRequest.commitChanges { error in
-            if let error = error {
-                completion(.failure(error))
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = displayName
+            changeRequest.commitChanges { error in
+                if let error = error {
+                    completion(.failure(error))
+                }
+                else {
+                    if let updatedUser = Auth.auth().currentUser {
+                        print("Successfully updated display name for user [\(user.uid)] to [\(updatedUser.displayName ?? "(empty)")]")
+                        self.currentUser = updatedUser
+                        completion(.success(updatedUser))
+                    }
+                }
             }
-            else {
-              if let updatedUser = Auth.auth().currentUser {
-                print("Successfully updated display name for user [\(user.uid)] to [\(updatedUser.displayName ?? "(empty)")]")
-                self.currentUser = updatedUser
-                completion(.success(updatedUser))
-              }
-            }
-          }
         }
     }
     

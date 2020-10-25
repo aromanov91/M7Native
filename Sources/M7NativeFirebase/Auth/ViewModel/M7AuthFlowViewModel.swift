@@ -99,12 +99,9 @@ public class M7AuthFlowViewModel: ObservableObject {
             switch result {
             
             case .success(_):
-                
                 print("ChekSMS VM Susses")
                 self.isLoading = false
                 
-
-               
             case .failure(let error):
                 self.isLoading = false
                 self.errorText = error.localizedDescription
@@ -132,11 +129,7 @@ public class M7AuthFlowViewModel: ObservableObject {
                 self.errorText = error.localizedDescription
                 print("ChekSMS VM UserData Error: \(error.localizedDescription)")
             }
-            
-
-            
         }
-
     }
     
     public func createAccount() {
