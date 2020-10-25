@@ -139,10 +139,10 @@ public class AuthenticationService: ObservableObject{
     public func createAccount(_ user: UserData, complition: @escaping (Result<Bool, Error>) -> Void) {
         
         do {
-            
             let _ = try db.collection("users").addDocument(from: user)
             print("✅ Account create")
             complition(.success(true))
+            
         }
         catch {
             print("⛔️ Accounts merged error: " + error.localizedDescription)
@@ -174,15 +174,20 @@ public class AuthenticationService: ObservableObject{
     //
     //    }
     
-    public func isUserDataCreated(completion: @escaping(Bool) -> ()) {
+    public func isUserDataCreated(completion: @escaping(Result<Bool, Error>) -> Void) {
         
         db.collection("users").document(uid).getDocument { (document, error) in
+            if let error = error {
+                print("⛔️ Check SMS error: " + error.localizedDescription)
+                completion(.failure(error))
+            }
+            
             if let document = document, document.exists {
-                print("document exists.")
-                completion(true)
+                print("🙋‍♂️ Document exists")
+                completion(.success(true))
             } else {
-                print("document does not exists.")
-                completion(false)
+                print("🙅‍♂️ Document does not exists")
+                completion(.success(false))
             }
         }
         
@@ -204,25 +209,38 @@ public class AuthenticationService: ObservableObject{
                 self.currentUser = user
                 self.uid = user.uid
                 
-                self.isUserDataCreated { (data) in
+                self.isUserDataCreated { (result) in
                     
-                    if data == false {
+                    
+                    switch result {
+                    
+                    case .success(let data):
                         
-                        print("🙅‍♂️  Account chek: false")
-                        
-                        self.createAccount(UserData(username: "", firstName: "Anonymously", lastName: "", pic: "", bio: "")) { result in
+                        if data == false {
                             
-                            switch result {
+                            print("🙅‍♂️  Account chek: false")
                             
-                            case .success(_): break
+                            self.createAccount(UserData(username: "", firstName: "Anonymously", lastName: "", pic: "", bio: "")) { result in
                                 
-                            case .failure(_): break
+                                switch result {
                                 
+                                case .success(_): break
+                                    
+                                case .failure(_): break
+                                    
+                                }
                             }
                         }
+                        
+                        print("🙋‍♂️ Account chek: true")
+                            
+                        
+                    case .failure(let error):
+                        print("⛔️ Check UserData error: " + error.localizedDescription)
                     }
                     
-                    print("🙋‍♂️ Account chek: true")
+                    
+
                     
                 }
             }

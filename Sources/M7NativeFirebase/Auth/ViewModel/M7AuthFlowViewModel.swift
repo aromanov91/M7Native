@@ -103,25 +103,35 @@ public class M7AuthFlowViewModel: ObservableObject {
                 print("ChekSMS VM Susses")
                 self.isLoading = false
                 
-                self.authenticationService.isUserDataCreated { (data) in
+                self.authenticationService.isUserDataCreated { (result) in
                     
-                    if data {
-                        print("Close Modal")
-                        self.showModal = false
-                        
-                        
-                    } else {
-                        print("Navogate to CreateAccount ")
-                        self.navigationLinkCreateAccount = 88
-                        
+                    switch result {
+                    
+                    case .success(let data):
+                        if data {
+                            print("Close Modal")
+                            self.showModal = false
+                            
+                            
+                        } else {
+                            print("Navogate to CreateAccount ")
+                            self.navigationLinkCreateAccount = 88
+                            
+                        }
+                    case .failure(let error):
+                        self.isLoading = false
+                        self.errorText = error.localizedDescription
+                        print("ChekSMS VM UserData Error: \(error.localizedDescription)")
                     }
+                    
+
                     
                 }
                
             case .failure(let error):
                 self.isLoading = false
                 self.errorText = error.localizedDescription
-                print("ChekSMS VM Error")
+                print("ChekSMS VM Error: \(error.localizedDescription)")
             }
         }
 
