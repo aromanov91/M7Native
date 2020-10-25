@@ -15,7 +15,7 @@ public class AuthenticationService: ObservableObject{
     
     @Published public var uid =  Auth.auth().currentUser?.uid ?? ""
     
-    @Published public var userData = UserData(username: "", firstName: "", lastName: "", pic: "", bio: "")
+    @Published public var userData = UserData(username: "", pic: "", bio: "")
     
     @Published public var ID: String = ""
     
@@ -220,7 +220,7 @@ public class AuthenticationService: ObservableObject{
                             
                             print("🙅‍♂️  Account chek: false")
                             
-                            self.createAccount(UserData(username: "", firstName: "Anonymously", lastName: "", pic: "", bio: "")) { result in
+                            self.createAccount(UserData(username: "", pic: "", bio: "")) { result in
                                 
                                 switch result {
                                 
@@ -270,7 +270,7 @@ public class AuthenticationService: ObservableObject{
                 print("✅ Fetch user data Success")
                 let user = try? snapshot?.data(as: UserData.self)
                 
-                completion(user ?? UserData(username: "", firstName: "", lastName: "", pic: "", bio: ""))
+                completion(user ?? UserData(username: "", pic: "", bio: ""))
             })
             
         }

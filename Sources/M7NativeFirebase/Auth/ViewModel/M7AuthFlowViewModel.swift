@@ -103,36 +103,38 @@ public class M7AuthFlowViewModel: ObservableObject {
                 print("ChekSMS VM Susses")
                 self.isLoading = false
                 
-                self.authenticationService.isUserDataCreated { (result) in
-                    
-                    switch result {
-                    
-                    case .success(let data):
-                        if data {
-                            print("Close Modal")
-                            self.showModal = false
-                            
-                            
-                        } else {
-                            print("Navogate to CreateAccount ")
-                            self.navigationLinkCreateAccount = 88
-                            
-                        }
-                    case .failure(let error):
-                        self.isLoading = false
-                        self.errorText = error.localizedDescription
-                        print("ChekSMS VM UserData Error: \(error.localizedDescription)")
-                    }
-                    
 
-                    
-                }
                
             case .failure(let error):
                 self.isLoading = false
                 self.errorText = error.localizedDescription
                 print("ChekSMS VM Error: \(error.localizedDescription)")
             }
+        }
+        
+        self.authenticationService.isUserDataCreated { (dataResult) in
+            
+            switch dataResult {
+            
+            case .success(let data):
+                if data {
+                    print("Close Modal")
+                    self.showModal = false
+                    
+                    
+                } else {
+                    print("Navogate to CreateAccount ")
+                    self.navigationLinkCreateAccount = 88
+                    
+                }
+            case .failure(let error):
+                self.isLoading = false
+                self.errorText = error.localizedDescription
+                print("ChekSMS VM UserData Error: \(error.localizedDescription)")
+            }
+            
+
+            
         }
 
     }
@@ -148,7 +150,7 @@ public class M7AuthFlowViewModel: ObservableObject {
             case .success(let user):
                 print("✅ Set display name: \(String(describing: user.displayName))")
                 
-                self.authenticationService.createAccount(UserData(username: self.username, firstName: self.firstName, lastName: self.lastName, pic: self.pic, bio: self.bio)) { (result) in
+                self.authenticationService.createAccount(UserData(username: self.username, pic: self.pic, bio: self.bio)) { (result) in
                     
                     self.isLoading = false
                     
