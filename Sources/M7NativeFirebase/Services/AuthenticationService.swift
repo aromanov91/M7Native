@@ -11,11 +11,11 @@ import FirebaseFirestoreSwift
 
 public class AuthenticationService: ObservableObject{
     
-    @Published public var userData = UserModel(username: "", firstName: "", lastName: "", pic: "", bio: "")
-    
-    @Published public var currentUser = Auth.auth().currentUser?
+    @Published public var currentUser = Auth.auth().currentUser
     
     @Published public var uid =  Auth.auth().currentUser?.uid ?? ""
+    
+    @Published public var userData = UserData(username: "", firstName: "", lastName: "", pic: "", bio: "")
     
     @Published public var ID: String = ""
     
@@ -36,7 +36,6 @@ public class AuthenticationService: ObservableObject{
     public init() {
         
         if status == false {
-            
             
             if isAuthActivationProgress == false {
                 
@@ -119,8 +118,6 @@ public class AuthenticationService: ObservableObject{
             self.status = true
             self.currentUser = res?.user
             self.uid = res?.user.uid ?? ""
-            //            self.checkUser()
-            
             
         }
         
@@ -139,7 +136,7 @@ public class AuthenticationService: ObservableObject{
     
     // MARK: - Create Account
     
-    public func createAccount(_ user: UserModel, complition: @escaping (Result<Bool, Error>) -> Void) {
+    public func createAccount(_ user: UserData, complition: @escaping (Result<Bool, Error>) -> Void) {
         
         do {
             
@@ -213,7 +210,7 @@ public class AuthenticationService: ObservableObject{
                         
                         print("🙅‍♂️  Account chek: false")
                         
-                        self.createAccount(UserModel(username: "", firstName: "Anonymously", lastName: "", pic: "", bio: "")) { result in
+                        self.createAccount(UserData(username: "", firstName: "Anonymously", lastName: "", pic: "", bio: "")) { result in
                             
                             switch result {
                             
@@ -239,7 +236,7 @@ public class AuthenticationService: ObservableObject{
     
     // MARK: - Fetch User Data
     
-    public func fetchUserData(uid: String, completion: @escaping (UserModel)-> Void) {
+    public func fetchUserData(uid: String, completion: @escaping (UserData) -> Void) {
         
         if Auth.auth().currentUser != nil {
             
@@ -253,9 +250,9 @@ public class AuthenticationService: ObservableObject{
                 }
                 
                 print("✅ Fetch user data Success")
-                let user = try? snapshot?.data(as: UserModel.self)
+                let user = try? snapshot?.data(as: UserData.self)
                 
-                completion(user ?? UserModel(username: "", firstName: "", lastName: "", pic: "", bio: ""))
+                completion(user ?? UserData(username: "", firstName: "", lastName: "", pic: "", bio: ""))
             })
             
         }
@@ -273,13 +270,25 @@ public class AuthenticationService: ObservableObject{
     
     // MARK: - User propertis
     
-//    public func changeDisplayName(displayName: String, complition) {
-//    
-//    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-//    changeRequest?.displayName = displayName
-//    changeRequest?.commitChanges { (error) in
-//      // ...
-//    }
-//    }
+    public func changeDisplayName(displayName: String, completion: @escaping (Result<User, Error>) -> Void) {
+    
+        if let user = Auth.auth().currentUser {
+            
+          let changeRequest = user.createProfileChangeRequest()
+          changeRequest.displayName = displayName
+          changeRequest.commitChanges { error in
+            if let error = error {
+                completion(.failure(error))
+            }
+            else {
+              if let updatedUser = Auth.auth().currentUser {
+                print("Successfully updated display name for user [\(user.uid)] to [\(updatedUser.displayName ?? "(empty)")]")
+                self.currentUser = updatedUser
+                completion(.success(updatedUser))
+              }
+            }
+          }
+        }
+    }
     
 }

@@ -131,17 +131,37 @@ public class M7AuthFlowViewModel: ObservableObject {
         
         isLoading = true
         
-        authenticationService.createAccount(UserModel(username: username, firstName: firstName, lastName: lastName, pic: pic, bio: bio)) { (result) in
+        authenticationService.changeDisplayName(displayName: firstName) { (result) in
             
             switch result {
             
-            case .success(_):
-                self.isLoading = false
-                self.showModal = false
+            case .success(let user):
+                print("✅ Set display name: \(String(describing: user.displayName))")
+                
+                self.authenticationService.createAccount(UserData(username: self.username, firstName: self.firstName, lastName: self.lastName, pic: self.pic, bio: self.bio)) { (result) in
+                    
+                    self.isLoading = false
+                    
+                    switch result {
+                    
+                    case .success(_):
+                        self.isLoading = false
+                        self.showModal = false
+                        
+                    case .failure(let error):
+                        self.isLoading = false
+                        self.errorText = error.localizedDescription
+                    }
+                    
+                }
+                
+                
+                
                 
             case .failure(let error):
                 self.isLoading = false
                 self.errorText = error.localizedDescription
+                print("ChekSMS VM Error")
             }
             
         }
