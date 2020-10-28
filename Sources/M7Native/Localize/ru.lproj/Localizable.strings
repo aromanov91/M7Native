@@ -4,8 +4,6 @@
 "Button.Cancel" = "Отменить";
 "Button.Delete" = "Удалить";
 "Button.Next" = "Далее";
-
-//New
 "Button.Back" = "Назад";
 "Button.Close" = "Закрыть";
 "Button.Hide" = "Скрыть";
@@ -18,13 +16,8 @@
 "Button.Rate" = "Оценить";
 "Button.DeleteAll" = "Удалить все";
 "Button.Details" = "Подробнее";
-
 "Button.Rename" = "Переименовать";
 "Button.Invite" = "Пригласить";
-
-"Button.Enter" = "Войти";
-"Button.Exit" = "Выйти";
-
 
 // Settings
 "Settings.Title" = "Настройки";
@@ -36,6 +29,18 @@
 "Settings.Subscription" = "Премиум";
 "Settings.SupportSection" = "Поддержка";
 "Settings.AppSection" = "Приложение";
+"Settings.Notifications" = "Notifications";
+"Settings.SoundsAndVibration" = "Sounds and Vibration";
+"Settings.Sounds" = "Sounds";
+"Settings.Vibration" = "Vibration";
+"Settings.Language" = "Language";
+"Settings.PasswordandFaceID" = "Password and Face ID";
+"Settings.Scurity" = "Security";
+"Settings.Password" = "Password";
+"Settings.FaceID" = "Face ID";
+"Settings.Font" = "Font";
+"Settings.Inactive" = "Not active";
+"Settings.Active" = "Active";
 
 // Apperance
 "Apperance.Title" = "Внешний вид";
@@ -45,6 +50,8 @@
 "Apperance.LightTheme" = "Светлая";
 
 // Auth
+"Auth.Authorization" = "Авторизация";
+"Auth.EnterOrRegister" = "Войти или зарегистрироваться";
 "Auth.SignUpWithEmailTitle" = "Вход";
 "Auth.CreateAccounTitle" = "Создание аккаунта";
 "Auth.SignUpWithEmailButton" = "Зарегистрироваться";
@@ -67,3 +74,11 @@
 "Rate.title" = "Вам нравится приложение?";
 "Rate.subtitle" = "Будем рады, если оцените приложение или оставите отзыв";
 
+//About
+"About.Changes" = "Изменения";
+"About.FutureUpdates" = "Будущие обновления";
+"About.SuggestIdea" = "Предложить идею";
+"About.PrivacyPolicy" = "Политика конфиденциальности";
+"About.LicenseAgreements" = "Лицензионные соглашения";
+"About.LibrariesUsed" = "Используемые библиотеки";
+"About.OtherApplications" = "Другие наши приложения";

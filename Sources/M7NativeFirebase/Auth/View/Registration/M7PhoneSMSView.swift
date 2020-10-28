@@ -18,18 +18,21 @@ public struct M7PhoneSMSView: View {
         
         
         
-        M7ModalNavigationView(/*M7Localize.auth.createAccounTitle*/ "SMS" ) {
+        M7ModalNavigationView(/*M7Localize.auth.createAccounTitle*/) {
             
             
             
             VStack {
                 
-                VStack(alignment: .leading, spacing: M7Space.m) {
+                VStack(alignment: .center, spacing: M7Space.m) {
                     
                     Spacer()
                     
+                    M7Text("SMS", style: .title3, alignment: .center)
+                    
                     M7SMSField($model.smsCode)
-                        .padding(.vertical, M7Space.l)
+                        .padding(.vertical, M7Space.s)
+                        .frame(width: 164)
                     
                     if model.isSmsError {
                         M7Text(model.smsErrorText, style: .subtitle2, color: .error, alignment: .center)

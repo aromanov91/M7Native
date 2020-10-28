@@ -4,6 +4,20 @@
 "Button.Cancel" = "Cancel";
 "Button.Delete" = "Delete";
 "Button.Next" = "Next";
+"Button.Back" = "Back";
+"Button.Close" = "Close";
+"Button.Hide" = "Hide";
+"Button.Clean" = "Clear";
+"Button.Continue" = "Continue";
+"Button.Done" = "Done";
+"Button.Enter" = "Enter";
+"Button.Exit" = "Exit";
+"Button.Move" = "Move";
+"Button.Rate" = "Rate";
+"Button.DeleteAll" = "Delete All";
+"Button.Details" = "Details";
+"Button.Rename" = "Rename";
+"Button.Invite" = "Invite";
 
 // Settings
 "Settings.Title" = "Settings";
@@ -34,7 +48,26 @@
 "Auth.FirstNameTextField" = "First Name";
 "Auth.LastNameTextField" = "Last Name";
 "Auth.CreateAccountButton" = "Create Account";
+/// SMS
+"Auth.EnterPhoneTitle" = "Enter your phone number";
+"Auth.PhoneTextField" = "Phone number";
+"Auth.SMSTextField" = "Code";
+"Auth.EnterOTPTitle" = "The code will come now";
+"Auth.EnterOTPSubtitle" = "The code was sent via SMS to the number";
+"Auth.ResendOTPButton" = "Send code again";
+"Auth.Authorization" = "Авторизация";
+"Auth.EnterOrRegister" = "Войти или зарегистрироваться";
 
 // Rate
 "Rate.title" = "Do you like the app?";
 "Rate.subtitle" = "We would be glad if you rate the app or give us a review";
+
+//About
+"About.Changes" = "Changes";
+"About.FutureUpdates" = "Future Updates";
+"About.SuggestIdea" = "Suggest an idea";
+"About.PrivacyPolicy" = "Privacy Policy";
+"About.LicenseAgreements" = "License Agreements";
+"About.LibrariesUsed" = "Libraries Used";
+"About.OtherApplications" = "Our Other Applications";
+
