@@ -26,10 +26,16 @@ public struct M7PhoneSMSView: View {
                 
                 VStack(alignment: .leading, spacing: M7Space.m) {
                     
-                 
+                    Spacer()
                     
                     M7SMSField($model.smsCode)
+                        .padding(.vertical, M7Space.l)
                     
+                    if model.isSmsError {
+                        M7Text(model.smsErrorText, style: .subtitle2, color: .error, alignment: .center)
+                    }
+                    
+                    Spacer()
                 }
                 
                 Spacer()

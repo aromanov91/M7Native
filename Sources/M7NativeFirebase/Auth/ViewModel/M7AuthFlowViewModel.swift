@@ -36,8 +36,10 @@ public class M7AuthFlowViewModel: ObservableObject {
     // SMS
     @Published public var smsCode = ""
     @Published public var phoneNumber = ""
+    @Published public var phoneErrorText = ""
     @Published public var smsErrorText = ""
     @Published public var isSmsError = false
+    @Published public var isPhoneError = false
     
     // Form
     @Published public var username = "Anonimus"
@@ -53,13 +55,13 @@ public class M7AuthFlowViewModel: ObservableObject {
     
     public init() {
         self.authenticationService.objectWillChange
-                    .sink { _ in
-                        self.objectWillChange.send()
-                    }
-                    .store(in: &cancellables)
+            .sink { _ in
+                self.objectWillChange.send()
+            }
+            .store(in: &cancellables)
     }
     
-
+    
     
     public func emailCheck() {
         navigationLink = 1
@@ -74,6 +76,7 @@ public class M7AuthFlowViewModel: ObservableObject {
     public func sendAuthSMS() {
         
         isLoading = true
+        isPhoneError = false
         
         authenticationService.sendAuthSMS(phoneNumber: phoneNumber) { (result) in
             
@@ -82,10 +85,13 @@ public class M7AuthFlowViewModel: ObservableObject {
             case .success(_):
                 self.isLoading = false
                 self.navigationLink = 1
+                print(".navigationLink = 1")
                 
             case .failure(let error):
                 self.isLoading = false
-                self.errorText = error.localizedDescription
+                self.isPhoneError = true
+                self.phoneErrorText = error.localizedDescription
+                print("phoneErrorText")
             }
         }
     }
@@ -93,6 +99,7 @@ public class M7AuthFlowViewModel: ObservableObject {
     public func chekSMS() {
         
         isLoading = true
+        isSmsError = false
         
         authenticationService.chekSMS(smsCode: smsCode) { (result) in
             
@@ -101,33 +108,39 @@ public class M7AuthFlowViewModel: ObservableObject {
             case .success(_):
                 print("ChekSMS VM Susses")
                 self.isLoading = false
+                self.showModal = false
+                
+//                self.authenticationService.isUserDataCreated { (dataResult) in
+//                    
+//                    switch dataResult {
+//                    
+//                    case .success(let data):
+//                        if data {
+//                            print("Close Modal")
+//                            
+//                            self.showModal = false
+//                            
+//                            
+//                        } else {
+//                            print("Navogate to CreateAccount ")
+//                            
+//                            self.navigationLinkCreateAccount = 88
+//                            
+//                        }
+//                    case .failure(let error):
+//                        self.isLoading = false
+//                        self.errorText = error.localizedDescription
+//                        print("ChekSMS VM UserData Error: \(error.localizedDescription)")
+//                    }
+//                }
+                
+                
                 
             case .failure(let error):
                 self.isLoading = false
-                self.errorText = error.localizedDescription
+                self.isSmsError = true
+                self.smsErrorText = error.localizedDescription
                 print("ChekSMS VM Error: \(error.localizedDescription)")
-            }
-        }
-        
-        self.authenticationService.isUserDataCreated { (dataResult) in
-            
-            switch dataResult {
-            
-            case .success(let data):
-                if data {
-                    print("Close Modal")
-                    self.showModal = false
-                    
-                    
-                } else {
-                    print("Navogate to CreateAccount ")
-                    self.navigationLinkCreateAccount = 88
-                    
-                }
-            case .failure(let error):
-                self.isLoading = false
-                self.errorText = error.localizedDescription
-                print("ChekSMS VM UserData Error: \(error.localizedDescription)")
             }
         }
     }
@@ -161,8 +174,6 @@ public class M7AuthFlowViewModel: ObservableObject {
                 }
                 
                 
-                
-                
             case .failure(let error):
                 self.isLoading = false
                 self.errorText = error.localizedDescription
@@ -172,20 +183,20 @@ public class M7AuthFlowViewModel: ObservableObject {
         }
         
     }
-   
+    
     
     
     public func logOut(){
         
         authenticationService.logOut()
-        // clearing all data...
         
         email = ""
         password = ""
         emailSignUp = ""
         passwordSignUp = ""
-        
         navigationLink = 0
+        navigationLinkCreateAccount = 0
+        errorText = ""
+        smsCode = ""
     }
-    
 }

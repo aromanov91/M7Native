@@ -128,10 +128,11 @@ public class AuthenticationService: ObservableObject{
             }
         }
         
-        currentUser = Auth.auth().currentUser
-        uid =  Auth.auth().currentUser?.uid ?? ""
+        let newUser = Auth.auth().currentUser
+        self.currentUser = newUser
+        self.uid =  newUser?.uid ?? ""
         print("✅ Accounts merged")
-        complition(.success(currentUser))
+        complition(.success(newUser))
     }
     
     // MARK: - Create Account
@@ -142,7 +143,6 @@ public class AuthenticationService: ObservableObject{
             let _ = try db.collection("users").addDocument(from: user)
             print("✅ Account create")
             complition(.success(true))
-            
         }
         catch {
             print("⛔️ Accounts merged error: " + error.localizedDescription)
@@ -150,37 +150,74 @@ public class AuthenticationService: ObservableObject{
         }
     }
     
-    //    public func checkUser() {
-    //
-    //        db.collection("users").document(uid).getDocument { (doc, err) in
-    //
-    //            if let err = err {
-    //                print("Error getting documents: \(err)")
-    //
-    //            } else {
-    //
-    //                guard let user = doc else { return }
-    //
-    //                let uid = user.data()?["uid"] as? String
-    //
-    //                if uid == nil {
-    //                    self.navigationLinkCreateAccount = 88
-    //
-    //                } else {
-    //                    self.showModal = false
-    //                }
-    //            }
-    //        }
-    //
-    //    }
+//        public func checkUser() {
+//
+//            db.collection("users").document(uid).getDocument { (doc, err) in
+//
+//                if let err = err {
+//                    print("Error getting documents: \(err)")
+//
+//                } else {
+//
+//                    guard let user = doc else { return }
+//
+//                    let uid = user.data()?["uid"] as? String
+//
+//                    if uid == nil {
+//                        self.navigationLinkCreateAccount = 88
+//
+//                    } else {
+//                        self.showModal = false
+//                    }
+//                }
+//            }
+//
+//        }
+    
+//    public func checkUser(completion: @escaping(Bool) -> Void) {
+//
+//        db.collection("users").document(uid).getDocument { (doc, err) in
+//
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//
+//            } else {
+//
+//                guard let user = doc else { return }
+//
+//                let uid = user.data()?["uid"] as? String
+//
+//                if uid == nil {
+//                    completion(false)
+//
+//                } else {
+//                    completion(true)
+//                }
+//            }
+//        }
+//
+//    }
     
     public func isUserDataCreated(completion: @escaping(Result<Bool, Error>) -> Void) {
         
-        db.collection("users").document(uid).getDocument { (document, error) in
+        if let user = Auth.auth().currentUser {
+        
+            db.collection("users").document(user.uid).getDocument { (document, error) in
             if let error = error {
                 print("⛔️ Check SMS error: " + error.localizedDescription)
                 completion(.failure(error))
             }
+            
+//            guard let userData = document else { return }
+//                            let uid = userData.data()?["uid"] as? String
+//
+//                            if uid == nil {
+//                                completion(.success(false))
+//
+//                            } else {
+//                                completion(.success(true))
+//                            }
+
             
             if let document = document, document.exists {
                 print("🙋‍♂️ Document exists")
@@ -189,6 +226,7 @@ public class AuthenticationService: ObservableObject{
                 print("🙅‍♂️ Document does not exists")
                 completion(.success(false))
             }
+        }
         }
     }
     
@@ -208,8 +246,7 @@ public class AuthenticationService: ObservableObject{
                 self.uid = user.uid
                 
                 self.isUserDataCreated { (result) in
-                    
-                    
+
                     switch result {
                     
                     case .success(let data):
@@ -222,10 +259,11 @@ public class AuthenticationService: ObservableObject{
                                 
                                 switch result {
                                 
-                                case .success(_): break
+                                case .success(_):
+                                   print("✅  Account created")
                                     
-                                case .failure(_): break
-                                    
+                                case .failure(_): 
+                                    print("⛔️  Account dont created")
                                 }
                             }
                         }

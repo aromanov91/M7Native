@@ -1,9 +1,30 @@
 // Action buttons
 "Button.Add" = "Добавить";
 "Button.Edit" = "Редактировать";
-"Button.Cancel" = "Отмена";
+"Button.Cancel" = "Отменить";
 "Button.Delete" = "Удалить";
 "Button.Next" = "Далее";
+
+//New
+"Button.Back" = "Назад";
+"Button.Close" = "Закрыть";
+"Button.Hide" = "Скрыть";
+"Button.Clean" = "Очистить";
+"Button.Continue" = "Продолжить";
+"Button.Done" = "Готово";
+"Button.Enter" = "Войти";
+"Button.Exit" = "Выйти";
+"Button.Move" = "Переместить";
+"Button.Rate" = "Оценить";
+"Button.DeleteAll" = "Удалить все";
+"Button.Details" = "Подробнее";
+
+"Button.Rename" = "Переименовать";
+"Button.Invite" = "Пригласить";
+
+"Button.Enter" = "Войти";
+"Button.Exit" = "Выйти";
+
 
 // Settings
 "Settings.Title" = "Настройки";
@@ -34,6 +55,13 @@
 "Auth.FirstNameTextField" = "Имя";
 "Auth.LastNameTextField" = "Фамилия";
 "Auth.CreateAccountButton" = "Создать учетную запись";
+/// SMS
+"Auth.EnterPhoneTitle" = "Укажите номер телефона";
+"Auth.PhoneTextField" = "Номер телефона";
+"Auth.SMSTextField" = "Код";
+"Auth.EnterOTPTitle" = "Код сейчас придет";
+"Auth.EnterOTPSubtitle" = "Код отпрален по SMS на номер";
+"Auth.ResendOTPButton" = "Отправить код еще раз";
 
 // Rate
 "Rate.title" = "Вам нравится приложение?";
