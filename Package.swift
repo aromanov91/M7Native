@@ -23,7 +23,8 @@ let package = Package(
     dependencies: [
         .package(name: "Firebase",
                    url: "https://github.com/firebase/firebase-ios-sdk.git",
-                   .branch("6.31-spm-beta")),
+                   .upToNextMajor(from: "7.0.0")
+        ),
     ],
     targets: [
         .target(
@@ -32,10 +33,10 @@ let package = Package(
         .target(
             name: "M7NativeFirebase",
             dependencies: ["M7Native",
-                           .product(name: "Firebase", package: "Firebase"),
+                         //  .product(name: "Firebase", package: "Firebase"),
                            .product(name: "FirebaseAuth", package: "Firebase"),
                            .product(name: "FirebaseFirestore", package: "Firebase"),
-                           .product(name: "FirebaseFirestoreSwift", package: "Firebase"),
+                           .product(name: "FirebaseFirestoreSwift-Beta", package: "Firebase"),
             ]),
         .testTarget(
             name: "M7NativeTests",
