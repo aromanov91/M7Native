@@ -7,6 +7,70 @@
 import SwiftUI
 import Combine
 
+
+
+
+
+public struct Toast<Presenting>: View where Presenting: View {
+
+    /// The binding that decides the appropriate drawing in the body.
+    @Binding public var isShowing: Bool
+    /// The view that will be "presenting" this toast
+    public let presenting: () -> Presenting
+    /// The text to show
+    public let text: Text
+
+    public var body: some View {
+
+        GeometryReader { geometry in
+            
+            ZStack {
+
+            ZStack(alignment: .center) {
+
+                self.presenting()
+                    .blur(radius: self.isShowing ? 1 : 0)
+                    
+                    
+                    
+
+                VStack {
+                    self.text
+                }
+                .frame(width: geometry.size.width / 2,
+                       height: geometry.size.height / 5)
+                .background(Color.secondary.colorInvert())
+                .foregroundColor(Color.primary)
+                .cornerRadius(20)
+                .transition(.slide)
+                .opacity(self.isShowing ? 1 : 0)
+
+            }
+                
+            }.background(Color.red)
+
+
+        }
+
+    }
+
+}
+
+extension View {
+
+    public func toast(isShowing: Binding<Bool>, text: Text) -> some View {
+        Toast(isShowing: isShowing,
+              presenting: { self },
+              text: text)
+    }
+
+}
+
+
+
+
+
+
 public struct M7SelectModal: View {
     
     

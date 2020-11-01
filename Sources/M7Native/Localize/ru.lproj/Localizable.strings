@@ -62,6 +62,7 @@
 "Auth.FirstNameTextField" = "Имя";
 "Auth.LastNameTextField" = "Фамилия";
 "Auth.CreateAccountButton" = "Создать учетную запись";
+
 /// SMS
 "Auth.EnterPhoneTitle" = "Укажите номер телефона";
 "Auth.PhoneTextField" = "Номер телефона";

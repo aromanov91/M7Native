@@ -35,7 +35,7 @@ public struct M7PhoneRegistrationView: View {
                         
                         Spacer()
                         
-                        M7Text("Номер телефона", style: .title3, alignment: .center)
+                        M7Text(M7Localize.auth.enterPhoneTitle, style: .title3, alignment: .center)
                         
                         M7PhoneFiled($model.phoneNumber)
                             .padding(.vertical, M7Space.l)
@@ -68,6 +68,7 @@ public struct M7PhoneRegistrationView: View {
                                 
                     
                 }.padding(.all, M7Space.m)
+            
                 
             //}
         }

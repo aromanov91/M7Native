@@ -18,7 +18,7 @@ public struct M7SMSField: View {
     }
     
     public var body: some View {
-        TextField("123 456", text: $code)
+        TextField("123456", text: $code)
             .onReceive(Just(code)) { _ in limitText(textLimit) }
             
             

@@ -28,7 +28,9 @@ public struct M7PhoneSMSView: View {
                     
                     Spacer()
                     
-                    M7Text("SMS", style: .title3, alignment: .center)
+                    M7Text(M7Localize.auth.enterOTPTitle, style: .title3, alignment: .center)
+                    
+                    M7Text(M7Localize.auth.enterOTPSubtitle, style: .paragraph2, alignment: .center)
                     
                     M7SMSField($model.smsCode)
                         .padding(.vertical, M7Space.s)

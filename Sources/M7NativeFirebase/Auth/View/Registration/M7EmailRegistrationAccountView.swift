@@ -20,10 +20,7 @@ public struct M7EmailRegistrationAccountView: View {
                 
                 VStack(alignment: .leading, spacing: M7Space.m) {
                     
-                    
                     M7TextField(M7Localize.auth.firstNameTextField, text: $model.firstName)
-                    
-                    M7TextField(M7Localize.auth.lasttNameTextField, text: $model.lastName)
                     
                 }
                 

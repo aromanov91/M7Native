@@ -87,7 +87,7 @@ public struct M7PhoneFiled: View {
                     
                     Spacer().frame(width: M7Space.s)
                     
-                    TextField("Phone number", text: $number, onEditingChanged: { (changed) in
+                    TextField("000 000 0000", text: $number, onEditingChanged: { (changed) in
                                 if changed {
                                     
                                     self.phoneNumber = "+" + (countryCode.isEmpty ? currentCode() : "\(countryCode)") + number
