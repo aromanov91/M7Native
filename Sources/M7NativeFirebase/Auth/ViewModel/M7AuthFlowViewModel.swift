@@ -108,24 +108,25 @@ public class M7AuthFlowViewModel: ObservableObject {
             case .success(_):
                 print("ChekSMS VM Susses")
                 self.isLoading = false
-                self.showModal = false
+                self.navigationLinkCreateAccount = 88
+                //self.showModal = false
                 
 //                self.authenticationService.isUserDataCreated { (dataResult) in
-//                    
+//
 //                    switch dataResult {
-//                    
+//
 //                    case .success(let data):
 //                        if data {
 //                            print("Close Modal")
-//                            
+//
 //                            self.showModal = false
-//                            
-//                            
+//
+//
 //                        } else {
 //                            print("Navogate to CreateAccount ")
-//                            
+//
 //                            self.navigationLinkCreateAccount = 88
-//                            
+//
 //                        }
 //                    case .failure(let error):
 //                        self.isLoading = false

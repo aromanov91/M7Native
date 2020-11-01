@@ -5,11 +5,11 @@
 //  Created by Alexander Romanov on 17.10.2020.
 //
 
-import Combine
+import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-public class AuthenticationService: ObservableObject{
+public class AuthenticationService: ObservableObject {
     
     @Published public var currentUser = Auth.auth().currentUser
     
