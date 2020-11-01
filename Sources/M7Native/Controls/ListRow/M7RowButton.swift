@@ -2,7 +2,7 @@
 //  File.swift
 //  
 //
-//  Created by 18391981 on 20.06.2020.
+//  Created by Alexander Romanov on 20.06.2020.
 //
 
 import SwiftUI

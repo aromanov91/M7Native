@@ -2,7 +2,7 @@
 //  M7RatingView.swift
 //  Listixs (iOS)
 //
-//  Created by 18391981 on 03.10.2020.
+//  Created by Alexander Romanov on 03.10.2020.
 //
 
 import SwiftUI
