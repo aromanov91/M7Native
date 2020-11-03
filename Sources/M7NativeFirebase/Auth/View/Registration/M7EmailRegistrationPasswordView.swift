@@ -23,7 +23,7 @@ public struct M7EmailRegistrationPasswordView: View {
             
             VStack(alignment: .leading) {
                 
-                VStack(alignment: .leading, spacing: M7Space.m) {
+                VStack(alignment: .leading, spacing: M7Space.medium) {
                     
                     M7TextField(M7Localize.auth.passwordTextField, text: $model.passwordSignUp)
                     
@@ -36,7 +36,7 @@ public struct M7EmailRegistrationPasswordView: View {
                 }
                 
                 
-            }.padding(.all, M7Space.m)
+            }.padding(.all, M7Space.medium)
         }
         
         NavigationLink(destination: M7ApperanceView(), tag: 12, selection: $model.navigationLink) {

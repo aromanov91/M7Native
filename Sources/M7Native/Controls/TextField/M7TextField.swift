@@ -106,7 +106,7 @@ public struct M7TextField: View {
                 
                 
             ).background(RoundedRectangle(cornerRadius: 12).fill(focused ? M7Colors.surface.primary : M7Colors.surface.secondary))
-            .cornerRadius(M7Radius.m)
+            .cornerRadius(M7Radius.medium)
             .font(M7Fonts.subtitle1)
             
             if helperText != "" {

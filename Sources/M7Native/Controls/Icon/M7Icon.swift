@@ -108,7 +108,7 @@ public enum M7IconNames: String, CaseIterable {
     case arrowRightCircle = "arrow-right-circle"
     case arrowLeftCircle = "arrow-left-circle"
     case arrowDownCircle = "arrow-down-circle"
-    case refresh = "arefresh-cw"
+    case refresh = "refresh"
     case info = "info"
     case thumbsDown = "thumbs-down"
     case thumbsUp = "thumbs-up"
@@ -119,6 +119,7 @@ public enum M7IconSizes: Int, CaseIterable {
     case s
     case m
     case l
+    case xl
 }
 
 public struct M7Icon: View {
@@ -126,9 +127,10 @@ public struct M7Icon: View {
     private struct Constants {
         
         /// Size
-        static var s: CGFloat = M7Space.s
-        static var m: CGFloat = M7Space.m
-        static var l: CGFloat = M7Space.l
+        static var s: CGFloat = M7Space.small
+        static var m: CGFloat = M7Space.medium
+        static var l: CGFloat = M7Space.large
+        static var xl: CGFloat = M7Space.xLarge
         
     }
     
@@ -149,11 +151,21 @@ public struct M7Icon: View {
     }
     
     public var body: some View {
+        
+        if name != .none {
+        
         Image(name.rawValue, bundle: .module)
             .resizable()
             .frame(width: size, height: size)
             .foregroundColor(color.color)
+            
+        } else {
+            
+            EmptyView()
+            
+        }
     }
+        
     
     private mutating func setTextStyle(_ size: M7IconSizes) {
         switch size {
@@ -163,6 +175,8 @@ public struct M7Icon: View {
             self.size = Constants.s
         case .l:
             self.size = Constants.l
+        case .xl:
+            self.size = Constants.xl
         }
     }
 }

@@ -29,6 +29,7 @@ public class M7Localize {
         public static var details: String = "Button.Details"
         public static var rename: String = "Button.Rename"
         public static var invite: String = "Button.Invite"
+        public static var save: String = "Button.Save"
     }
     
     public enum settings {

@@ -18,6 +18,7 @@
 "Button.Details" = "Подробнее";
 "Button.Rename" = "Переименовать";
 "Button.Invite" = "Пригласить";
+"Button.Save" = "Сохранить";
 
 // Settings
 "Settings.Title" = "Настройки";

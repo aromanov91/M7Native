@@ -49,15 +49,15 @@ public struct M7RateView: View {
                     Image("closeButton", bundle: .module)
                 }).frame(width: 28, height: 28, alignment: .trailing)
                 
-                Spacer().frame(width: M7Space.s)
+                Spacer().frame(width: M7Space.small)
                 
-            }.frame(height: M7Space.xl + M7Space.xxs)
+            }.frame(height: M7Space.xLarge + M7Space.xxSmall)
         
             VStack(spacing: .zero) {
             
-            Spacer().frame(height: M7Space.l, alignment: .center)
+            Spacer().frame(height: M7Space.large, alignment: .center)
             
-            VStack(spacing: M7Space.m) {
+            VStack(spacing: M7Space.medium) {
                 
                 M7Text(title, style: .title1, alignment: .center)
                 
@@ -71,12 +71,12 @@ public struct M7RateView: View {
             
             Spacer()
             
-            VStack(spacing: M7Space.xl) {
+            VStack(spacing: M7Space.xLarge) {
                 
                 
                 M7Text(subtitle, style: .title3, color: M7Color.onBackgroundMediumEmphasis, alignment: .center)
                 
-                HStack(spacing: M7Space.m) {
+                HStack(spacing: M7Space.medium) {
                     
                     M7Button(style: .secondary, size: .l, round: .full, width: .round, action: {
                         

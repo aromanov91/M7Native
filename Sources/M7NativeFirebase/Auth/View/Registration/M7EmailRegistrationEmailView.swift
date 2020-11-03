@@ -22,7 +22,7 @@ public struct M7EmailRegistrationEmailView: View {
             
             VStack {
                 
-                VStack(alignment: .leading, spacing: M7Space.m) {
+                VStack(alignment: .leading, spacing: M7Space.medium) {
                     
                     M7TextField(M7Localize.auth.emailTextField, text: $model.emailSignUp)
                 }
@@ -33,7 +33,7 @@ public struct M7EmailRegistrationEmailView: View {
                     M7Text(M7Localize.button.next, style: .button, color: .onPrimaryHighEmphasis)
                 }
                 
-            }.padding(.all, M7Space.m)
+            }.padding(.all, M7Space.medium)
         }
     }
 }

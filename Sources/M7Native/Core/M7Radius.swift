@@ -10,12 +10,12 @@ import SwiftUI
 
 public class M7Radius {
     
-    public static var m: CGFloat {
-        return M7Space.xs
+    public static var medium: CGFloat {
+        return M7Space.xSmall
     }
     
-    public static var s: CGFloat {
-        return M7Space.xxs
+    public static var small: CGFloat {
+        return M7Space.xxSmall
     }
     
     

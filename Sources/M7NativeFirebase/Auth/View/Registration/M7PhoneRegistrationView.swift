@@ -31,14 +31,14 @@ public struct M7PhoneRegistrationView: View {
                 
                 VStack {
                     
-                    VStack(alignment: .center, spacing: M7Space.m) {
+                    VStack(alignment: .center, spacing: M7Space.medium) {
                         
                         Spacer()
                         
                         M7Text(M7Localize.auth.enterPhoneTitle, style: .title3, alignment: .center)
                         
                         M7PhoneFiled($model.phoneNumber)
-                            .padding(.vertical, M7Space.l)
+                            .padding(.vertical, M7Space.large)
                         
                         if model.isPhoneError {
                             M7Text(model.phoneErrorText, style: .subtitle2, color: .error, alignment: .center)
@@ -67,7 +67,7 @@ public struct M7PhoneRegistrationView: View {
                                 }
                                 
                     
-                }.padding(.all, M7Space.m)
+                }.padding(.all, M7Space.medium)
             
                 
             //}

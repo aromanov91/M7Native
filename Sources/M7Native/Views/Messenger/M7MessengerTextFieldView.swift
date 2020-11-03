@@ -28,7 +28,7 @@ public struct M7MessengerTextFieldView: View {
                 
                 VStack {
                     
-                    HStack(spacing: M7Space.xs) {
+                    HStack(spacing: M7Space.xSmall) {
                         
                     
                         
@@ -61,8 +61,8 @@ public struct M7MessengerTextFieldView: View {
                     Spacer()
                     
                 }
-                .padding(.horizontal, M7Space.xs)
-                .padding(.vertical, M7Space.xxs)
+                .padding(.horizontal, M7Space.xSmall)
+                .padding(.vertical, M7Space.xxSmall)
 
             }
         }

@@ -24,7 +24,7 @@ public struct M7PhoneSMSView: View {
             
             VStack {
                 
-                VStack(alignment: .center, spacing: M7Space.m) {
+                VStack(alignment: .center, spacing: M7Space.medium) {
                     
                     Spacer()
                     
@@ -33,7 +33,7 @@ public struct M7PhoneSMSView: View {
                     M7Text(M7Localize.auth.enterOTPSubtitle, style: .paragraph2, alignment: .center)
                     
                     M7SMSField($model.smsCode)
-                        .padding(.vertical, M7Space.s)
+                        .padding(.vertical, M7Space.small)
                         .frame(width: 164)
                     
                     if model.isSmsError {
@@ -53,7 +53,7 @@ public struct M7PhoneSMSView: View {
                     EmptyView()
                 }
 
-            }.padding(.all, M7Space.m)
+            }.padding(.all, M7Space.medium)
             
         }
     }

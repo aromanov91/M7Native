@@ -42,7 +42,7 @@ public struct M7AuthView: View {
             
             VStack {
                 
-                Spacer().frame(height: M7Space.m)
+                Spacer().frame(height: M7Space.medium)
                 
                 M7Text("LISTER", style: .overline, color: .onBackgroundMediumEmphasis, alignment: .center)
                 
@@ -58,7 +58,7 @@ public struct M7AuthView: View {
                 
                 Spacer()
                 
-                VStack(spacing: M7Space.m) {
+                VStack(spacing: M7Space.medium) {
                     
                     Text(phone)
                     
@@ -93,7 +93,7 @@ public struct M7AuthView: View {
                         EmptyView()
                     }
                     
-                }.padding(.horizontal, M7Space.m)
+                }.padding(.horizontal, M7Space.medium)
                 
             }.navigationBarHidden(true)
             

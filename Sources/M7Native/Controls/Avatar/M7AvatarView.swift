@@ -18,9 +18,9 @@ public struct M7AvatarView: View {
     private struct Constants {
         
         /// Size
-        static var sizeS: CGFloat { return M7Space.m }
-        static var sizeM: CGFloat { return M7Space.xl }
-        static var sizeL: CGFloat { return M7Space.xxxl }
+        static var sizeS: CGFloat { return M7Space.medium }
+        static var sizeM: CGFloat { return M7Space.xLarge }
+        static var sizeL: CGFloat { return M7Space.xxxLarge }
         static var avatarTextSpaceS: CGFloat { return .zero }
         static var avatarTextSpaceM: CGFloat { return 2 }
         static var avatarTextSpaceL: CGFloat { return 2 }

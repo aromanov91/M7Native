@@ -99,7 +99,7 @@ public struct M7SelectModal: View {
             .padding()
             .frame(height: 52)
             .background(M7Colors.surface.secondary)
-            .cornerRadius(M7Radius.m)
+            .cornerRadius(M7Radius.medium)
             .foregroundColor(M7Colors.onSurface.highEmphasis)
 
             .sheet(isPresented: $showModal) {

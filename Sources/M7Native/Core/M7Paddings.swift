@@ -11,9 +11,9 @@ import SwiftUI
 public class M7Paddings {
     
     public enum all {
-        public static let s = M7Space.s
-        public static let m = M7Space.m
-        public static let xxs = M7Space.xxs
-        public static let xxxs = M7Space.xxxs
+        public static let small = M7Space.small
+        public static let medium = M7Space.medium
+        public static let xxSmall = M7Space.xxSmall
+        public static let xxxSmall = M7Space.xxxSmall
     }
 }

@@ -29,12 +29,12 @@ public struct M7Background<Content: View>: View {
         static var colorTertiary: Color { return M7Colors.background.tertiary }
         
         /// Size
-        static var paddingM: CGFloat { return M7Paddings.all.m }
-        static var paddingS: CGFloat { return M7Paddings.all.s }
+        static var paddingM: CGFloat { return M7Paddings.all.medium }
+        static var paddingS: CGFloat { return M7Paddings.all.small }
         
         /// Radius
-        static var radiusM: CGFloat { return M7Radius.m }
-        static var radiusS: CGFloat { return M7Radius.s }
+        static var radiusM: CGFloat { return M7Radius.medium }
+        static var radiusS: CGFloat { return M7Radius.small }
     }
     
     private let content: Content
@@ -66,7 +66,7 @@ public struct M7Background<Content: View>: View {
             .padding(.all, paddingSize)
             .frame(minWidth: 0, maxWidth: .infinity)
             .background(backgroundColor)
-            .cornerRadius(M7Radius.m)
+            .cornerRadius(M7Radius.medium)
         
     }
     

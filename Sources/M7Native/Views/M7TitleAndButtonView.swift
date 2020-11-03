@@ -21,7 +21,7 @@ public struct M7TitleAndButtonView: View {
     private struct Constants {
         
         /// Size
-        static var heightL: CGFloat { return M7Space.xl + M7Space.xxs }
+        static var heightL: CGFloat { return M7Space.xLarge + M7Space.xxSmall }
         
     }
     
@@ -63,7 +63,7 @@ public struct M7TitleAndButtonView: View {
     
     public var body: some View {
         
-        VStack(spacing: M7Space.m) {
+        VStack(spacing: M7Space.medium) {
             
             if image != "" {
                 Image(image)
@@ -73,7 +73,7 @@ public struct M7TitleAndButtonView: View {
                 M7Icon(icon)
             }
             
-            VStack(spacing: M7Space.xxs) {
+            VStack(spacing: M7Space.xxSmall) {
             
                 M7Text(title, style: .title2, color: .onSurfaceHighEmphasis, alignment: .center)
             

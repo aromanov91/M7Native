@@ -77,15 +77,15 @@ public struct M7PhoneFiled: View {
                         Text("+" + (countryCode.isEmpty ? currentCode() : "\(countryCode)"))
                         
                         
-                    }.frame(width: M7Space.xxl - M7Space.xxs, height: M7Space.xl + M7Space.xxs)
+                    }.frame(width: M7Space.xxLarge - M7Space.xxSmall, height: M7Space.xLarge + M7Space.xxSmall)
 
                     
                     Capsule()
                         
                         .fill(M7Color.surfaceTertiary.color)
-                        .frame(width: M7Space.xxxs / 2, height: M7Space.m)
+                        .frame(width: M7Space.xxxSmall / 2, height: M7Space.medium)
                     
-                    Spacer().frame(width: M7Space.s)
+                    Spacer().frame(width: M7Space.small)
                     
                     TextField("000 000 0000", text: $number, onEditingChanged: { (changed) in
                                 if changed {

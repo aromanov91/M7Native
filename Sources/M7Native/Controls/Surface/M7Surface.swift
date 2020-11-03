@@ -41,15 +41,15 @@ public struct M7Surface<Content: View>: View {
         static var colorTertiary: Color { return M7Colors.surface.tertiary }
         
         /// Size
-        static var paddingM: CGFloat { return M7Paddings.all.m }
-        static var paddingS: CGFloat { return M7Paddings.all.s }
-        static var paddingXXXS: CGFloat { return M7Paddings.all.xxxs }
-         static var paddingXXS: CGFloat { return M7Paddings.all.xxs }
+        static var paddingM: CGFloat { return M7Paddings.all.medium }
+        static var paddingS: CGFloat { return M7Paddings.all.small }
+        static var paddingXXXS: CGFloat { return M7Paddings.all.xxxSmall }
+         static var paddingXXS: CGFloat { return M7Paddings.all.xxSmall }
         static var paddingZero: CGFloat { return .zero }
         
         /// Radius
-        static var radiusM: CGFloat { return M7Radius.m }
-        static var radiusS: CGFloat { return M7Radius.s }
+        static var radiusM: CGFloat { return M7Radius.medium }
+        static var radiusS: CGFloat { return M7Radius.small }
         
         /// Shadow
         static var shadowZ0: M7Shadow.shadowCreate { return M7Shadow.z0 }
@@ -94,7 +94,7 @@ public struct M7Surface<Content: View>: View {
             .padding(.all, paddingSize)
             //.frame(minWidth: 0, maxWidth: .infinity)
             .background(backgroundColor)
-            .cornerRadius(M7Radius.m)
+            .cornerRadius(M7Radius.medium)
             .shadow(color: self.shadowStyle.color.opacity(self.shadowStyle.opacity),
                     radius: self.shadowStyle.radius,
                     x: self.shadowStyle.x,

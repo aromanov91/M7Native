@@ -18,6 +18,7 @@
 "Button.Details" = "Details";
 "Button.Rename" = "Rename";
 "Button.Invite" = "Invite";
+"Button.Save" = "Save";
 
 // Settings
 "Settings.Title" = "Settings";

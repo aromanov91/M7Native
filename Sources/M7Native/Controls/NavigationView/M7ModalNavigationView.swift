@@ -22,7 +22,7 @@ public struct M7ModalNavigationView<Content>: View where Content: View {
             
             HStack {
                 
-                VStack(alignment: .leading, spacing: M7Space.s) {
+                VStack(alignment: .leading, spacing: M7Space.small) {
                     
                     HStack {
                         
@@ -45,7 +45,7 @@ public struct M7ModalNavigationView<Content>: View where Content: View {
                     }
                     
                     
-                }.padding(.all, M7Space.m)
+                }.padding(.all, M7Space.medium)
                 
                 Spacer()
                 

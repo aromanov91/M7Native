@@ -43,12 +43,12 @@ public struct M7Button<Content: View>: View {
     private struct Constants {
         
          /// Size
-        static var heightL: CGFloat { return M7Space.xl + M7Space.xxs }
-        static var heightM: CGFloat { return M7Space.l + M7Space.xxs }
+        static var heightL: CGFloat { return M7Space.xLarge + M7Space.xxSmall }
+        static var heightM: CGFloat { return M7Space.large + M7Space.xxSmall }
         
         /// Radius
-        static var radiusM: CGFloat { return M7Radius.m }
-        static var radiusS: CGFloat { return M7Radius.s }
+        static var radiusM: CGFloat { return M7Radius.medium }
+        static var radiusS: CGFloat { return M7Radius.small }
         
         /// Shadow
         static var shadowClean: M7Shadow.shadowCreate { return M7Shadow.z0 }

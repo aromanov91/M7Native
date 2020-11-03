@@ -20,17 +20,17 @@ public struct M7Row: View {
         
         /// Size
         static var heightNone: CGFloat { return .zero }
-        static var heightS: CGFloat { return M7Space.xxxs }
-        static var heightL: CGFloat { return M7Space.xxs }
-        static var heightM: CGFloat { return M7Space.xs }
+        static var heightS: CGFloat { return M7Space.xxxSmall }
+        static var heightL: CGFloat { return M7Space.xxSmall }
+        static var heightM: CGFloat { return M7Space.xSmall }
         
         
         /// Radius
-        static var radiusM: CGFloat { return M7Radius.m }
-        static var radiusS: CGFloat { return M7Radius.s }
+        static var radiusM: CGFloat { return M7Radius.medium }
+        static var radiusS: CGFloat { return M7Radius.small }
         
         /// Spacing
-        static var spacingIconAndText: CGFloat { return M7Space.xxs }
+        static var spacingIconAndText: CGFloat { return M7Space.xxSmall }
     }
     
     public var text: String

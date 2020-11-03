@@ -24,7 +24,7 @@ public struct M7EmailLoginView: View {
         
             VStack(spacing: .zero) {
             
-            VStack(alignment: .leading, spacing: M7Space.m) {
+            VStack(alignment: .leading, spacing: M7Space.medium) {
                 
 
                 List {
@@ -67,7 +67,7 @@ public struct M7EmailLoginView: View {
             M7Button(style: .primary, action: { print("") }) {
                 M7Text(M7Localize.auth.logInButton, style: .button, color: .onPrimaryHighEmphasis)
             }
-            }.padding(.horizontal, M7Space.m)
+            }.padding(.horizontal, M7Space.medium)
         
     }
         
