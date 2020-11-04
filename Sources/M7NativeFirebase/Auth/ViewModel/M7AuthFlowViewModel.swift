@@ -180,8 +180,8 @@ public class M7AuthFlowViewModel: ObservableObject {
                 self.errorText = error.localizedDescription
                 print("ChekSMS VM Error")
             }
-            
         }
+        
         
     }
     
