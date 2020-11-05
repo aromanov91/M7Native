@@ -15,7 +15,7 @@ public class AuthenticationService: ObservableObject {
     
     @Published public var uid =  Auth.auth().currentUser?.uid ?? ""
     
-    @Published public var userData = UserData(username: "", pic: "", bio: "")
+    @Published public var userData = UserData(username: "", pic: "", bio: "", defaultList: "")
     
     @Published public var ID: String = ""
     
@@ -31,6 +31,11 @@ public class AuthenticationService: ObservableObject {
     private var isAuthActivationProgress: Bool {
         set { UserDefaults.standard.set(newValue, forKey: "Auth.IsAuthActivationProgress") }
         get { UserDefaults.standard.bool(forKey: "Auth.IsAuthActivationProgress") }
+    }
+    
+    private var defaultListUID: String {
+        set { UserDefaults.standard.set(newValue, forKey: "Auth.DefaultListUID") }
+        get { UserDefaults.standard.string(forKey: "Auth.DefaultListUID") ?? "" }
     }
     
     public init() {
@@ -150,6 +155,8 @@ public class AuthenticationService: ObservableObject {
         }
     }
     
+    
+    
 //        public func checkUser() {
 //
 //            db.collection("users").document(uid).getDocument { (doc, err) in
@@ -255,7 +262,7 @@ public class AuthenticationService: ObservableObject {
                             
                             print("🙅‍♂️  Account chek: false")
                             
-                            self.createAccount(UserData(username: "", pic: "", bio: "")) { result in
+                            self.createAccount(self.userData) { result in
                                 
                                 switch result {
                                 
@@ -298,7 +305,7 @@ public class AuthenticationService: ObservableObject {
                 print("✅ Fetch user data Success")
                 let user = try? snapshot?.data(as: UserData.self)
                 
-                completion(user ?? UserData(username: "", pic: "", bio: ""))
+                completion(user ?? self.userData)
             })
             
         }

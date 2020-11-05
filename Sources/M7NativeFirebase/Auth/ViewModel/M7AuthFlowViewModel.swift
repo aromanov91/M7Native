@@ -157,7 +157,7 @@ public class M7AuthFlowViewModel: ObservableObject {
             case .success(let user):
                 print("✅ Set display name: \(String(describing: user.displayName))")
                 
-                self.authenticationService.createAccount(UserData(username: self.username, pic: self.pic, bio: self.bio)) { (result) in
+                self.authenticationService.createAccount(UserData(username: self.username, pic: self.pic, bio: self.bio, defaultList: self.authenticationService.userData.defaultList)) { (result) in
                     
                     self.isLoading = false
                     

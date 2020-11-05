@@ -15,12 +15,14 @@ public struct UserData: Identifiable, Codable {
     public var username: String
     public var pic: String
     public var bio: String
+    public var defaultList: String
     
     enum CodingKeys: String, CodingKey {
         case id
         case username
         case pic
         case bio
+        case defaultList
     }
     
 }
