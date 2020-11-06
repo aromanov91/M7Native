@@ -9,12 +9,13 @@ import SwiftUI
 
 public struct M7MessengerTextFieldView: View {
     
-    @State public var text = ""
+    @Binding public var text: String
     @State public var focused: Bool = true
     
     public let sendAction: () -> Void
     
-    public init(sendAction: @escaping () -> Void) {
+    public init(text: Binding<String>, sendAction: @escaping () -> Void) {
+        self._text = text
         self.sendAction = sendAction
     }
     
