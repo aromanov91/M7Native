@@ -19,6 +19,8 @@ public class AuthenticationService: ObservableObject {
     
     @Published public var ID: String = ""
     
+    @Published public var isLoadData = true
+    
     private var handle: AuthStateDidChangeListenerHandle?
     
     private let db = Firestore.firestore()
@@ -33,12 +35,11 @@ public class AuthenticationService: ObservableObject {
         get { UserDefaults.standard.bool(forKey: "Auth.IsAuthActivationProgress") }
     }
     
-    private var defaultListUID: String {
-        set { UserDefaults.standard.set(newValue, forKey: "Auth.DefaultListUID") }
-        get { UserDefaults.standard.string(forKey: "Auth.DefaultListUID") ?? "" }
-    }
+    public init() {}
     
-    public init() {
+    public func run(complition: @escaping(Result<UserData, Error>) -> Void ) {
+        
+        isLoadData = true
         
         if status == false {
             
@@ -50,8 +51,24 @@ public class AuthenticationService: ObservableObject {
             }
         }
         
-        fetchUserData(uid: uid) { (user) in
-            self.userData = user
+        let userAuth = Auth.auth().currentUser
+        
+        let userUid = userAuth?.uid ?? ""
+        
+        currentUser = userAuth
+        
+        uid = userUid
+        
+        fetchUserData(uid: userUid) { (userData) in
+            switch userData {
+            case .success(let data):
+                self.isLoadData = false
+                self.userData = data
+                complition(.success(data))
+            case .failure(let error):
+                self.isLoadData = false
+                complition(.failure(error))
+            }
         }
     }
     
@@ -157,83 +174,83 @@ public class AuthenticationService: ObservableObject {
     
     
     
-//        public func checkUser() {
-//
-//            db.collection("users").document(uid).getDocument { (doc, err) in
-//
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//
-//                } else {
-//
-//                    guard let user = doc else { return }
-//
-//                    let uid = user.data()?["uid"] as? String
-//
-//                    if uid == nil {
-//                        self.navigationLinkCreateAccount = 88
-//
-//                    } else {
-//                        self.showModal = false
-//                    }
-//                }
-//            }
-//
-//        }
+    //        public func checkUser() {
+    //
+    //            db.collection("users").document(uid).getDocument { (doc, err) in
+    //
+    //                if let err = err {
+    //                    print("Error getting documents: \(err)")
+    //
+    //                } else {
+    //
+    //                    guard let user = doc else { return }
+    //
+    //                    let uid = user.data()?["uid"] as? String
+    //
+    //                    if uid == nil {
+    //                        self.navigationLinkCreateAccount = 88
+    //
+    //                    } else {
+    //                        self.showModal = false
+    //                    }
+    //                }
+    //            }
+    //
+    //        }
     
-//    public func checkUser(completion: @escaping(Bool) -> Void) {
-//
-//        db.collection("users").document(uid).getDocument { (doc, err) in
-//
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//
-//            } else {
-//
-//                guard let user = doc else { return }
-//
-//                let uid = user.data()?["uid"] as? String
-//
-//                if uid == nil {
-//                    completion(false)
-//
-//                } else {
-//                    completion(true)
-//                }
-//            }
-//        }
-//
-//    }
+    //    public func checkUser(completion: @escaping(Bool) -> Void) {
+    //
+    //        db.collection("users").document(uid).getDocument { (doc, err) in
+    //
+    //            if let err = err {
+    //                print("Error getting documents: \(err)")
+    //
+    //            } else {
+    //
+    //                guard let user = doc else { return }
+    //
+    //                let uid = user.data()?["uid"] as? String
+    //
+    //                if uid == nil {
+    //                    completion(false)
+    //
+    //                } else {
+    //                    completion(true)
+    //                }
+    //            }
+    //        }
+    //
+    //    }
     
     public func isUserDataCreated(completion: @escaping(Result<Bool, Error>) -> Void) {
         
         if let user = Auth.auth().currentUser {
-        
+            
             db.collection("users").document(user.uid).getDocument { (document, error) in
-            if let error = error {
-                print("⛔️ Check SMS error: " + error.localizedDescription)
-                completion(.failure(error))
+                if let error = error {
+                    print("⛔️ Check SMS error: " + error.localizedDescription)
+                    completion(.failure(error))
+                }
+                
+                //            guard let userData = document else { return }
+                //                            let uid = userData.data()?["uid"] as? String
+                //
+                //                            if uid == nil {
+                //                                completion(.success(false))
+                //
+                //                            } else {
+                //                                completion(.success(true))
+                //                            }
+                
+                
+                if let document = document, document.exists {
+                    print("🙋‍♂️ Document exists")
+                    completion(.success(true))
+                } else {
+                    print("🙅‍♂️ Document does not exists")
+                    completion(.success(false))
+                }
             }
-            
-//            guard let userData = document else { return }
-//                            let uid = userData.data()?["uid"] as? String
-//
-//                            if uid == nil {
-//                                completion(.success(false))
-//
-//                            } else {
-//                                completion(.success(true))
-//                            }
-
-            
-            if let document = document, document.exists {
-                print("🙋‍♂️ Document exists")
-                completion(.success(true))
-            } else {
-                print("🙅‍♂️ Document does not exists")
-                completion(.success(false))
-            }
-        }
         }
     }
     
@@ -253,7 +270,7 @@ public class AuthenticationService: ObservableObject {
                 self.uid = user.uid
                 
                 self.isUserDataCreated { (result) in
-
+                    
                     switch result {
                     
                     case .success(let data):
@@ -267,7 +284,7 @@ public class AuthenticationService: ObservableObject {
                                 switch result {
                                 
                                 case .success(_):
-                                   print("✅  Account created")
+                                    print("✅  Account created")
                                     
                                 case .failure(_): 
                                     print("⛔️  Account dont created")
@@ -284,12 +301,12 @@ public class AuthenticationService: ObservableObject {
                 }
             }
         }
-  }
+    }
     
     
     // MARK: - Fetch User Data
     
-    public func fetchUserData(uid: String, completion: @escaping (UserData) -> Void) {
+    public func fetchUserData(uid: String, completion: @escaping (Result<UserData, Error>) -> Void) {
         
         if Auth.auth().currentUser != nil {
             
@@ -299,13 +316,13 @@ public class AuthenticationService: ObservableObject {
                 
                 if let err = error {
                     print(err.localizedDescription)
-                    return
+                    completion(.failure(err))
                 }
                 
                 print("✅ Fetch user data Success")
                 let user = try? snapshot?.data(as: UserData.self)
                 
-                completion(user ?? self.userData)
+                completion(.success(user ?? self.userData))
             })
             
         }
