@@ -35,7 +35,10 @@ public class AuthenticationService: ObservableObject {
         get { UserDefaults.standard.bool(forKey: "Auth.IsAuthActivationProgress") }
     }
     
-    public init() {}
+    public init() {
+        
+        run { (result) in }
+    }
     
     public func run(complition: @escaping(Result<UserData, Error>) -> Void ) {
         
