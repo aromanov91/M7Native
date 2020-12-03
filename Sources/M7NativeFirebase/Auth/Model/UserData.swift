@@ -15,6 +15,7 @@ public struct UserData: Identifiable, Codable {
     public var username: String
     public var pic: String
     public var bio: String
+    public var phone: String
     public var defaultList: String
     
     enum CodingKeys: String, CodingKey {
@@ -22,6 +23,7 @@ public struct UserData: Identifiable, Codable {
         case username
         case pic
         case bio
+        case phone
         case defaultList
     }
     

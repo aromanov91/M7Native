@@ -15,98 +15,111 @@ public class AuthenticationService: ObservableObject {
     
     @Published public var uid =  Auth.auth().currentUser?.uid ?? ""
     
-    @Published public var userData = UserData(username: "", pic: "", bio: "", defaultList: "")
+    @Published public var userData = UserData(username: "", pic: "", bio: "", phone: "", defaultList: "")
     
     @Published public var ID: String = ""
     
     @Published public var isLoadData = true
     
-    private var handle: AuthStateDidChangeListenerHandle?
+    //private var handle: AuthStateDidChangeListenerHandle?
     
     private let db = Firestore.firestore()
+    
+    public var defaultList: String {
+        set { UserDefaults.standard.set(newValue, forKey: "Auth.DefaultList") }
+        get { UserDefaults.standard.string(forKey: "Auth.DefaultList") ?? "" }
+    }
     
     public var status: Bool {
         set { UserDefaults.standard.set(newValue, forKey: "Auth.Status") }
         get { UserDefaults.standard.bool(forKey: "Auth.Status") }
     }
     
-    private var isAuthActivationProgress: Bool {
-        set { UserDefaults.standard.set(newValue, forKey: "Auth.IsAuthActivationProgress") }
-        get { UserDefaults.standard.bool(forKey: "Auth.IsAuthActivationProgress") }
-    }
+//    private var isAuthActivationProgress: Bool {
+//        set { UserDefaults.standard.set(newValue, forKey: "Auth.IsAuthActivationProgress") }
+//        get { UserDefaults.standard.bool(forKey: "Auth.IsAuthActivationProgress") }
+//    }
     
     public init() {
         
-        run { (result) in }
+       //x run { (result) in }
     }
     
     public func run(complition: @escaping(Result<UserData, Error>) -> Void ) {
         
         isLoadData = true
         
-        if status == false {
+//        if status == false {
+//
+//            if isAuthActivationProgress == false {
+//
+//                isAuthActivationProgress = true
+//
+//                registerStateListener()
+//            }
+//        }
+        
+//        let userAuth = Auth.auth().currentUser
+//
+//        let userUid = userAuth?.uid ?? ""
+//
+//        currentUser = userAuth
+//
+//        uid = userUid
+//
+//
+//
+        
+        print("UID: " + uid)
+        fetchUserData(uid: uid) { (userData) in
             
-            if isAuthActivationProgress == false {
-                
-                isAuthActivationProgress = true
-                
-                registerStateListener()
-            }
-        }
-        
-        let userAuth = Auth.auth().currentUser
-        
-        let userUid = userAuth?.uid ?? ""
-        
-        currentUser = userAuth
-        
-        uid = userUid
-        
-        fetchUserData(uid: userUid) { (userData) in
             switch userData {
             case .success(let data):
                 self.isLoadData = false
                 self.userData = data
+                self.defaultList = data.defaultList
+                print("Auth service: \(data)")
                 complition(.success(data))
             case .failure(let error):
                 self.isLoadData = false
                 complition(.failure(error))
             }
         }
+        
     }
     
-    public func registerStateListener() {
-        if let handle = handle {
-            Auth.auth().removeStateDidChangeListener(handle)
-        }
-        self.handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            print("Sign in state has changed.")
-            self.currentUser = user
-            self.uid = user?.uid ?? ""
-            
-            if let user = user {
-                let anonymous = user.isAnonymous ? "anonymously " : ""
-                print("User signed in \(anonymous)with user ID \(user.uid). Email: \(user.email ?? "(empty)"), display name: [\(user.displayName ?? "(empty)")]")
-            }
-            else {
-                print("User signed out.")
-                self.signInAnonymously()
-            }
-        }
-        
-        
-        //        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-        //                self.currentUser = user
-        //
-        //                if user == nil {
-        //
-        //                } else {
-        //
-        //                }
-        //
-        //            }
-        //
-    }
+//    public func registerStateListener() {
+//        if let handle = handle {
+//            Auth.auth().removeStateDidChangeListener(handle)
+//        }
+//        self.handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+//            print("Sign in state has changed.")
+//            self.currentUser = user
+//            self.uid = user?.uid ?? ""
+//
+//            if let user = user {
+//                let anonymous = user.isAnonymous ? "anonymously " : ""
+//                print("User signed in \(anonymous)with user ID \(user.uid). Email: \(user.email ?? "(empty)"), display name: [\(user.displayName ?? "(empty)")]")
+//            }
+//            else {
+//                print("User signed out.")
+//                self.signInAnonymously()
+//            }
+//        }
+//
+//
+//        //        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+//        //                self.currentUser = user
+//        //
+//        //                if user == nil {
+//        //
+//        //                } else {
+//        //
+//        //                }
+//        //
+//        //            }
+//        //
+//    }
     
     // MARK: - SMS Auth
     
@@ -129,7 +142,7 @@ public class AuthenticationService: ObservableObject {
     
     public func chekSMS(smsCode: String, complition: @escaping (Result<User?, Error>) -> Void) {
         
-        let unauthUser = currentUser
+        //let unauthUser = currentUser
         
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.ID, verificationCode: smsCode)
         
@@ -140,18 +153,18 @@ public class AuthenticationService: ObservableObject {
                 complition(.failure(error))
             }
             
-            self.status = true
+            
             self.currentUser = res?.user
             self.uid = res?.user.uid ?? ""
         }
         
-        unauthUser?.link(with: credential) { (authResult, error) in
-            
-            if let error = error {
-                print("⛔️ Accounts merged error: " + error.localizedDescription)
-                complition(.failure(error))
-            }
-        }
+//        unauthUser?.link(with: credential) { (authResult, error) in
+//            
+//            if let error = error {
+//                print("⛔️ Accounts merged error: " + error.localizedDescription)
+//                complition(.failure(error))
+//            }
+//        }
         
         let newUser = Auth.auth().currentUser
         self.currentUser = newUser
@@ -164,8 +177,15 @@ public class AuthenticationService: ObservableObject {
     
     public func createAccount(_ user: UserData, complition: @escaping (Result<Bool, Error>) -> Void) {
         
+        
+        //db.collection("users").document(uid).setData(["phone": currentUser?.phoneNumber ?? ""])
+        
         do {
-            let _ = try db.collection("users").addDocument(from: user)
+            
+            let _ = try db.collection("users").document(uid).setData(from: user)
+            
+            
+            
             print("✅ Account create")
             complition(.success(true))
         }
@@ -257,6 +277,9 @@ public class AuthenticationService: ObservableObject {
         }
     }
     
+    
+
+    
     // MARK: - Sign In Anonymously
     
     public func signInAnonymously() {
@@ -265,7 +288,7 @@ public class AuthenticationService: ObservableObject {
             
             Auth.auth().signInAnonymously() { (authResult, error) in
                 
-                self.isAuthActivationProgress = false
+               // self.isAuthActivationProgress = false
                 
                 guard let user = authResult?.user else { return }
                 print("✅ Sign In Anonymously")
@@ -311,24 +334,31 @@ public class AuthenticationService: ObservableObject {
     
     public func fetchUserData(uid: String, completion: @escaping (Result<UserData, Error>) -> Void) {
         
-        if Auth.auth().currentUser != nil {
+       
+        print("Firestore uid get: " + uid)
             
             let thisUser = db.collection("users").document(uid)
             
             thisUser.getDocument(completion: { snapshot, error in
                 
                 if let err = error {
-                    print(err.localizedDescription)
+                    print("Firestore error: " + err.localizedDescription)
+                 
                     completion(.failure(err))
                 }
                 
                 print("✅ Fetch user data Success")
                 let user = try? snapshot?.data(as: UserData.self)
                 
+                self.defaultList = user?.defaultList ?? ""
+                self.userData = user ?? self.userData
+                
+                print("Firestore fetch: \(String(describing: user))")
+                
                 completion(.success(user ?? self.userData))
             })
             
-        }
+        
     }
     
     // MARK: - Log Out

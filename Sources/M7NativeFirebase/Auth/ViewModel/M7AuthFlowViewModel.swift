@@ -157,7 +157,9 @@ public class M7AuthFlowViewModel: ObservableObject {
             case .success(let user):
                 print("✅ Set display name: \(String(describing: user.displayName))")
                 
-                self.authenticationService.createAccount(UserData(username: self.username, pic: self.pic, bio: self.bio, defaultList: self.authenticationService.userData.defaultList)) { (result) in
+                self.authenticationService.createAccount(UserData(username: self.username, pic: self.pic, bio: self.bio, phone: self.authenticationService.currentUser?.phoneNumber ?? "", defaultList: self.authenticationService.userData.defaultList)) { (result) in
+                    
+                   // self.authenticationService.defaultList = 
                     
                     self.isLoading = false
                     
@@ -165,6 +167,7 @@ public class M7AuthFlowViewModel: ObservableObject {
                     
                     case .success(_):
                         self.isLoading = false
+                        self.authenticationService.status = true
                         self.showModal = false
                         
                     case .failure(let error):
