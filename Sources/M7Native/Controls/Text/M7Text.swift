@@ -75,6 +75,7 @@ public struct M7Text: View {
             .multilineTextAlignment(alignment)
             .redacted(reason:  isPlaceholder ? .placeholder : .init())
             
+            
         } else {
             Text( isPlaceholder ? "Load..." : LocalizedStringKey(text), bundle: .module)
                 .font(textStyle)

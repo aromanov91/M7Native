@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+#if os(iOS)
 import MessageUI
 import UIKit
 
@@ -106,3 +107,4 @@ struct M7MailView: UIViewControllerRepresentable {
     
     
 }
+#endif
